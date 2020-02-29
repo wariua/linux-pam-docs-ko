@@ -1,22 +1,19 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 2. Some comments on the text</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="prev" href="sag-introduction.html" title="Chapter 1. Introduction"><link rel="next" href="sag-overview.html" title="Chapter 3. Overview"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 2. Some comments on the text</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-introduction.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="sag-overview.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="sag-text-conventions"></a>Chapter 2. Some comments on the text</h1></div></div></div><p>
-      Before proceeding to read the rest of this document, it should be
-      noted that the text assumes that certain files are placed in certain
-      directories.  Where they have been specified, the conventions we adopt
-      here for locating these files are those of the relevant RFC (RFC-86.0,
-      see <a class="link" href="sag-see-also.html" title="Chapter 7. See also">bibliography"</a>). If you are
-      using a distribution of Linux (or some other operating system) that
-      supports PAM but chooses to distribute these files in a different way
-      you should be careful when copying examples directly from the text.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>2장. 몇 가지 언급</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="prev" href="sag-introduction.html" title="1장. 들어가며"><link rel="next" href="sag-overview.html" title="3장. 소개"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2장. 몇 가지 언급</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-introduction.html">이전</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="sag-overview.html">다음</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="sag-text-conventions"></a>2장. 몇 가지 언급</h1></div></div></div><p>
+      이 문서를 계속 읽어 나가기 전에, 본문에선 특정 파일들이 특정
+      디렉터리에 위치해 있다고 상정하고 있다는 걸 알아 둘 필요가 있다.
+      앞서 설명하긴 했지만 여기서 우리가 택하는 파일 위치 관행은 관련
+      RFC(RFC-86.0, <a class="link" href="sag-see-also.html" title="7장. 참고">참고 문헌</a> 참고)의
+      방식이다. PAM을 지원하지만 그 파일들을 다른 방식으로 배포하는
+      리눅스 (또는 기타 운영 체제) 배포판을 쓰고 있다면 본문의 예시를
+      그대로 복사할 때 주의할 필요가 있다.
     </p><p>
-      As an example of the above, where it is explicit, the text assumes
-      that PAM loadable object files (the
-      <span class="emphasis"><em>modules</em></span>) are to be located in
-      the following directory: <code class="filename">/lib/security/</code> or
-      <code class="filename">/lib64/security</code> depending on the architecture.
-      This is generally the location that seems to be compatible with the
-      Filesystem Hierarchy Standard (FHS). On Solaris, which has its own
-      licensed version of PAM, and some other implementations of UN*X,
-      these files can be found in <code class="filename">/usr/lib/security</code>.
-      Please be careful to perform the necessary transcription when using
-      the examples from the text.
-    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-introduction.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="sag-overview.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 1. Introduction </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. Overview</td></tr></table></div></body></html>
+      그 예로, 명확한 경우에 본문에서는 PAM 적재형 오브젝트 파일(즉
+      <span class="emphasis"><em>모듈</em></span>)이 아키텍처에 따라
+      <code class="filename">/lib/security/</code> 또는
+      <code class="filename">/lib64/security</code>에 위치해 있다고
+      상정한다. 이는 일반적으로 파일시스템 계층구조 표준(FHS)과
+      호환될 듯한 위치다. 자체적인 PAM 버전이 있는 솔라리스와 일부 다른
+      UN*X 구현에서는 <code class="filename">/usr/lib/security</code>에
+      그 파일들이 있다. 본문의 예시를 이용할 때 부디 필요에 따라 변경을
+      하길 바란다.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-introduction.html">이전</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="sag-overview.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">1장. 들어가며 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 3장. 소개</td></tr></table></div></body></html>
