@@ -1,68 +1,68 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.10. pam_ftp - module for anonymous access</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_filter.html" title="6.9. pam_filter - filter module"><link rel="next" href="sag-pam_group.html" title="6.11. pam_group - module to modify group access"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10. pam_ftp - module for anonymous access</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_filter.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_group.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_ftp"></a>6.10. pam_ftp - module for anonymous access</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_ftp.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.10. pam_ftp - 익명 접속 모듈</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_filter.html" title="6.9. pam_filter - 필터 모듈"><link rel="next" href="sag-pam_group.html" title="6.11. pam_group - 그룹 접근 변경 모듈"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10. pam_ftp - 익명 접속 모듈</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_filter.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_group.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_ftp"></a>6.10. pam_ftp - 익명 접속 모듈</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_ftp.so</code>  [
 	debug
       ] [
         ignore
       ] [
         users=<em class="replaceable"><code>XXX,YYY,</code></em>
-      ...]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-description"></a>6.10.1. DESCRIPTION</h3></div></div></div><p>
-      pam_ftp is a PAM module which provides a pluggable
-      anonymous ftp mode of access.
+      ...]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-description"></a>6.10.1. 설명</h3></div></div></div><p>
+      pam_ftp는 장착형으로 ftp 익명 접근 방식을 제공하는
+      PAM 모듈이다.
     </p><p>
-      This module intercepts the user's name and password. If the name is
-      <span class="emphasis"><em>ftp</em></span> or <span class="emphasis"><em>anonymous</em></span>, the
-      user's password is broken up at the <span class="emphasis"><em>@</em></span> delimiter
-      into a <span class="emphasis"><em>PAM_RUSER</em></span> and a
-      <span class="emphasis"><em>PAM_RHOST</em></span> part; these pam-items being set
-      accordingly. The username (<span class="emphasis"><em>PAM_USER</em></span>) is set
-      to <span class="emphasis"><em>ftp</em></span>.  In this case the module succeeds.
-      Alternatively, the module sets the <span class="emphasis"><em>PAM_AUTHTOK</em></span>
-      item with the entered password and fails.
+      이 모듈은 사용자의 이름과 패스워드를 가로챈다. 이름이
+      <span class="emphasis"><em>ftp</em></span>나 <span class="emphasis"><em>anonymous</em></span>면
+      사용자의 패스워드를 <span class="emphasis"><em>@</em></span>을 기준으로
+      나눠서 PAM 항목 <span class="emphasis"><em>PAM_RUSER</em></span> 및
+      <span class="emphasis"><em>PAM_RHOST</em></span>에 설정한다.
+      사용자 이름(<span class="emphasis"><em>PAM_USER</em></span>)은
+      <span class="emphasis"><em>ftp</em></span>로 설정한다. 성공적으로
+      동작한 경우가 그렇고, 아닌 경우는 입력받은 패스워드를
+      <span class="emphasis"><em>PAM_AUTHTOK</em></span>에 설정하고
+      실패 처리한다.
     </p><p>
-      This module is not safe and easily spoofable.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-options"></a>6.10.2. OPTIONS</h3></div></div></div><p>
+      이 모듈은 안전하지 않으며 쉽게 속일 수 있다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-options"></a>6.10.2. 옵션</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
             <code class="option">debug</code>
           </span></dt><dd><p>
-	      Print debug information.
+	      디버그 정보 찍기.
             </p></dd><dt><span class="term">
             <code class="option">ignore</code>
           </span></dt><dd><p>
-              Pay no attention to the email address of the user
-              (if supplied).
+              사용자의 이메일 주소에 신경쓰지 않기.
             </p></dd><dt><span class="term">
             <code class="option">ftp=<em class="replaceable"><code>XXX,YYY,...</code></em></code>
           </span></dt><dd><p>
-              Instead of <span class="emphasis"><em>ftp</em></span> or
-              <span class="emphasis"><em>anonymous</em></span>, provide anonymous login
-              to the comma separated list of users:
-              <code class="option"><em class="replaceable"><code>XXX,YYY,...</code></em></code>.
-              Should the applicant enter
-              one of these usernames the returned username is set to
-              the first in the list: <span class="emphasis"><em>XXX</em></span>.
+              <span class="emphasis"><em>ftp</em></span> 및
+              <span class="emphasis"><em>anonymous</em></span> 대신
+              쉽표로 구분된 사용자 목록
+              (<code class="option"><em class="replaceable"><code>XXX,YYY,...</code></em></code>)으로 익명 로그인을 제공한다.
+              사용자가 그 사용자 이름들 중 하나를 입력한 경우 반환되는
+              사용자 이름은 그 목록 첫 번째 이름(<span class="emphasis"><em>XXX</em></span>)으로
+              설정된다.
             </p></dd></dl></div><p>
 
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-types"></a>6.10.3. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      Only the <code class="option">auth</code> module type is provided.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-return_values"></a>6.10.4. RETURN VALUES</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-types"></a>6.10.3. 제공하는 모듈 종류</h3></div></div></div><p>
+      <code class="option">auth</code> 모듈 타입만 제공한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-return_values"></a>6.10.4. 반환 값</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-              The authentication was successful.
+              인증에 성공했다.
             </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-	      User not known.
+	      알 수 없는 사용자.
             </p></dd></dl></div><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-examples"></a>6.10.5. EXAMPLES</h3></div></div></div><p>
-      Add the following line to <code class="filename">/etc/pam.d/ftpd</code> to
-      handle ftp style anonymous login:
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-examples"></a>6.10.5. 예시</h3></div></div></div><p>
+      <code class="filename">/etc/pam.d/ftpd</code>에 다음 행을 추가해서
+      ftp 스타일 익명 로그인 처리를 할 수 있다.
       </p><pre class="programlisting">
 #
-# ftpd; add ftp-specifics. These lines enable anonymous ftp over
-#       standard UN*X access (the listfile entry blocks access to
-#       users listed in /etc/ftpusers)
+# ftpd; ftp 한정 내용. 다음은 표준 UN*X 접근 방식에 앞서
+#       익명 ftp를 켠다. (listfile 항목은 /etc/ftpusers에
+#       있는 사용자들에 접근하지 못하게 막는다.)
 #
 auth    sufficient  pam_ftp.so
 auth    required    pam_unix.so use_first_pass
 auth    required    pam_listfile.so \
            onerr=succeed item=user sense=deny file=/etc/ftpusers
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-author"></a>6.10.6. AUTHOR</h3></div></div></div><p>
-        pam_ftp was written by Andrew G. Morgan &lt;morgan@kernel.org&gt;.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_filter.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_group.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.9. pam_filter - filter module </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> 6.11. pam_group - module to modify group access</td></tr></table></div></body></html>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_ftp-author"></a>6.10.6. 작성자</h3></div></div></div><p>
+        Andrew G. Morgan &lt;morgan@kernel.org&gt;이 pam_ftp를 작성했다.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_filter.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_group.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.9. pam_filter - 필터 모듈 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.11. pam_group - 그룹 접근 변경 모듈</td></tr></table></div></body></html>
