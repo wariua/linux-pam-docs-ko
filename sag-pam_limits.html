@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.15. pam_limits - limit resources</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_lastlog.html" title="6.14. pam_lastlog - display date of last login"><link rel="next" href="sag-pam_listfile.html" title="6.16. pam_listfile - deny or allow services based on an arbitrary file"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.15. pam_limits - limit resources</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_lastlog.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_listfile.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_limits"></a>6.15. pam_limits - limit resources</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_limits.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.15. pam_limits - 자원 제한</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_lastlog.html" title="6.14. pam_lastlog - 최근 로그인 시간 표시"><link rel="next" href="sag-pam_listfile.html" title="6.16. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.15. pam_limits - 자원 제한</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_lastlog.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_listfile.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_limits"></a>6.15. pam_limits - 자원 제한</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_limits.so</code>  [
         conf=<em class="replaceable"><code>/path/to/limits.conf</code></em>
       ] [
         debug
@@ -8,172 +8,167 @@
         utmp_early
       ] [
         noaudit
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-description"></a>6.15.1. DESCRIPTION</h3></div></div></div><p>
-      The pam_limits PAM module sets limits on the system resources that can be
-      obtained in a user-session. Users of <span class="emphasis"><em>uid=0</em></span> are affected
-      by this limits, too.
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-description"></a>6.15.1. 설명</h3></div></div></div><p>
+      pam_limits는 사용자 세션에서 얻을 수 있는 시스템 자원들에 제한을 설정하는
+      PAM 모듈이다. <span class="emphasis"><em>uid=0</em></span>인 사용자도
+      이 제한의 영향을 받는다.
     </p><p>
-      By default limits are taken from the <code class="filename">/etc/security/limits.conf</code>
-      config file. Then individual *.conf files from the <code class="filename">/etc/security/limits.d/</code>
-      directory are read. The files are parsed one after another in the order of "C" locale.
-      The effect of the individual files is the same as if all the files were
-      concatenated together in the order of parsing.
-      If a config file is explicitly specified with a module option then the
-      files in the above directory are not parsed.
+      기본적으로 설정 파일 <code class="filename">/etc/security/limits.conf</code>에서
+      제한치들을 가져온다. 그 다음으로 <code class="filename">/etc/security/limits.d/</code>에서
+      개별 *.conf 파일들을 읽어 들인다. 파일을 파싱하는 순서는 "C" 로캘의
+      순서를 따른다. 개별 파일들의 효과는 모든 파일을 파싱 순서대로
+      이어 붙인 것과 동일하다.
+      모듈 옵션으로 설정 파일을 따로 지정한 경우에는 위 디렉터리의 파일들을
+      파싱하지 않는다.
     </p><p>
-      The module must not be called by a multithreaded application.
+      멀티스레드 응용에서 이 모듈을 호출해선 안 된다.
     </p><p>
-      If Linux PAM is compiled with audit support the module will report
-      when it denies access based on limit of maximum number of concurrent
-      login sessions.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-limits.conf-description"></a>6.15.2. DESCRIPTION</h3></div></div></div><p>
-      The <span class="emphasis"><em>pam_limits.so</em></span> module applies ulimit limits,
-      nice priority and number of simultaneous login sessions limit to user
-      login sessions. This description of the configuration file syntax
-      applies to the <code class="filename">/etc/security/limits.conf</code> file and
-      <code class="filename">*.conf</code> files in the
-      <code class="filename">/etc/security/limits.d</code> directory.
+      감사 지원을 포함해서 Linux-PAM을 컴파일하면 동시 로그인 세션 최대
+      개수 제한에 따라 접근을 거부한 경우 모듈에서 보고를 하게 된다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-limits.conf-description"></a>6.15.2. 설명</h3></div></div></div><p>
+      <span class="emphasis"><em>pam_limits.so</em></span> 모듈은 사용자 로그인 세션에
+      ulimit 제한들과 나이스 우선순위, 동시 로그인 세션 수 제한을 적용한다.
+      다음 설정 파일 문법 설명 내용이 <code class="filename">/etc/security/limits.conf</code>
+      파일 및 <code class="filename">/etc/security/limits.d</code> 디렉터리의
+      <code class="filename">*.conf</code> 파일들에 적용된다.
     </p><p>
-      The syntax of the lines is as follows:
+      각 행의 문법은 다음과 같다.
     </p><p>
       <em class="replaceable"><code>&lt;domain&gt;</code></em> <em class="replaceable"><code>&lt;type&gt;</code></em>
       <em class="replaceable"><code>&lt;item&gt;</code></em> <em class="replaceable"><code>&lt;value&gt;</code></em>
     </p><p>
-      The fields listed above should be filled as follows:
+      위 필드들을 다음처럼 채워야 한다.
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">&lt;domain&gt;</code>
         </span></dt><dd><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
-                a username
+                사용자 이름
               </p></li><li class="listitem"><p>
-                a groupname, with <span class="emphasis"><em>@group</em></span> syntax.
-                This should not be confused with netgroups.
+                <span class="emphasis"><em>@group</em></span> 문법의 그룹 이름.
+                netgroup과 혼동하지 말아야 한다.
               </p></li><li class="listitem"><p>
-                the wildcard <span class="emphasis"><em>*</em></span>, for default entry.
+                기본 항목을 위한 와일드카드 <span class="emphasis"><em>*</em></span>.
               </p></li><li class="listitem"><p>
-                the wildcard <span class="emphasis"><em>%</em></span>, for maxlogins limit only,
-                can also be used with <span class="emphasis"><em>%group</em></span> syntax. If the
-                <span class="emphasis"><em>%</em></span> wildcard is used alone it is identical
-                to using <span class="emphasis"><em>*</em></span> with maxsyslogins limit. With
-                a group specified after <span class="emphasis"><em>%</em></span> it limits the total
-                number of logins of all users that are member of the group.
+                maxlogins 제한에 한해서 와일드 카드 <span class="emphasis"><em>%</em></span>를
+                <span class="emphasis"><em>%group</em></span> 문법으로 쓸 수 있다.
+                <span class="emphasis"><em>%</em></span> 와일드카드만 쓰면 maxsyslogins
+                제한에 <span class="emphasis"><em>*</em></span>을 쓰는 것과 동일하다.
+                <span class="emphasis"><em>%</em></span> 뒤에 그룹을 지정하면
+                그 그룹에 속한 모든 사용자의 총 로그인 세션 개수를 제한한다.
               </p></li><li class="listitem"><p>
-                an uid range specified as <em class="replaceable"><code>&lt;min_uid&gt;</code></em><span class="emphasis"><em>:</em></span><em class="replaceable"><code>&lt;max_uid&gt;</code></em>. If min_uid
-                is omitted, the match is exact for the max_uid. If max_uid is omitted, all
-                uids greater than or equal min_uid match.
+                <em class="replaceable"><code>&lt;min_uid&gt;</code></em><span class="emphasis"><em>:</em></span><em class="replaceable"><code>&lt;max_uid&gt;</code></em> 형식으로
+                지정한 uid 범위. min_uid를 생략하면 딱 max_uid만 걸린다.
+                max_uid를 생략하면 min_uid와 같거나 그보다 큰 uid가 걸린다.
               </p></li><li class="listitem"><p>
-                a gid range specified as <span class="emphasis"><em>@</em></span><em class="replaceable"><code>&lt;min_gid&gt;</code></em><span class="emphasis"><em>:</em></span><em class="replaceable"><code>&lt;max_gid&gt;</code></em>. If min_gid
-                is omitted, the match is exact for the max_gid. If max_gid is omitted, all
-                gids greater than or equal min_gid match. For the exact match all groups including
-                the user's supplementary groups are examined. For the range matches only
-                the user's primary group is examined.
+                <span class="emphasis"><em>@</em></span><em class="replaceable"><code>&lt;min_gid&gt;</code></em><span class="emphasis"><em>:</em></span><em class="replaceable"><code>&lt;max_gid&gt;</code></em> 형식으로
+                지정한 gid 범위. min_gid를 생략하면 딱 max_gid만 걸린다.
+                max_gid를 생략하면 min_gid와 같거나 그보다 큰 gid가 걸린다.
+                일치 검사에선 사용자의 부가 그룹까지 포함한 모든 그룹을 검사한다.
+                범위 검사에선 사용자의 주 그룹만 검사한다.
               </p></li><li class="listitem"><p>
-                a gid specified as <span class="emphasis"><em>%:</em></span><em class="replaceable"><code>&lt;gid&gt;</code></em> applicable
-                to maxlogins limit only. It limits the total number of logins of all users
-                that are member of the group with the specified gid.
+                maxlogins 제한에 한해서 <span class="emphasis"><em>%:</em></span><em class="replaceable"><code>&lt;gid&gt;</code></em>
+                형식으로 지정한 gid. 지정한 gid의 그룹에 속한 모든 사용자의
+                총 로그인 세션 개수를 제한한다.
               </p></li></ul></div></dd><dt><span class="term">
           <code class="option">&lt;type&gt;</code>
         </span></dt><dd><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="option">hard</code></span></dt><dd><p>
-                  for enforcing <span class="emphasis"><em>hard</em></span> resource limits.
-                  These limits are set by the superuser and enforced by the Kernel.
-                  The user cannot raise his requirement of system resources above such values.
+                  <span class="emphasis"><em>경성</em><span> 자원 제한 적용.
+                  이 제한들은 수퍼유저가 설정해서 커널 수준에서 강제한다.
+                  사용자가 시스템 자원 요구를 그 값보다 높게 올릴 수 없다.
                 </p></dd><dt><span class="term"><code class="option">soft</code></span></dt><dd><p>
-                  for enforcing <span class="emphasis"><em>soft</em></span> resource limits.
-                  These limits are ones that the user can move up or down within the
-                  permitted range by any pre-existing <span class="emphasis"><em>hard</em></span>
-                  limits. The values specified with this token can be thought of as
-                  <span class="emphasis"><em>default</em></span> values, for normal system usage.
+                  <span class="emphasis"><em>연성</em></span> 자원 제한 적용.
+                  기존 <span class="emphasis"><em>경성</em></span> 제한이
+                  허용하는 범위 내에서 사용자가 올리거나 내릴 수 있는 제한치다.
+                  이 토큰으로 지정하는 값은 정상적인 시스템 사용 수준을 나타내는
+                  <span class="emphasis"><em>기본</em></span> 값으로 생각할 수 있다.
                 </p></dd><dt><span class="term"><code class="option">-</code></span></dt><dd><p>
-                  for enforcing both <span class="emphasis"><em>soft</em></span> and
-                  <span class="emphasis"><em>hard</em></span> resource limits together.
+                  <span class="emphasis"><em>연성</em></span> 자원 제한과
+                  <span class="emphasis"><em>경성</em></span> 자원 제한을 함께 적용.
                 </p><p>
-                  Note, if you specify a type of '-' but neglect to supply the
-                  item and value fields then the module will never enforce any
-                  limits on the specified user/group etc. .
+                  참고로 '-' 타입을 지정하고 item과 value 필드는 주지 않으면
+                  지정한 사용자/그룹 등에 대해 모듈에서 어떤 제한도 적용하지
+                  않게 된다.
                 </p></dd></dl></div></dd><dt><span class="term">
           <code class="option">&lt;item&gt;</code>
-        </span></dt><dd><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="option">core</code></span></dt><dd><p>limits the core file size (KB)</p></dd><dt><span class="term"><code class="option">data</code></span></dt><dd><p>maximum data size (KB)</p></dd><dt><span class="term"><code class="option">fsize</code></span></dt><dd><p>maximum filesize (KB)</p></dd><dt><span class="term"><code class="option">memlock</code></span></dt><dd><p>maximum locked-in-memory address space (KB)</p></dd><dt><span class="term"><code class="option">nofile</code></span></dt><dd><p>maximum number of open file descriptors</p></dd><dt><span class="term"><code class="option">rss</code></span></dt><dd><p>maximum resident set size (KB) (Ignored in Linux 2.4.30 and higher)</p></dd><dt><span class="term"><code class="option">stack</code></span></dt><dd><p>maximum stack size (KB)</p></dd><dt><span class="term"><code class="option">cpu</code></span></dt><dd><p>maximum CPU time (minutes)</p></dd><dt><span class="term"><code class="option">nproc</code></span></dt><dd><p>maximum number of processes</p></dd><dt><span class="term"><code class="option">as</code></span></dt><dd><p>address space limit (KB)</p></dd><dt><span class="term"><code class="option">maxlogins</code></span></dt><dd><p>maximum number of logins for this user (this limit does
-                  not apply to user with <span class="emphasis"><em>uid=0</em></span>)</p></dd><dt><span class="term"><code class="option">maxsyslogins</code></span></dt><dd><p>maximum number of all logins on system; user is not
-                  allowed to log-in if total number of all user logins is
-                  greater than specified number (this limit does not apply to
-                  user with <span class="emphasis"><em>uid=0</em></span>)</p></dd><dt><span class="term"><code class="option">priority</code></span></dt><dd><p>the priority to run user process with (negative
-                  values boost process priority)</p></dd><dt><span class="term"><code class="option">locks</code></span></dt><dd><p>maximum locked files (Linux 2.4 and higher)</p></dd><dt><span class="term"><code class="option">sigpending</code></span></dt><dd><p>maximum number of pending signals (Linux 2.6 and higher)</p></dd><dt><span class="term"><code class="option">msgqueue</code></span></dt><dd><p>maximum memory used by POSIX message queues (bytes)
-                  (Linux 2.6 and higher)</p></dd><dt><span class="term"><code class="option">nice</code></span></dt><dd><p>maximum nice priority allowed to raise to (Linux 2.6.12 and higher) values: [-20,19]</p></dd><dt><span class="term"><code class="option">rtprio</code></span></dt><dd><p>maximum realtime priority allowed for non-privileged processes
-                  (Linux 2.6.12 and higher)</p></dd></dl></div></dd></dl></div><p>
-      All items support the values <span class="emphasis"><em>-1</em></span>,
-      <span class="emphasis"><em>unlimited</em></span> or <span class="emphasis"><em>infinity</em></span> indicating no limit,
-      except for <span class="emphasis"><em>priority</em></span> and <span class="emphasis"><em>nice</em></span>.
+        </span></dt><dd><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="option">core</code></span></dt><dd><p>코어 파일 크기 제한 (KB)</p></dd><dt><span class="term"><code class="option">data</code></span></dt><dd><p>데이터 세그먼트 최대 크기 (KB)</p></dd><dt><span class="term"><code class="option">fsize</code></span></dt><dd><p>파일 최대 크기 (KB)</p></dd><dt><span class="term"><code class="option">memlock</code></span></dt><dd><p>메모리 고정 주소 공간 최대 크기 (KB)</p></dd><dt><span class="term"><code class="option">nofile</code></span></dt><dd><p>열린 파일 디스크립터 최대 개수</p></dd><dt><span class="term"><code class="option">rss</code></span></dt><dd><p>상주 집합 최대 크기 (KB) (리눅스 2.4.30 이상에선 무시)</p></dd><dt><span class="term"><code class="option">stack</code></span></dt><dd><p>스택 최대 크기 (KB)</p></dd><dt><span class="term"><code class="option">cpu</code></span></dt><dd><p>CPU 시간 최대 사용량 (분)</p></dd><dt><span class="term"><code class="option">nproc</code></span></dt><dd><p>프로세스 최대 개수</p></dd><dt><span class="term"><code class="option">as</code></span></dt><dd><p>주소 공간 제한 (KB)</p></dd><dt><span class="term"><code class="option">maxlogins</code></span></dt><dd><p>이 사용자의 로그인 세션 최대 개수
+                  (<span class="emphasis"><em>uid=0</em></span>인 사용자에는 이 제한이 적용되지 않는다.)</p></dd><dt><span class="term"><code class="option">maxsyslogins</code></span></dt><dd><p>시스템 전체 로그인 세션 최대 개수.
+                  모든 사용자 로그인 세션 개수가 지정한 값보다 크면
+                  사용자 로그인이 허용되지 않는다. (<span class="emphasis"><em>uid=0</em></span>인
+                  사용자에는 이 제한이 적용되지 않는다.)</p></dd><dt><span class="term"><code class="option">priority</code></span></dt><dd><p>사용자 프로세스 실행 우선순위
+                  (음수 값이 프로세스 우선순위를 높임)</p></dd><dt><span class="term"><code class="option">locks</code></span></dt><dd><p>잠긴 파일 최대 개수 (리눅스 2.4 이상)</p></dd><dt><span class="term"><code class="option">sigpending</code></span></dt><dd><p>미처리 시그널 최대 개수 (리눅스 2.6 이상)</p></dd><dt><span class="term"><code class="option">msgqueue</code></span></dt><dd><p>POSIX 메시지 큐의 메모리 최대 사용량 (바이트)
+                  (리눅스 2.6 이상)</p></dd><dt><span class="term"><code class="option">nice</code></span></dt><dd><p>허용되는 나이스 우선순위 상한 (리눅스 2.6.12 이상) 값 범위: [-20,19]</p></dd><dt><span class="term"><code class="option">rtprio</code></span></dt><dd><p>비특권 프로세스에 허용되는 실시간 우선순위 상한
+                  (리눅스 2.6.12 이상)</p></dd></dl></div></dd></dl></div><p>
+      <span class="emphasis"><em>priority</em></span>와 <span class="emphasis"><em>nice</em></span>를 제외한
+      모든 항목에서 <span class="emphasis"><em>-1</em></span>이나
+      <span class="emphasis"><em>unlimited</em></span>, <span class="emphasis"><em>infinity</em></span> 값으로 무제한을 지원한다.
     </p><p>
-      If a hard limit or soft limit of a resource is set to a valid value,
-      but outside of the supported range of the local system, the system
-      may reject the new limit or unexpected behavior may occur. If the
-      control value <span class="emphasis"><em>required</em></span>  is used, the module will
-      reject the login if a limit could not be set.
+      자원 경성 제한이나 연성 제한으로 설정한 값이 유효하기는 하지만
+      로컬 시스템의 지원 범위를 벗어나는 경우 시스템이 새 제한치를
+      거부하거나 예기치 않은 동작이 일어날 수 있다. control 값으로
+      <span class="emphasis"><em>required</em></span>를 쓰면
+      제한을 설정할 수 없는 경우 로그인을 거절하게 된다.
     </p><p>
-      In general, individual limits have priority over group limits, so if
-      you impose no limits for <span class="emphasis"><em>admin</em></span> group, but one of
-      the members in this group have a limits line, the user will have its
-      limits set according to this line.
+      일반적으로 그룹 제한치보다 개인별 제한치가 우선한다. 그래서
+      <span class="emphasis"><em>admin</em></span> 그룹에는 아무 제한도
+      없지만 그룹 멤버들 중 하나에 대한 제한 행이 있으면 그 행에 따라
+      그 사용자에 제한치가 설정된다.
     </p><p>
-      Also, please note that all limit settings are set
-      <span class="emphasis"><em>per login</em></span>. They are not global, nor are they
-      permanent; existing only for the duration of the session.
-      One exception is the <span class="emphasis"><em>maxlogin</em></span> option, this one
-      is system wide. But there is a race, concurrent logins at the same
-      time will not always be detect as such but only counted as one.
+      모든 제한 설정이 <span class="emphasis"><em>로그인 세션 한정</em></span>이라는
+      점에도 유의해야 한다. 전역도 아니고 영구적인 것도 아니다. 세션이
+      유지되는 동안만 적용된다.
+      유일한 예외가 <span class="emphasis"><em>maxlogin</em><span> 옵션인데,
+      이는 시스템 전역 제한이다. 하지만 경쟁이 있으므로 동시에 로그인하면
+      그대로 탐지되는 게 아니라 한 개로 계산될 수도 있다.
     </p><p>
-      In the <span class="emphasis"><em>limits</em></span> configuration file, the
-      '<span class="emphasis"><em>#</em></span>' character introduces a comment
-      - after which the rest of the line is ignored.
+      <span class="emphasis"><em>제한치</em><span> 설정 파일에서
+      '<span class="emphasis"><em>#</em></span>' 문자는 주석 시작을 나타낸다.
+      그 행의 나머지 내용이 무시된다.
     </p><p>
-      The pam_limits module does report configuration problems
-      found in its configuration file and errors via <span class="citerefentry"><span class="refentrytitle">syslog</span>(3)</span>.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-options"></a>6.15.3. OPTIONS</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+      pam_limits 모듈은 설정 파일에서 발견한 설정 문제나 오류들을
+      <span class="citerefentry"><span class="refentrytitle">syslog</span>(3)</span>를  통해 보고한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-options"></a>6.15.3. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">conf=<em class="replaceable"><code>/path/to/limits.conf</code></em></code>
         </span></dt><dd><p>
-            Indicate an alternative limits.conf style configuration file to
-            override the default.
+            대신 사용할 다른 limits.conf 형식 설정 파일을 나타낸다.
           </p></dd><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
-            Print debug information.
+            디버그 정보 찍기.
           </p></dd><dt><span class="term">
           <code class="option">set_all</code>
         </span></dt><dd><p>
-            Set the limits for which no value is specified in the
-            configuration file to the one from the process with the
-            PID 1.
+            설정 파일에서 아무 값도 지정하지 않은 제한 항목들을
+            PID 1인 프로세스의 제한치로 설정한다.
           </p></dd><dt><span class="term">
           <code class="option">utmp_early</code>
         </span></dt><dd><p>
-            Some broken applications actually allocate a utmp entry for
-            the user before the user is admitted to the system. If some
-            of the services you are configuring PAM for do this, you can
-            selectively use this module argument to compensate for this
-            behavior and at the same time maintain system-wide consistency
-            with a single limits.conf file.
+            일부 이상한 응용들에선 사용자의 시스템 입장이 허용되기 전에
+            그 사용자에 대한 utmp 항목을 할당한다. PAM을 구성하려고
+            하는 서비스들 중 일부에서 그렇게 동작하는 경우 선별적으로
+            이 모듈 인자를 사용해서 계산을 보정하여 limits.conf 파일
+            하나로 시스템 전체에서 일관성을 유지할 수 있다.
           </p></dd><dt><span class="term">
           <code class="option">noaudit</code>
         </span></dt><dd><p>
-            Do not report exceeded maximum logins count to the audit subsystem.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-types"></a>6.15.4. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      Only the <code class="option">session</code> module type is provided.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-return_values"></a>6.15.5. RETURN VALUES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_ABORT</span></dt><dd><p>
-             Cannot get current limits.
+            로그인 세션 최대 수 초과를 감사 서브시스템으로 보고하지 않는다.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-types"></a>6.15.4. 제공하는 모듈 종류</h3></div></div></div><p>
+      <code class="option">session</code> 모듈 타입만 제공한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-return_values"></a>6.15.5. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_ABORT</span></dt><dd><p>
+             현재 제한치를 얻지 못했음.
           </p></dd><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
-             No limits found for this user.
+             이 사용자를 위한 제한치를 찾지 못했음.
           </p></dd><dt><span class="term">PAM_PERM_DENIED</span></dt><dd><p>
-            New limits could not be set.
+            새 제한치를 설정할 수 없음.
           </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
-             Cannot read config file.
+             설정 파일 읽을 수 없음.
           </p></dd><dt><span class="term">PAM_SESSION_ERR</span></dt><dd><p>
-             Error recovering account name.
+             계정 이름 알아내는 중 오류.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-             Limits were changed.
+             제한치가 바뀌었음.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-             The user is not known to the system.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-files"></a>6.15.6. FILES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/limits.conf</code></span></dt><dd><p>Default configuration file</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-limits.conf-examples"></a>6.15.7. EXAMPLES</h3></div></div></div><p>
-      These are some example lines which might be specified in
-      <code class="filename">/etc/security/limits.conf</code>.
+             시스템에 알려져 있지 않은 사용자.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-files"></a>6.15.6. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/limits.conf</code></span></dt><dd><p>기본 설정 파일</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-limits.conf-examples"></a>6.15.7. 예시</h3></div></div></div><p>
+      다음은 <code class="filename">/etc/security/limits.conf</code>에
+      지정할 수 있는 예시들이다.
     </p><pre class="programlisting">
 *               soft    core            0
 *               hard    nofile          512
@@ -185,6 +180,6 @@ ftp             hard    nproc           0
 :123            hard    cpu             5000
 @500:           soft    cpu             10000
 600:700         hard    locks           10
-    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-authors"></a>6.15.8. AUTHORS</h3></div></div></div><p>
-      pam_limits was initially written by Cristian Gafton &lt;gafton@redhat.com&gt;
-    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_lastlog.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_listfile.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.14. pam_lastlog - display date of last login </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> 6.16. pam_listfile - deny or allow services based on an arbitrary file</td></tr></table></div></body></html>
+    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_limits-authors"></a>6.15.8. 작성자</h3></div></div></div><p>
+      Cristian Gafton &lt;gafton@redhat.com&gt;이 pam_limits를 처음 작성했다.
+    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_lastlog.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_listfile.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.14. pam_lastlog - 최근 로그인 시간 표시 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.16. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</td></tr></table></div></body></html>
