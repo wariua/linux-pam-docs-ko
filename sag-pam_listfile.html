@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.16. pam_listfile - deny or allow services based on an arbitrary file</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_limits.html" title="6.15. pam_limits - limit resources"><link rel="next" href="sag-pam_localuser.html" title="6.17. pam_localuser - require users to be listed in /etc/passwd"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.16. pam_listfile - deny or allow services based on an arbitrary file</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_limits.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_localuser.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_listfile"></a>6.16. pam_listfile - deny or allow services based on an arbitrary file</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_listfile.so</code>   
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.16. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_limits.html" title="6.15. pam_limits - 자원 제한"><link rel="next" href="sag-pam_localuser.html" title="6.17. pam_localuser - /etc/passwd에 있는 사용자여야 함"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.16. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_limits.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_localuser.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_listfile"></a>6.16. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_listfile.so</code>   
 	item=[tty|user|rhost|ruser|group|shell]
          
         sense=[allow|deny]
@@ -10,125 +10,122 @@
         apply=[<em class="replaceable"><code>user</code></em>|<em class="replaceable"><code>@group</code></em>]
       ] [
         quiet
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-description"></a>6.16.1. DESCRIPTION</h3></div></div></div><p>
-      pam_listfile is a PAM module which provides a way to deny or
-      allow services based on an arbitrary file.
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-description"></a>6.16.1. 설명</h3></div></div></div><p>
+      pam_listfile은 임의 파일을 가지고 서비스를 거부하거나
+      허용할 수 있게 해 주는 PAM 모듈이다.
     </p><p>
-      The module gets the <code class="option">item</code> of the type specified --
-      <span class="emphasis"><em>user</em></span> specifies the username,
-      <span class="emphasis"><em>PAM_USER</em></span>; tty specifies the name of the terminal
-      over which the request has been made, <span class="emphasis"><em>PAM_TTY</em></span>;
-      rhost specifies the name of the remote host (if any) from which the
-      request was made, <span class="emphasis"><em>PAM_RHOST</em></span>; and ruser specifies
-      the name of the remote user (if available) who made the request,
-      <span class="emphasis"><em>PAM_RUSER</em></span> -- and looks for an instance of that
-      item in the <code class="option">file=<em class="replaceable"><code>filename</code></em></code>.
-      <code class="filename">filename</code> contains one line per item listed. If
-      the item is found, then if
-      <code class="option">sense=<em class="replaceable"><code>allow</code></em></code>,
-      <span class="emphasis"><em>PAM_SUCCESS</em></span> is returned, causing the authorization
-      request to succeed; else if
-      <code class="option">sense=<em class="replaceable"><code>deny</code></em></code>,
-      <span class="emphasis"><em>PAM_AUTH_ERR</em></span> is returned, causing the authorization
-      request to fail.
+      <code class="option">item</code>으로 타입을 받아서
+      <code class="option">file=<em class="replaceable"><code>filename</code></em></code>에
+      그 항목 인스턴스가 있는지 확인한다. 타입 <span class="emphasis"><em>user</em></span>는
+      사용자 이름, 즉 <span class="emphasis"><em>PAM_USER</em></span>를 나타내고,
+      tty는 요청이 이뤄진 터미널의 이름, 즉 <span class="emphasis"><em>PAM_TTY</em></span>를
+      나타내고, rhost는 (해당되는 경우) 요청을 한 원격 호스트의 이름, 즉
+      <span class="emphasis"><em>PAM_RHOST</em></span>를 나타내고, ruser는
+      (해당되는 경우) 요청을 한 원격 사용자의 이름, 즉
+      <span class="emphasis"><em>PAM_RUSER</em></span>를 나타낸다.
+      <code class="filename">filename</code>에는 각 행에 한 개씩 항목이 나열돼 있다.
+      항목이 있는 경우, <code class="option">sense=<em class="replaceable"<code>allow</code></em></code>면
+      <span class="emphasis"><em>PAM_SUCCESS</em></span>를 반환해서 인가 요청이
+      성공하게 하고, <code class="option">sense=<em class="replaceable"><code>deny</code></em></code>면
+      <span class="emphasis"><em>PAM_AUTH_ERR</em></span>를 반환해서
+      인가 요청이 실패하게 한다.
     </p><p>
-      If an error is encountered (for instance, if
-      <code class="filename">filename</code> does not exist, or a poorly-constructed
-      argument is encountered), then if <span class="emphasis"><em>onerr=succeed</em></span>,
-      <span class="emphasis"><em>PAM_SUCCESS</em></span> is returned, otherwise if
-      <span class="emphasis"><em>onerr=fail</em></span>, <span class="emphasis"><em>PAM_AUTH_ERR</em></span> or
-      <span class="emphasis"><em>PAM_SERVICE_ERR</em></span> (as appropriate) will be returned.
+      오류를 만난 경우에 (예를 들어 <code class="filename">filename</code>이
+      존재하지 않거나 인자를 잘못 준 경우에), <span class="emphasis"><em>onerr=succeed</em></span>이면
+      <span class="emphasis"><em>PAM_SUCCESS</em></span>를 반환하고,
+      <span class="emphasis"><em>onerr=fail</em></span>이면 (경우에 맞게)
+      <span class="emphasis"><em>PAM_AUTH_ERR</em></span>나
+      <span class="emphasis"><em>PAM_SERVICE_ERR</em></span>를 반환하게 된다.
     </p><p>
-      An additional argument, <code class="option">apply=</code>, can be used
-      to restrict the application of the above to a specific user
-      (<code class="option">apply=<em class="replaceable"><code>username</code></em></code>)
-      or a given group
-      (<code class="option">apply=<em class="replaceable"><code>@groupname</code></em></code>).
-      This added restriction is only meaningful when used with the
-      <span class="emphasis"><em>tty</em></span>, <span class="emphasis"><em>rhost</em></span> and
-      <span class="emphasis"><em>shell</em></span> items.
+      추가로 <code class="option">apply=</code> 인자를 사용해서 위 내용이
+      특정 사용자(<code class="option">apply=<em class="replaceable"><code>username</code></em></code>)나
+      지정한 그룹(<code class="option">apply=<em class="replaceable"><code>@groupname</code></em></code>에만
+      적용되도록 제한할 수 있다.
+      이 추가 제한은 <span class="emphasis"><em>tty</em></span>,
+      <span class="emphasis"><em>rhost</em></span>, <span class="emphasis"><em>shell</em></span>
+      항목과 함께 쓸 때만 의미가 있다.
     </p><p>
-      Besides this last one, all arguments should be specified; do not
-      count on any default behavior.
+      이 인자는 제외하고 모든 인자를 지정해 주는 게 좋다. 기본 동작
+      방식에 의지해선 안 된다.
     </p><p>
-      No credentials are awarded by this module.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-options"></a>6.16.2. OPTIONS</h3></div></div></div><p>
+      이 모듈에선 어떤 크리덴셜도 받지 않는다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-options"></a>6.16.2. 옵션</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
             <code class="option">item=[tty|user|rhost|ruser|group|shell]</code>
           </span></dt><dd><p>
-	      What is listed in the file and should be checked for.
+	      파일에 나열돼 있고 확인해야 하는 것이 무슨 항목인가.
             </p></dd><dt><span class="term">
             <code class="option">sense=[allow|deny]</code>
           </span></dt><dd><p>
-              Action to take if found in file, if the item is NOT found in
-              the file, then the opposite action is requested.
+              파일에서 발견 시 취할 동작. 그 항목이 파일에 없으면
+              반대 동작을 요청한다.
             </p></dd><dt><span class="term">
             <code class="option">file=<em class="replaceable"><code>/path/filename</code></em></code>
           </span></dt><dd><p>
-              File containing one item per line. The file needs to be a plain
-              file and not world writable.
+              각 행에 한 항목씩 담은 파일. 단순 텍스트 파일이어야 하며
+              아무나 쓰기 가능한 파일이어선 안 된다.
             </p></dd><dt><span class="term">
             <code class="option">onerr=[succeed|fail]</code>
           </span></dt><dd><p>
-              What to do if something weird happens like being unable to open
-              the file.
+              파일 열기 실패 같은 뭔가 이상한 일이 발생할 때의 동작.
             </p></dd><dt><span class="term">
             <code class="option">apply=[<em class="replaceable"><code>user</code></em>|<em class="replaceable"><code>@group</code></em>]</code>
           </span></dt><dd><p>
-              Restrict the user class for which the restriction apply. Note that
-              with <code class="option">item=[user|ruser|group]</code> this does not make sense,
-              but for <code class="option">item=[tty|rhost|shell]</code> it have a meaning.
+              조건을 적용할 사용자를 제한. 참고로
+              <code class="option">item=[user|ruser|group]</code>에서는
+              이 옵션이 무의미하고
+              <code class="option">item=[tty|rhost|shell]</code>에 대해
+              의미가 있다.
             </p></dd><dt><span class="term">
             <code class="option">quiet</code>
           </span></dt><dd><p>
-              Do not treat service refusals or missing list files as
-              errors that need to be logged.
+              서비스 거절이나 목록 파일 부재를 로그로 기록해야 하는
+              오류로 처리하지 않기.
             </p></dd></dl></div><p>
 
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-types"></a>6.16.3. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      All module types (<code class="option">auth</code>, <code class="option">account</code>,
-      <code class="option">password</code> and <code class="option">session</code>) are provided.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-return_values"></a>6.16.4. RETURN VALUES</h3></div></div></div><p>
-      </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>Authentication failure.</p></dd><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
-               Memory buffer error.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-types"></a>6.16.3. 제공하는 모듈 종류</h3></div></div></div><p>
+      모든 모듈 타입(<code class="option">auth</code>, <code class="option">account</code>,
+      <code class="option">password</code>, <code class="option">session</code>)을 제공한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-return_values"></a>6.16.4. 반환 값</h3></div></div></div><p>
+      </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>인증 실패.</p></dd><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
+               메모리 버퍼 오류.
             </p></dd><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
-              The rule does not apply to the <code class="option">apply</code> option.
+              <code class="option">apply</code> 옵션에 따라 규칙이 적용되지 않았다.
             </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
-	      Error in service module.
+	      서비스 모듈 내 오류.
             </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-              Success.
+              성공.
             </p></dd></dl></div><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-examples"></a>6.16.5. EXAMPLES</h3></div></div></div><p>
-      Classic 'ftpusers' authentication can be implemented with this entry
-      in <code class="filename">/etc/pam.d/ftpd</code>:
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-examples"></a>6.16.5. 예시</h3></div></div></div><p>
+      다음 내용을 <code class="filename">/etc/pam.d/ftpd</code>에 넣어서
+      전통적인 'ftpusers' 인증을 구현할 수 있다.
       </p><pre class="programlisting">
 #
-# deny ftp-access to users listed in the /etc/ftpusers file
+# /etc/ftpusers 파일에 나열된 사용자에게 ftp 접근 거부
 #
 auth    required       pam_listfile.so \
         onerr=succeed item=user sense=deny file=/etc/ftpusers
       </pre><p>
-      Note, users listed in <code class="filename">/etc/ftpusers</code> file are
-      (counterintuitively) <span class="emphasis"><em>not</em></span> allowed access to
-      the ftp service.
+      참고로 <code class="filename">/etc/ftpusers</code> 파일에 나열되는 건
+      (이름과 달리) ftp 서비스 접근이 허용되지
+      <span class="emphasis"><em>않는</em></span> 사용자들이다.
     </p><p>
-      To allow login access only for certain users, you can use a
-      <code class="filename">/etc/pam.d/login</code> entry like this:
+      특정 사용자들에게만 로그인 접근을 허용하려면 다음과 같은 내용을
+      <code class="filename">/etc/pam.d/login</code>에 쓸 수 있다.
       </p><pre class="programlisting">
 #
-# permit login to users listed in /etc/loginusers
+# /etc/loginusers에 나열된 사용자에게만 로그인 허가
 #
 auth    required       pam_listfile.so \
         onerr=fail item=user sense=allow file=/etc/loginusers
       </pre><p>
-      For this example to work, all users who are allowed to use the
-      login service should be listed in the file
-      <code class="filename">/etc/loginusers</code>.  Unless you are explicitly
-      trying to lock out root, make sure that when you do this, you leave
-      a way for root to log in, either by listing root in
-      <code class="filename">/etc/loginusers</code>, or by listing a user who is
-      able to <span class="emphasis"><em>su</em></span> to the root account.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-author"></a>6.16.6. AUTHOR</h3></div></div></div><p>
-        pam_listfile was written by Michael K. Johnson &lt;johnsonm@redhat.com&gt;
-        and Elliot Lee &lt;sopwith@cuc.edu&gt;.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_limits.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_localuser.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.15. pam_limits - limit resources </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> 6.17. pam_localuser - require users to be listed in /etc/passwd</td></tr></table></div></body></html>
+      이 예시를 이용하려면 login 서비스 이용이 허용된 모든 사용자가
+      <code class="filename">/etc/loginusers</code>에 나열돼 있어야 한다.
+      의도적으로 root를 막으려는 게 아니라면 root를
+      <code class="filename">/etc/loginusers</code>에 포함시키거나
+      root 계정으로 <span class="emphasis"><em>su</em></span> 할 수 있는
+      사용자를 포함시켜서 root로 로그인할 방법을 남겨 두도록 하자.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-author"></a>6.16.6. 작성자</h3></div></div></div><p>
+        Michael K. Johnson &lt;johnsonm@redhat.com&gt;과
+        Elliot Lee &lt;sopwith@cuc.edu&gt;가 pam_listfile을 작성했다.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_limits.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_localuser.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.15. pam_limits - 자원 제한 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.17. pam_localuser - /etc/passwd에 있는 사용자여야 함</td></tr></table></div></body></html>
