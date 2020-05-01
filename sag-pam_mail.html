@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.19. pam_mail - inform about available mail</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_loginuid.html" title="6.18. pam_loginuid - record user's login uid to the process attribute"><link rel="next" href="sag-pam_mkhomedir.html" title="6.20. pam_mkhomedir - create users home directory"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.19. pam_mail - inform about available mail</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_loginuid.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_mkhomedir.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_mail"></a>6.19. pam_mail - inform about available mail</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_mail.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.19. pam_mail - 받은 메일 알림</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_loginuid.html" title="6.18. pam_loginuid - 사용자의 로그인 uid를 프로세스 속성에 기록"><link rel="next" href="sag-pam_mkhomedir.html" title="6.20. pam_mkhomedir - 사용자 홈 디렉터리 만들기"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.19. pam_mail - 받은 메일 알림</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_loginuid.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_mkhomedir.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_mail"></a>6.19. pam_mail - 받은 메일 알림</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_mail.so</code>  [
 	close
       ] [
 	debug
@@ -16,90 +16,88 @@
 	quiet
       ] [
 	standard
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-description"></a>6.19.1. DESCRIPTION</h3></div></div></div><p>
-      The pam_mail PAM module provides the "you have new mail"
-      service to the user. It can be plugged into any application
-      that has credential or session hooks. It gives a single message
-      indicating the <span class="emphasis"><em>newness</em></span> of any mail it finds
-      in the user's mail folder. This module also sets the PAM
-      environment variable, <span class="emphasis"><em>MAIL</em></span>, to the
-      user's mail directory.
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-description"></a>6.19.1. 설명</h3></div></div></div><p>
+      pam_mail은 사용자에게 "새 메일이 있습니다" 서비스를 제공하는
+      PAM 모듈이다. 크리덴셜 또는 세션 훅이 있는 아무 응용에나
+      쓸 수 있다. 사용자 메일 폴더에서 찾은 메일의
+      <span class="emphasis"><em>새로움 정도</em></span>를 보여 주는
+      메시지를 하나 찍는다. 그리고 PAM 환경 변수
+      <span class="emphasis"><em>MAIL</em></span>에 사용자의
+      메일 디렉터리를 설정하기도 한다.
     </p><p>
-      If the mail spool file (be it <code class="filename">/var/mail/$USER</code>
-      or a pathname given with the <code class="option">dir=</code> parameter) is
-      a directory then pam_mail assumes it is in the
-      <span class="emphasis"><em>Maildir</em></span> format.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-options"></a>6.19.2. OPTIONS</h3></div></div></div><p>
+      메일 스풀 파일(<code class="filename">/var/mail/$USER</code>이거나
+      <code class="option">dir=</code> 매개변수로 준 경로명)이 디렉터리면
+      <span class="emphasis"><em>Maildir</em></span> 형식으로 되어 있다고
+      상정한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-options"></a>6.19.2. 옵션</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
             <code class="option">close</code>
           </span></dt><dd><p>
-              Indicate if the user has any mail also on logout.
+              로그아웃 시에도 사용자에게 메일이 있는지 알려 주기.
             </p></dd><dt><span class="term">
             <code class="option">debug</code>
           </span></dt><dd><p>
-	      Print debug information.
+	      디버그 정보 찍기.
             </p></dd><dt><span class="term">
             <code class="option">dir=<em class="replaceable"><code>maildir</code></em></code>
           </span></dt><dd><p>
-              Look for the user's mail in an alternative location defined by
-             <code class="filename">maildir/&lt;login&gt;</code>.  The default
-             location for mail is <code class="filename">/var/mail/&lt;login&gt;</code>.
-             Note, if the supplied
-             <code class="filename">maildir</code> is prefixed by a '~', the
-             directory is interpreted as indicating a file in the user's
-             home directory.
+              <code class="filename">maildir/&lt;login&gt;</code>이 가리키는
+             위치에서 사용자의 메일을 확인한다. 메일을 확인하는 기본 위치는
+             <code class="filename">/var/mail/&lt;login&gt;</code>이다.
+             참고로 <code class="filename">maildir</code> 앞에 '~'를 붙이면
+             사용자 홈 디렉터리에 있는 파일을 나타내는 것으로 해석한다.
             </p></dd><dt><span class="term">
             <code class="option">empty</code>
           </span></dt><dd><p>
-              Also print message if user has no mail.
+              사용자에게 메일이 없는 경우에도 메시지 찍기.
             </p></dd><dt><span class="term">
             <code class="option">hash=<em class="replaceable"><code>count</code></em></code>
           </span></dt><dd><p>
-              Mail directory hash depth. For example, a
-              <span class="emphasis"><em>hashcount</em></span> of 2 would
-              make the mail file be
-              <code class="filename">/var/spool/mail/u/s/user</code>.
+              메일 디렉터리 해시 깊이. 예를 들어
+              <span class="emphasis"><em>해시 카운트</em></span>가 2이면
+              메일 파일이 <code class="filename">/var/spool/mail/u/s/user</code>처럼
+              된다.
             </p></dd><dt><span class="term">
             <code class="option">noenv</code>
           </span></dt><dd><p>
-	      Do not set the <span class="emphasis"><em>MAIL</em></span>
-              environment variable.
+	      환경 변수 <span class="emphasis"><em>MAIL</em></span>
+              설정하지 않기.
             </p></dd><dt><span class="term">
             <code class="option">nopen</code>
           </span></dt><dd><p>
-	      Don't print any mail information on login. This flag is
-              useful to get the <span class="emphasis"><em>MAIL</em></span>
-              environment variable set, but to not display any information
-              about it.
+	      로그인 시 어떤 메일 정보도 찍지 않기.
+              환경 변수 <span class="emphasis"><em>MAIL</em></span>은
+              얻되 어떤 정보도 표시하지 않고 싶을 때 이 플래그가
+              유용하다.
             </p></dd><dt><span class="term">
             <code class="option">quiet</code>
           </span></dt><dd><p>
-	      Only report when there is new mail.
+	      새 메일이 있을 때만 알려 주기.
             </p></dd><dt><span class="term">
             <code class="option">standard</code>
           </span></dt><dd><p>
-	      Old style "You have..." format which doesn't show the
-              mail spool being used. This also implies "empty".
+	      사용 중인 메일 스풀을 보여 주지 않는 구식 "You have..." 형식 사용.
+              "empty"를 함축한다.
             </p></dd></dl></div><p>
 
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-types"></a>6.19.3. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      The <code class="option">session</code> and
-      <code class="option">auth</code> (on establishment and
-      deletion of credentials) module types are provided.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-return_values"></a>6.19.4. RETURN VALUES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
-             Memory buffer error.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-types"></a>6.19.3. 제공하는 모듈 종류</h3></div></div></div><p>
+      <code class="option">session</code> 및 
+      <code class="option">auth</code>(크리덴셜 설정 및 삭제)
+      모듈 타입을 제공한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-return_values"></a>6.19.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
+             메모리 버퍼 오류.
           </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
-	    Badly formed arguments.
+	    잘못된 인자.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-            Success.
+            성공.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-            User not known.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-examples"></a>6.19.5. EXAMPLES</h3></div></div></div><p>
-      Add the following line to <code class="filename">/etc/pam.d/login</code> to
-      indicate that the user has new mail when they login to the system.
+            알 수 없는 사용자.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-examples"></a>6.19.5. 예시</h3></div></div></div><p>
+      <code class="filename">/etc/pam.d/login</code>에 다음 행을 추가하면
+      사용자가 시스템에 로그인할 때 새 메일이 있다고 알려 준다.
       </p><pre class="programlisting">
 session  optional  pam_mail.so standard
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-author"></a>6.19.6. AUTHOR</h3></div></div></div><p>
-        pam_mail was written by Andrew G. Morgan &lt;morgan@kernel.org&gt;.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_loginuid.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_mkhomedir.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.18. pam_loginuid - record user's login uid to the process attribute </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> 6.20. pam_mkhomedir - create users home directory</td></tr></table></div></body></html>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_mail-author"></a>6.19.6. 작성자</h3></div></div></div><p>
+        Andrew G. Morgan &lt;morgan@kernel.org&gt;이 pam_mail을 작성했다.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_loginuid.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_mkhomedir.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.18. pam_loginuid - 사용자의 로그인 uid를 프로세스 속성에 기록 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.20. pam_mkhomedir - 사용자 홈 디렉터리 만들기</td></tr></table></div></body></html>
