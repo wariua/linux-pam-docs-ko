@@ -1,48 +1,49 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.21. pam_motd - display the motd file</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_mkhomedir.html" title="6.20. pam_mkhomedir - create users home directory"><link rel="next" href="sag-pam_namespace.html" title="6.22. pam_namespace - setup a private namespace"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.21. pam_motd - display the motd file</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_mkhomedir.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_namespace.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_motd"></a>6.21. pam_motd - display the motd file</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_motd.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.21. pam_motd - motd 파일 표시</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_mkhomedir.html" title="6.20. pam_mkhomedir - 사용자 홈 디렉터리 만들기"><link rel="next" href="sag-pam_namespace.html" title="6.22. pam_namespace - 비공개 네임스페이스 구성"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.21. pam_motd - motd 파일 표시</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_mkhomedir.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_namespace.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_motd"></a>6.21. pam_motd - motd 파일 표시</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_motd.so</code>  [
         motd=<em class="replaceable"><code>/path/filename</code></em>
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-description"></a>6.21.1. DESCRIPTION</h3></div></div></div><p>
-      pam_motd is a PAM module that can be used to display
-      arbitrary motd (message of the day) files after a successful
-      login. By default the <code class="filename">/etc/motd</code> file is
-      shown. The message size is limited to 64KB.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-options"></a>6.21.2. OPTIONS</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-description"></a>6.21.1. 설명</h3></div></div></div><p>
+      pam_motd는 로그인 성공 후 임의의 motd(message of the day,
+      오늘의 메시지) 파일을 표시할 수 있는 PAM 모듈이다.
+      기본적으로 <code class="filename">/etc/motd</code> 파일을
+      보여 준다. 메시지 크기가 64KB로 제한돼 있다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-options"></a>6.21.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">motd=<em class="replaceable"><code>/path/filename</code></em></code>
         </span></dt><dd><p>
-	    The <code class="filename">/path/filename</code> file is displayed
-            as message of the day.
+	    <code class="filename">/path/filename</code> 파일을
+            오늘의 메시지로 표시한다.
           </p></dd><dt><span class="term">
           <code class="option">motd_dir=<em class="replaceable"><code>/path/dirname.d</code></em></code>
         </span></dt><dd><p>
-            The <code class="filename">/path/dirname.d</code> directory is scanned
-            and each file contained inside of it is displayed.
+            <code class="filename">/path/dirname.d</code> 디렉터리를
+            훑어서 그 안의 각 파일을 표시한다.
           </p></dd></dl></div><p>
-      When no options are given, the default is to display both
-      <code class="filename">/etc/motd</code> and the contents of
-      <code class="filename">/etc/motd.d</code>.  Specifying either option (or both)
-      will disable this default behavior.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-types"></a>6.21.3. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      Only the <code class="option">session</code> module type is provided.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-return_values"></a>6.21.4. RETURN VALUES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
-            This is the only return value of this module.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-examples"></a>6.21.5. EXAMPLES</h3></div></div></div><p>
-      The suggested usage for <code class="filename">/etc/pam.d/login</code> is:
+      아무 옵션도 주지 않으면 기본적으로
+      <code class="file">/etc/motd</code>와
+      <code class="filename">/etc/motd.d</code> 내용물을 모두
+      표시한다. 어느 한 옵션이라도 지정하면 이 기본 동작이
+      꺼지게 된다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-types"></a>6.21.3. 제공하는 모듈 종류</h3></div></div></div><p>
+      <code class="option">session</code> 모듈 타입만 제공한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-return_values"></a>6.21.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
+            이 모듈의 유일한 반환 값이다.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-examples"></a>6.21.5. 예시</h3></div></div></div><p>
+      <code class="filename">/etc/pam.d/login</code> 사용법:
       </p><pre class="programlisting">
 session  optional  pam_motd.so
       </pre><p>
     </p><p>
-      To use a <code class="filename">motd</code> file from a different location:
+      다른 위치의 <code class="filename">motd</code> 파일 사용하기:
       </p><pre class="programlisting">
 session  optional  pam_motd.so motd=/elsewhere/motd
       </pre><p>
     </p><p>
-      To use a <code class="filename">motd</code> file from elsewhere, along with a
-      corresponding <code class="filename">.d</code> directory:
+      다른 곳의 <code class="filename">motd</code> 파일 및
+      <code class="filename">.d</code> 디렉터리 사용하기:
       </p><pre class="programlisting">
 session  optional  pam_motd.so motd=/elsewhere/motd motd_dir=/elsewhere/motd.d
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-author"></a>6.21.6. AUTHOR</h3></div></div></div><p>
-        pam_motd was written by Ben Collins &lt;bcollins@debian.org&gt;.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_motd-author"></a>6.21.6. 작성자</h3></div></div></div><p>
+        Ben Collins &lt;bcollins@debian.org&gt;가 pam_motd를 작성했다.
       </p><p>
-        The <code class="option">motd_dir=</code> option was added by
-        Allison Karlitskaya &lt;allison.karlitskaya@redhat.com&gt;.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_mkhomedir.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_namespace.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.20. pam_mkhomedir - create users home directory </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> 6.22. pam_namespace - setup a private namespace</td></tr></table></div></body></html>
+        Allison Karlitskaya &lt;allison.karlitskaya@redhat.com&gt;가
+        <code class="option">motd_dir=</code> 옵션을 추가했다.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_mkhomedir.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_namespace.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.20. pam_mkhomedir - 사용자 홈 디렉터리 만들기 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.22. pam_namespace - 비공개 네임스페이스 구성</td></tr></table></div></body></html>
