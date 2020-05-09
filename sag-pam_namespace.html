@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.22. pam_namespace - setup a private namespace</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_motd.html" title="6.21. pam_motd - display the motd file"><link rel="next" href="sag-pam_nologin.html" title="6.23. pam_nologin - prevent non-root users from login"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.22. pam_namespace - setup a private namespace</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_motd.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_nologin.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_namespace"></a>6.22. pam_namespace - setup a private namespace</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_namespace.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.22. pam_namespace - 비공개 네임스페이스 구성</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_motd.html" title="6.21. pam_motd - motd 파일 표시"><link rel="next" href="sag-pam_nologin.html" title="6.23. pam_nologin - root 외 사용자 로그인 막기"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.22. pam_namespace - 비공개 네임스페이스 구성</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_motd.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_nologin.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_namespace"></a>6.22. pam_namespace - 비공개 네임스페이스 구성</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_namespace.so</code>  [
         debug
       ] [
         unmnt_remnt
@@ -20,261 +20,241 @@
         use_default_context
       ] [
         mount_private
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-description"></a>6.22.1. DESCRIPTION</h3></div></div></div><p>
-      The pam_namespace PAM module sets up a private namespace for a session
-      with polyinstantiated directories. A polyinstantiated directory
-      provides a different instance of itself based on user name, or when
-      using SELinux, user name, security context or both.  If an executable
-      script <code class="filename">/etc/security/namespace.init</code> exists, it
-      is used to initialize the instance directory after it is set up
-      and mounted on the polyinstantiated directory. The script receives the
-      polyinstantiated directory path, the instance directory path, flag
-      whether the instance directory was newly created (0 for no, 1 for yes),
-      and the user name as its arguments.
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-description"></a>6.22.1. 설명</h3></div></div></div><p>
+      pam_namespace는 다형화 디렉터리로 세션을 위한 비공개 네임스페이스를
+      구성해 주는 PAM 모듈이다. 다형화 디렉터리란 사용자 이름에 따라서,
+      또는 SELinux를 쓰는 경우 사용자 이름이나 보안 문맥, 또는 둘 모두에
+      따라서 다른 인스턴스를 제공하는 디렉터리다. 인스턴스 디렉터리를
+      준비해서 다형화 디렉터리에 마운트한 다음에 실행 가능 스크립트
+      <code class="filename">/etc/security/namespace.init</code>이 존재하면
+      그 스크립트를 사용해 디렉터리를 초기화한다. 그 스크립트는 인자로
+      다형화 디렉터리 경로, 인스턴스 디렉터리 경로, 인스턴스 디렉터리가
+      새로 만들어진 것인지 여부를 나타내는 플래그(0은 아님, 1은 맞음),
+      사용자 이름을 받는다.
     </p><p>
-      The pam_namespace module disassociates the session namespace from
-      the parent namespace. Any mounts/unmounts performed in the parent
-      namespace, such as mounting of devices, are not reflected in the
-      session namespace. To propagate selected mount/unmount events from
-      the parent namespace into the disassociated session namespace, an
-      administrator may use the special shared-subtree feature. For
-      additional information on shared-subtree feature, please refer to
-      the mount(8) man page and the shared-subtree description at
-      http://lwn.net/Articles/159077 and http://lwn.net/Articles/159092.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-namespace.conf-description"></a>6.22.2. DESCRIPTION</h3></div></div></div><p>
-      The <span class="emphasis"><em>pam_namespace.so</em></span> module allows setup of
-      private namespaces with polyinstantiated directories.
-      Directories can be polyinstantiated based on user name
-      or, in the case of SELinux, user name, sensitivity level or complete security context.  If an
-      executable script <code class="filename">/etc/security/namespace.init</code>
-      exists, it is used to initialize the namespace every time an instance
-      directory is set up and mounted. The script receives the polyinstantiated
-      directory path and the instance directory path as its arguments.
+      pam_namespace 모듈은 세션 네임스페이스를 부모 네임스페이스와
+      분리한다. 부모 네임스페이스에서 장치 마운트 같은 마운트/언마운트를
+      수행해도 세션 네임스페이스에 반영되지 않는다. 부모 네임스페이스의
+      마운트/언마운트 동작 일부를 분리된 세션 네임스페이스로도 전파시키고
+      싶다면 특수 공유 서브트리 기능을 이용할 수 있다. 공유 서브트리
+      기능에 대한 자세한 내용은 mount(8) 맨페이지, 그리고
+      http://lwn.net/Articles/159077 및 http://lwn.net/Articles/159092 에
+      있는 공유 서브트리 설명을 참고할 수 있다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-namespace.conf-description"></a>6.22.2. 설명</h3></div></div></div><p>
+      <span class="emphasis"><em>pam_namespace.so</em></span> 모듈을 통해
+      다형화 디렉터리로 비공개 네임스페이스를 구성할 수 있다. 사용자 이름에
+      따라서, 또는 SELinux 사용 시 사용자 이름이나 민감도 단계, 또는
+      전체 보안 문맥에 따라서 여러 디렉터리 인스턴스가 생성될 수 있다.
+      실행 가능 스크립트 <code class="filename">/etc/security/namespace.init</code>이
+      존재하면 인스턴스 디렉터리를 준비해서 마운트할 때마다 그 스크립트를
+      사용해 네임스페이스를 초기화한다. 그 스크립트는 인자로 다형화 디렉터리
+      경로와 인스턴스 디렉터리 경로를 받는다.
     </p><p>
-      The <code class="filename">/etc/security/namespace.conf</code> file specifies
-      which directories are polyinstantiated, how they are polyinstantiated,
-      how instance directories would be named, and any users for whom
-      polyinstantiation would not be performed.
+      어느 디렉터리를 어떻게 다형화할 것인지, 인스턴스 디렉터리 이름을
+      어떻게 붙일 것인지, 다형화를 수행하지 않을 사용자가 있는지 등을
+      <code class="filename">/etc/security/namespace.conf</code> 파일에
+      지정한다.
     </p><p>
-      When someone logs in, the file <code class="filename">namespace.conf</code> is
-      scanned. Comments are marked by <span class="emphasis"><em>#</em></span> characters.
-      Each non comment line represents one polyinstantiated
-      directory. The fields are separated by spaces but can be quoted by
-      <span class="emphasis"><em>"</em></span> characters also escape
-      sequences <span class="emphasis"><em>\b</em></span>, <span class="emphasis"><em>\n</em></span>, and
-      <span class="emphasis"><em>\t</em></span> are recognized. The fields are as follows:
+      누군가 로그인을 하면 <code class="filename">namespace.conf</code> 파일을
+      탐색한다. <span class="emphasis"><em>#</em></span> 문자는 주석을 나타낸다.
+      주석 아닌 행 각각이 다형화 디렉터리 한 개를 나타낸다. 공백으로 필드를
+      구분하며 <span class="emphasis"><em>"</em></span> 문자로 필드를 감쌀 수
+      있고 이스케이프 열 <span class="emphasis"><em>\b</em></span>,
+      <span class="emphasis"><em>\n</em></span>, <span class="emphasis"><em>\t</em></span>도
+      인식한다. 필드는 다음과 같다.
    </p><p><em class="replaceable"><code>polydir</code></em> <em class="replaceable"><code>instance_prefix</code></em> <em class="replaceable"><code>method</code></em> <em class="replaceable"><code>list_of_uids</code></em>
     </p><p>
-      The first field, <em class="replaceable"><code>polydir</code></em>, is the absolute
-      pathname of the directory to polyinstantiate. The special string
-      <span class="emphasis"><em>$HOME</em></span> is replaced with the user's home directory,
-      and <span class="emphasis"><em>$USER</em></span> with the username. This field cannot
-      be blank.
+      첫 번째 필드 <em class="replaceable"><code>polydir</code></em>은
+      다형화할 디렉터리의 절대 경로명이다. 특수 문자열
+      <span class="emphasis"><em>$HOME</em></span>이 사용자 홈 디렉터리로
+      바뀌고 <span class="emphasis"><em>$USER</em></span>가 사용자 이름으로
+      바뀐다. 이 필드는 비어 있을 수 없다.
     </p><p>
-      The second field, <em class="replaceable"><code>instance_prefix</code></em> is
-      the string prefix used to build the pathname for the instantiation
-      of &lt;polydir&gt;. Depending on the polyinstantiation
-      <em class="replaceable"><code>method</code></em> it is then appended with
-      "instance differentiation string" to generate the final
-      instance directory path. This directory is created if it did not exist
-      already, and is then bind mounted on the &lt;polydir&gt; to provide an
-      instance of &lt;polydir&gt; based on the &lt;method&gt; column.
-      The special string <span class="emphasis"><em>$HOME</em></span> is replaced with the
-      user's home directory, and <span class="emphasis"><em>$USER</em></span> with the username.
-      This field cannot be blank.
+      두 번째 필드 <em class="replaceable"><code>instance_prefix</code></em>는
+      &lt;polydir&gt;의 인스턴스의 경로명을 만들 때 쓰는 선두 문자열이다.
+      다형화 <em class="replaceable"><code>method</code></em>에 따라 그 뒤에
+      "인스턴스 구별 문자열"이 붙어서 인스턴스 디렉터리 최종 경로가 된다.
+      그 디렉터리가 이미 존재하지 않으면 생성한 다음 &lt;method&gt; 열에
+      따라서 &lt;polydir&gt;에 바인드 마운트해서 &lt;polydir&gt; 인스턴스를
+      제공한다. 특수 문자열 <span class="emphasis"><em>$HOME</em></span>이
+      사용자 홈 디렉터리로 바뀌고 <span class="emphasis"><em>$USER</em></span>가
+      사용자 이름으로 바뀐다. 이 필드는 비어 있을 수 없다.
     </p><p>
-      The third field, <em class="replaceable"><code>method</code></em>, is the method
-      used for polyinstantiation. It can take these values; "user"
-      for polyinstantiation based on user name, "level" for
-      polyinstantiation based on process MLS level and user name, "context" for
-      polyinstantiation based on process security context and user name,
-      "tmpfs" for mounting tmpfs filesystem as an instance dir, and
-      "tmpdir" for creating temporary directory as an instance dir which is
-      removed when the user's session is closed.
-      Methods "context" and "level" are only available with SELinux. This
-      field cannot be blank.
+      세 번째 필드 <em class="replaceable"><code>method</code></em>는
+      다형화를 하는 방식이다. "user"는 사용자 이름에 따른 다형화,
+      "level"은 프로세스 MLS 단계 및 사용자 이름에 따른 다형화,
+      "context"는 프로세스 보안 문맥과 사용자 이름에 따른 다형화,
+      "tmpfs"는 tmpfs 파일 시스템을 인스턴스 디렉터리로 마운트하기,
+      "tmpdir"은 임시 디렉터리를 만들어서 인스턴스 디렉터리로 쓰고
+      사용자 세션이 닫힐 때 제거하는 방식이다.
+      "context" 및 "level" 방식은 SELinux를 쓸 때만 사용 가능하다.
+      이 필드는 비어 있을 수 없다.
     </p><p>
-      The fourth field, <em class="replaceable"><code>list_of_uids</code></em>, is
-      a comma separated list of user names for whom the polyinstantiation
-      is not performed. If left blank, polyinstantiation will be performed
-      for all users. If the list is preceded with a single "~" character,
-      polyinstantiation is performed only for users in the list.
+      네 번째 필드 <em class="replaceable"><code>list_of_uids</code></em>는
+      다형화를 수행하지 않을 사용자 이름의 쉼표 구분 목록이다. 비어 있으면
+      모든 사용자에 대해 다형화를 수행하게 된다. 목록 앞에 "~" 문자 하나가
+      붙어 있으면 그 목록의 사용자에게만 다형화를 수행한다.
     </p><p>
-      The <em class="replaceable"><code>method</code></em> field can contain also following
-      optional flags separated by <span class="emphasis"><em>:</em></span> characters.
+      <em class="replaceable"><code>method</code></em> 필드에 선택적으로
+      다음 플래그들을 <span class="emphasis"><em>:</em></span> 문자로 구분해서
+      붙일 수 있다.
     </p><p><span class="emphasis"><em>create</em></span>=<em class="replaceable"><code>mode</code></em>,<em class="replaceable"><code>owner</code></em>,<em class="replaceable"><code>group</code></em>
-      - create the polyinstantiated directory. The mode, owner and group parameters
-      are optional. The default for mode is determined by umask, the default
-      owner is the user whose session is opened, the default group is the
-      primary group of the user.
+      - 다형화 디렉터리를 만든다. 매개변수 mode, owner, group은 선택적이다.
+      모든 기본값은 umask로 정해지며, 기본 소유자는 세션을 여는 사용자이며,
+      기본 그룹은 사용자의 주 그룹이다.
     </p><p><span class="emphasis"><em>iscript</em></span>=<em class="replaceable"><code>path</code></em>
-      - path to the instance directory init script. The base directory for relative
-      paths is <code class="filename">/etc/security/namespace.d</code>.
+      - 인스턴스 디렉터리 초기화 스크립트 경로. 상대 경로의 기준
+      디렉터리는 <code class="filename">/etc/security/namespace.d</code>다.
     </p><p><span class="emphasis"><em>noinit</em></span>
-      - instance directory init script will not be executed.
+      - 인스턴스 디렉터리 초기화 스크립트를 실행하지 않는다.
     </p><p><span class="emphasis"><em>shared</em></span>
-      - the instance directories for "context" and "level" methods will not
-      contain the user name and will be shared among all users.
+      - "context" 및 "level" 방식의 인스턴스 디렉터리에 사용자 이름을
+      포함시키지 않아서 모든 사용자가 공유하게 된다.
     </p><p><span class="emphasis"><em>mntopts</em></span>=<em class="replaceable"><code>value</code></em>
-      - value of this flag is passed to the mount call when the tmpfs mount is
-      done. It allows for example the specification of the maximum size of the
-      tmpfs instance that is created by the mount call. See <span class="citerefentry"><span class="refentrytitle">mount</span>(8)</span> for details.
+      - tmpfs 마운트를 할 때 이 플래그 값을 mount 호출로 전달한다.
+      그래서 예를 들어 mount 호출로 만드는 tmpfs 인스턴스의 최대 크기를
+      지정할 수 있다. 자세한 내용은 <span class="citerefentry"><span class="refentrytitle">mount</span>(8)</span> 참고.
     </p><p>
-      The directory where polyinstantiated instances are to be
-      created, must exist and must have, by default, the mode of 0000.  The
-      requirement that the instance parent be of mode 0000 can be overridden
-      with the command line option <span class="emphasis"><em>ignore_instance_parent_mode</em></span>
+      다형화 인스턴스가 만들어질 디렉터리가 존재해야 하고 기본적으로는
+      모드가 0000이어야 한다. 인스턴스 부모의 모드가 0000이어야 한다는
+      요건을 명령행 옵션 <span class="emphasis"><em>ignore_instance_parent_mode</em></span>로
+      무시할 수 있다.
     </p><p>
-      In case of context or level polyinstantiation the SELinux context
-      which is used for polyinstantiation is the context used for executing
-      a new process as obtained by getexeccon. This context must be set
-      by the calling application or <code class="filename">pam_selinux.so</code>
-      module. If this context is not set the polyinstatiation will be
-      based just on user name.
+      context 내지 level 다형화인 경우 다형화에 쓰는 SELinux 문맥은
+      getexeccon으로 얻은 새 프로세스 실행을 위한 문맥이다. 호출 프로세스에서
+      또는 <code class="filename">pam_selinux.so</code>로 그 문맥을
+      설정해 둬야 한다. 그 문맥이 설정돼 있지 않으면 사용자 이름만
+      가지고 다형화가 이뤄지게 된다.
     </p><p>
-      The "instance differentiation string" is &lt;user name&gt; for "user"
-      method and &lt;user name&gt;_&lt;raw directory context&gt; for "context"
-      and "level" methods. If the whole string is too long the end of it is
-      replaced with md5sum of itself. Also when command line option
-      <span class="emphasis"><em>gen_hash</em></span> is used the whole string is replaced
-      with md5sum of itself.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-options"></a>6.22.3. OPTIONS</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+      "인스턴스 구별 문자열"이 "user" 방식에서는 &lt;사용자 이름&gt;이고
+      "context" 및 "level" 방식에서는 &lt;사용자 이름&gt;_&lt;디렉터리 문맥
+      값&gt;이다. 전체 문자열이 너무 길면 끝부분을 그 문자열의 md5sum으로
+      바꾼다. 그리고 명령행 옵션 <span class="emphasis"><em>gen_hash</em></span>를
+      쓰면 전체 문자열을 md5sum으로 바꾼다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-options"></a>6.22.3. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
-            A lot of debug information is logged using syslog
+            syslog를 이용해 많은 디버그 정보를 기록한다.
           </p></dd><dt><span class="term">
           <code class="option">unmnt_remnt</code>
         </span></dt><dd><p>
-            For programs such as su and newrole, the login
-            session has already setup a polyinstantiated
-            namespace. For these programs, polyinstantiation
-            is performed based on new user id or security
-            context, however the command first needs to
-            undo the polyinstantiation performed by login.
-            This argument instructs the command to
-            first undo previous polyinstantiation before
-            proceeding with new polyinstantiation based on
-            new id/context
+            su나 newrole 같은 프로그램에선 로그인 세션에
+            다형화된 네임스페이스가 이미 구성돼 있다.
+            그런 프로그램에선 새로운 사용자 ID나 보안 문맥에
+            따라 다형화를 수행하게 되는데, 먼저 login에서
+            수행한 다형화를 되돌려야 한다. 이 인자는
+            명령에서 새 ID/문맥에 따라 새로운 다형화를
+            진행하기 전에 먼저 이전 다형화를 되돌리도록
+            한다.
           </p></dd><dt><span class="term">
           <code class="option">unmnt_only</code>
         </span></dt><dd><p>
-            For trusted programs that want to undo any
-            existing bind mounts and process instance
-            directories on their own, this argument allows
-            them to unmount currently mounted instance
-            directories
+            기존 바인드 마운트가 있으면 되돌리고서
+            자체적으로 인스턴스 디렉터리 처리를 하려는
+            신뢰할 수 있는 프로그램이 있다면 이 인자를
+            써서 현재 마운트된 인스턴스 디렉터리가
+            언마운트되도록 할 수 있다.
           </p></dd><dt><span class="term">
           <code class="option">require_selinux</code>
         </span></dt><dd><p>
-            If selinux is not enabled, return failure
+            selinux가 켜져 있지 않으면 실패를 반환한다.
           </p></dd><dt><span class="term">
           <code class="option">gen_hash</code>
         </span></dt><dd><p>
-            Instead of using the security context string
-            for the instance name, generate and use its
-            md5 hash.
+            인스턴스 이름에 보안 문맥 문자열을 쓰지 않고
+            그 문자열의 md5 해시를 생성해서 쓴다.
           </p></dd><dt><span class="term">
           <code class="option">ignore_config_error</code>
         </span></dt><dd><p>
-            If a line in the configuration file corresponding
-            to a polyinstantiated directory contains format
-            error, skip that line process the next line.
-            Without this option, pam will return an error
-            to the calling program resulting in termination
-            of the session.
+            어느 다형화 디렉터리에 대한 설정 파일 행에
+            형식 오류가 있으면 그 행을 건너뛰고 다음 행을
+            처리한다. 이 옵션이 없으면 pam이 호출 프로세스에게
+            오류를 반환해서 세션 종료을 일으키게 된다.
           </p></dd><dt><span class="term">
           <code class="option">ignore_instance_parent_mode</code>
         </span></dt><dd><p>
-	    Instance parent directories by default are expected to have
-	    the restrictive mode of 000. Using this option, an administrator
-	    can choose to ignore the mode of the instance parent. This option
-            should be used with caution as it will reduce security and
-            isolation goals of the polyinstantiation mechanism.
+	    인스턴스 부모 디렉터리는 기본적으로 엄격한 000 모드여야
+	    한다. 이 옵션을 사용해서 인스턴스 부모의 모드를 무시하기로
+	    할 수 있다. 다형화 메커니즘의 보안성 및 격리 목표를
+            저하시키게 되므로 주의해서 사용해야 한다.
           </p></dd><dt><span class="term">
           <code class="option">unmount_on_close</code>
         </span></dt><dd><p>
-           Explicitly unmount the polyinstantiated directories instead
-           of relying on automatic namespace destruction after the last
-           process in a namespace exits. This option should be used
-           only in case it is ensured by other means that there cannot be
-           any processes running in the private namespace left after the
-           session close. It is also useful only in case there are
-           multiple pam session calls in sequence from the same process.
+           네임스페이스 마지막 프로세스가 끝난 후 네임스페이스가
+           자동 파기되는 것에 기대는 게 아니라 다형화 디렉터리를
+           명시적으로 언마운트한다. 세션이 닫힌 후 그 비공개
+           네임스페이스 안에 도는 프로세스가 없다는 것이 어떻게든
+           보장되는 경우에만 이 옵션을 써야 한다. 같은 프로세스에서
+           연이어 여러 번 pam 세션 호출을 하는 경우에도 유용하다.
           </p></dd><dt><span class="term">
           <code class="option">use_current_context</code>
         </span></dt><dd><p>
-	    Useful for services which do not change the SELinux context
-	    with setexeccon call. The module will use the current SELinux
-	    context of the calling process for the level and context
-	    polyinstantiation.
+	    setexeccon 호출로 SELinux 문맥을 바꾸지 않는 서비스에 유용하다.
+	    level 및 context 다형화에 호출 프로세스의 현재 SELinux
+	    문맥을 사용하게 된다.
           </p></dd><dt><span class="term">
           <code class="option">use_default_context</code>
         </span></dt><dd><p>
-	    Useful for services which do not use pam_selinux for changing
-	    the SELinux context with setexeccon call. The module will use
-	    the default SELinux context of the user for the level and context
-	    polyinstantiation.
+	    setexeccon 호출로 SELinux 문맥을 바꾸기 위해 pam_selinux를
+	    이용하지 않는 서비스에 유용하다. level 및 context 다형화에
+	    사용자의 기본 SELinux 문맥을 사용하게 된다.
           </p></dd><dt><span class="term">
           <code class="option">mount_private</code>
         </span></dt><dd><p>
-	    This option can be used on systems where the / mount point or
-	    its submounts are made shared (for example with a
-	    <span class="command"><strong>mount --make-rshared /</strong></span> command).
-	    The module will mark the whole directory tree so any mount and
-	    unmount operations in the polyinstantiation namespace are private.
-	    Normally the pam_namespace will try to detect the
-	    shared / mount point and make the polyinstantiated directories
-	    private automatically. This option has to be used just when
-	    only a subtree is shared and / is not.
+	    (예를 들어 <span class="command"><strong>mount --make-rshared /</strong></span>
+	    명령으로) / 마운트 포인트나 그 하위 마운트가 공유돼 있는
+	    시스템에서 이 옵션을 쓸 수 있다. 다형화 네임스페이스 안의
+	    모든 마운트 및 언마운트 동작이 비공개가 되도록 전체 디렉터리
+	    트리에 표시를 하게 된다. 보통은 공유된 / 마운트 포인트를
+	    pam_namespace에서 지동으로 탐지해서 다형화된 디렉터리를
+	    비공개로 만들게 된다. 서브트리만 공유이고 /는 아닐 때만
+	    이 옵션을 쓰면 된다.
           </p><p>
-	    Note that mounts and unmounts done in the private namespace will not
-	    affect the parent namespace if this option is used or when the
-	    shared / mount point is autodetected.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-types"></a>6.22.4. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      Only the <code class="option">session</code> module type is provided.
-      The module must not be called from multithreaded processes.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-return_values"></a>6.22.5. RETURN VALUES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-             Namespace setup was successful.
+	    참고로 이 옵션을 쓰거나 공유된 / 마운트 포인트를 자동 탐지했을
+	    때는 비공개 네임스페이스에서 이뤄진 마운트 및 언마운트가 부모
+	    네임스페이스에 영향을 끼치지 않는다.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-types"></a>6.22.4. 제공하는 모듈 종류</h3></div></div></div><p>
+      <code class="option">session</code> 모듈 타입만 제공한다.
+      멀티스레드 프로세스에서 이 모듈을 호출해선 안 된다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-return_values"></a>6.22.5. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
+             네임스페이스 구성에 성공했다.
           </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
-             Unexpected system error occurred while setting up namespace.
+             네임스페이스를 준비하는 중 예상치 못한 시스템 오류가 발생했다.
           </p></dd><dt><span class="term">PAM_SESSION_ERR</span></dt><dd><p>
-             Unexpected namespace configuration error occurred.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-files"></a>6.22.6. FILES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/namespace.conf</code></span></dt><dd><p>Main configuration file</p></dd><dt><span class="term"><code class="filename">/etc/security/namespace.d</code></span></dt><dd><p>Directory for additional configuration files</p></dd><dt><span class="term"><code class="filename">/etc/security/namespace.init</code></span></dt><dd><p>Init script for instance directories</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-namespace.conf-examples"></a>6.22.7. EXAMPLES</h3></div></div></div><p>
-      These are some example lines which might be specified in
-      <code class="filename">/etc/security/namespace.conf</code>.
+             예상치 못한 네임스페이스 구성 오류가 발생했다.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-files"></a>6.22.6. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/namespace.conf</code></span></dt><dd><p>주 설정 파일</p></dd><dt><span class="term"><code class="filename">/etc/security/namespace.d</code></span></dt><dd><p>추가 설정 파일 디렉터리</p></dd><dt><span class="term"><code class="filename">/etc/security/namespace.init</code></span></dt><dd><p>인스턴스 디렉터리 초기화 스크립트</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-namespace.conf-examples"></a>6.22.7. 예시</h3></div></div></div><p>
+      다음은 <code class="filename">/etc/security/namespace.conf</code>에
+      지정할 수 있는 예시 설정이다.
     </p><div class="literallayout"><p><br>
-      # The following three lines will polyinstantiate /tmp,<br>
-      # /var/tmp and user's home directories. /tmp and /var/tmp<br>
-      # will be polyinstantiated based on the security level<br>
-      # as well as user name, whereas home directory will be<br>
-      # polyinstantiated based on the full security context and user name.<br>
-      # Polyinstantiation will not be performed for user root<br>
-      # and adm for directories /tmp and /var/tmp, whereas home<br>
-      # directories will be polyinstantiated for all users.<br>
+      # 다음 세 행이 /tmp, /var/tmp, 사용자 홈 디렉터리를<br>
+      # 다형화하게 된다. /tmp와 /var/tmp는 보안 단계와 사용자<br>
+      # 이름을 가지고 다형화되는 반면, 홈 디렉터리는 전체 보안<br>
+      # 문맥과 사용자 이름을 가지고 다형화된다. 사용자 root와<br>
+      # adm에 대해선 /tmp 및 /var/tmp 디렉터리의 다형화를<br>
+      # 수행하지 않는다. 반면 홈 디렉터리는 모든 사용자에게<br>
+      # 다형화한다.<br>
       #<br>
-      # Note that instance directories do not have to reside inside<br>
-      # the polyinstantiated directory. In the examples below,<br>
-      # instances of /tmp will be created in /tmp-inst directory,<br>
-      # where as instances of /var/tmp and users home directories<br>
-      # will reside within the directories that are being<br>
-      # polyinstantiated.<br>
+      # 참고로 인스턴스 디렉터리가 다형화 디렉터리 안에 위치할<br>
+      # 필요가 없다. 아래 예에서 /tmp의 인스턴스는 /tmp-inst<br>
+      # 디렉터리 안에 생성된다. 반면 /var/tmp 및 사용자 홈<br>
+      # 디렉터리의 인스턴스는 다형화 디렉터리 안에 위치하게 된다.<br>
       #<br>
       /tmp     /tmp-inst/               level      root,adm<br>
       /var/tmp /var/tmp/tmp-inst/   	level      root,adm<br>
       $HOME    $HOME/$USER.inst/inst- context<br>
     </p></div><p>
-      For the &lt;service&gt;s you need polyinstantiation (login for example)
-      put the following line in /etc/pam.d/&lt;service&gt; as the last line for
-      session group:
+      다형화가 필요한 &lt;service&gt;가 있으면 (예를 들어 login)
+      다음 행을 /etc/pam.d/&lt;service&gt;의 세션 관련 내용 마지막
+      행으로 넣어 주면 된다.
     </p><p>
       session  required  pam_namespace.so [arguments]
     </p><p>
-      This module also depends on pam_selinux.so setting the context.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-authors"></a>6.22.8. AUTHORS</h3></div></div></div><p>
-      The namespace setup scheme was designed by Stephen Smalley, Janak Desai
-      and Chad Sellers.
-      The pam_namespace PAM module was developed by Janak Desai &lt;janak@us.ibm.com&gt;,
-      Chad Sellers &lt;csellers@tresys.com&gt; and Steve Grubb &lt;sgrubb@redhat.com&gt;.
-      Additional improvements by Xavier Toth &lt;txtoth@gmail.com&gt; and Tomas Mraz
-      &lt;tmraz@redhat.com&gt;.
-    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_motd.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_nologin.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.21. pam_motd - display the motd file </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> 6.23. pam_nologin - prevent non-root users from login</td></tr></table></div></body></html>
+      이 모듈을 위해 pam_selinux.so로 문맥을 설정해 줘야 한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-authors"></a>6.22.8. 작성자</h3></div></div></div><p>
+      Stephen Smalley, Janak Desai, Chad Sellers가 네임스페이스 구성 체계를
+      설계했다.
+      Janak Desai &lt;janak@us.ibm.com&gt;, Chad Sellers &lt;csellers@tresys.com&gt;,
+      Steve Grubb &lt;sgrubb@redhat.com&gt;이 PAM 모듈 pam_namespace를 개발했다.
+      Xavier Toth &lt;txtoth@gmail.com&gt;, Tomas Mraz &lt;tmraz@redhat.com&gt;가
+      추가 개선을 했다.
+    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_motd.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_nologin.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.21. pam_motd - motd 파일 표시 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.23. pam_nologin - root 외 사용자 로그인 막기</td></tr></table></div></body></html>
