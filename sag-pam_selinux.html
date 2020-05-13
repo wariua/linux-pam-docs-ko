@@ -30,10 +30,10 @@
     </p><p>
       PAM 스택에 pam_selinux를 추가하는 게 응용을 실행하는 다른 PAM 모듈의
       동작을 방해하게 될 수도 있다. 이를 방지하려면 PAM 스택에서 그런
-      모듈들 뒤에 <span class="emphasis"><em>pam_selinux.so open</em></span>을
-      두고, 또 그런 모듈들 앞에 <span class="emphasis"><em>pam_selinux.so close</em></span>을
+      모듈들 뒤에 <span class="emphasis"><em>pam_selinux.so open</em></span> 행을
+      두고, 또 그런 모듈들 앞에 <span class="emphasis"><em>pam_selinux.so close</em></span> 행을
       둬야 한다. 그런 배치가 가능하지 않은 경우에는
-      <span class="emphasis"><em>pam_selinux.so restore</em></span>을 이용해
+      <span class="emphasis"><em>pam_selinux.so restore</em></span> 행을 이용해
       원래 보안 문맥들을 임시로 복원할 수 있다.
     </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_selinux-options"></a>6.29.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">open</code>
