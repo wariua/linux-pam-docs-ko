@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.41. pam_xauth - forward xauth keys between users</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_wheel.html" title="6.40. pam_wheel - only permit root access to members of group wheel"><link rel="next" href="sag-see-also.html" title="Chapter 7. See also"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.41. pam_xauth - forward xauth keys between users</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_wheel.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-see-also.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_xauth"></a>6.41. pam_xauth - forward xauth keys between users</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_xauth.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.41. pam_xauth - 사용자 간 xauth 키 전달</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_wheel.html" title="6.40. pam_wheel - wheel 그룹 멤버만 root 접근 허용"><link rel="next" href="sag-see-also.html" title="7장. 참고"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.41. pam_xauth - 사용자 간 xauth 키 전달</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_wheel.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-see-also.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_xauth"></a>6.41. pam_xauth - 사용자 간 xauth 키 전달</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_xauth.so</code>  [
 	debug
       ] [
         xauthpath=<em class="replaceable"><code>/path/to/xauth</code></em>
@@ -6,92 +6,90 @@
         systemuser=<em class="replaceable"><code>UID</code></em>
       ] [
         targetuser=<em class="replaceable"><code>UID</code></em>
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-description"></a>6.41.1. DESCRIPTION</h3></div></div></div><p>
-      The pam_xauth PAM module is designed to forward xauth keys
-      (sometimes referred to as "cookies") between users.
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-description"></a>6.41.1. 설명</h3></div></div></div><p>
+      pam_xauth는 사용자 간에 xauth 키("쿠키"라고도 함)를 전달하기
+      위해 만들어진 PAM 모듈이다.
     </p><p>
-      Without pam_xauth, when xauth is enabled and a user uses the
-       <span class="citerefentry"><span class="refentrytitle">su</span>(1)</span> command to assume another user's privileges,
-      that user is no longer able to access the original user's X display
-      because the new user does not have the key needed to access the
-      display. pam_xauth solves the problem by forwarding the key from
-      the user running su (the source user) to the user whose identity the
-      source user is assuming (the target user) when the session is created,
-      and destroying the key when the session is torn down.
+      pam_xauth가 없으면 xauth가 켜져 있고 사용자가
+      <span class="citerefentry"><span class="refentrytitle">su</span>(1)</span>
+      명령으로 다른 사용자의 권한을 획득하는 경우에 그 사용자가
+      원래 사용자의 X 디스플레이에 접근할 수 없게 된다. 디스플레이에
+      접근하는 데 필요한 키를 새 사용자가 가지고 있지 않기 때문이다.
+      pam_xauth는 세션이 생성될 때 su를 실행하는 사용자(출발 사용자)의
+      키를 그 사용자가 획득하는 신원의 사용자(대상 사용자)에게로
+      전달하고 세션이 사라질 때 그 키를 파기해서 문제를 해결해 준다.
     </p><p>
-      This means, for example, that when you run
-       <span class="citerefentry"><span class="refentrytitle">su</span>(1)</span> from an xterm session, you will be able to run
-      X programs without explicitly dealing with the
-      <span class="citerefentry"><span class="refentrytitle">xauth</span>(1)</span> xauth command or ~/.Xauthority files.
+      그래서 예를 들어 xterm 세션에서
+      <span class="citerefentry"><span class="refentrytitle">su</span>(1)</span>를
+      실행할 때 <span class="citerefentry"><span class="refentrytitle">xauth</span>(1)</span>
+      명령이나 ~/.Xauthority 파일을 따로 건드리지 않고도 X 프로그램을
+      실행할 수 있게 된다.
     </p><p>
-      pam_xauth will only forward keys if xauth can list a key connected
-      to the $DISPLAY environment variable.
+      xauth가 $DISPLAY 환경 변수에 연결된 키를 나열해 줄 수 있는
+      경우에만 pam_xauth가 키를 전달하게 된다.
     </p><p>
-      Primitive access control is provided by
-      <code class="filename">~/.xauth/export</code> in the invoking user's home
-      directory and <code class="filename">~/.xauth/import</code> in the target
-      user's home directory.
+      호출측 사용자 홈 디렉터리의 <code class="filename">~/.xauth/export</code>와
+      대상 사용자 홈 디렉터리의 <code class="filename">~/.xauth/import</code>로
+      기초적인 접근 제어가 가능하다.
     </p><p>
-      If a user has a <code class="filename">~/.xauth/import</code> file, the user
-      will only receive cookies from users listed in the file. If there is
-      no <code class="filename">~/.xauth/import</code> file, the user will accept
-      cookies from any other user.
+      사용자에게 <code class="filename">~/.xauth/import</code> 파일이 있으면
+      그 파일에 나열된 사용자로부터만 쿠키를 받게 된다.
+      <code class="filename">~/.xauth/import</code> 파일이 없으면 다른 어떤
+      사용자로부터도 쿠키를 받아들이게 된다.
     </p><p>
-      If a user has a <code class="filename">.xauth/export</code> file, the user will
-      only forward cookies to users listed in the file. If there is no
-      <code class="filename">~/.xauth/export</code> file, and the invoking user is
-      not <span class="emphasis"><em>root</em></span>, the user will forward cookies
-      to any other user. If there is no <code class="filename">~/.xauth/export</code>
-      file, and the invoking user is <span class="emphasis"><em>root</em></span>,
-      the user will <span class="emphasis"><em>not</em></span> forward cookies to
-      other users.
+      사용자에게 <code class="filename">~/.xauth/export</code> 파일이 있으면
+      그 파일에 나열된 사용자로만 쿠키를 전달하게 된다.
+      <code class="filename">~/.xauth/export</code> 파일이 없으며 호출측
+      사용자가 <span class="emphasis"><em>root</em></span>가 아니면 다른 어떤
+      사용자로도 쿠키를 전달하게 된다. <code class="filename">~/.xauth/export</code>
+      파일이 없으며 호출측 사용자가 <span class="emphasis"><em>root</em></span>면
+      다른 사용자로 쿠키를 전달하지 <span class="emphasis"><em>않는다</em></span>.
     </p><p>
-      Both the import and export files support wildcards (such as
-      <span class="emphasis"><em>*</em></span>). Both the import and export files
-      can be empty, signifying that no users are allowed.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-options"></a>6.41.2. OPTIONS</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+      import 파일과 export 파일 모두 (<span class="emphasis"><em>*</em></span>
+      같은) 와일드카드를 지원한다. import 파일과 export 파일 모두 비어 있을 수
+      있으며, 어떤 사용자도 허용하지 않음을 나타낸다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-options"></a>6.41.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
-	    Print debug information.
+	    디버그 정보 찍기.
           </p></dd><dt><span class="term">
           <code class="option">xauthpath=<em class="replaceable"><code>/path/to/xauth</code></em></code>
         </span></dt><dd><p>
-            Specify the path the xauth program (it is expected in
+            xauth 프로그램의 경로 지정. (기본적으로
             <code class="filename">/usr/X11R6/bin/xauth</code>,
-            <code class="filename">/usr/bin/xauth</code>, or
-            <code class="filename">/usr/bin/X11/xauth</code> by default).
+            <code class="filename">/usr/bin/xauth</code>,
+            <code class="filename">/usr/bin/X11/xauth</code>
+            중 한 경로에 있어야 한다.)
           </p></dd><dt><span class="term">
           <code class="option">systemuser=<em class="replaceable"><code>UID</code></em></code>
         </span></dt><dd><p>
-            Specify the highest UID which will be assumed to belong to a
-            "system" user. pam_xauth will refuse to forward credentials to
-            users with UID less than or equal to this number, except for
-            root and the "targetuser", if specified.
+            "시스템" 사용자에 속한다고 상정할 가장 높은 UID 값 지정.
+            pam_xauth는 root, 그리고 "targetuser" 지정 시 그 사용자까지는
+            제외하고 UID가 이 값 이하인 사용자에게 크리덴셜 전달을 거부한다.
           </p></dd><dt><span class="term">
           <code class="option">targetuser=<em class="replaceable"><code>UID</code></em></code>
         </span></dt><dd><p>
-            Specify  a single target UID which is exempt from the
-            systemuser check.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-types"></a>6.41.3. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      Only the <span class="emphasis"><em>session</em></span> type is provided.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-return_values"></a>6.41.4. RETURN VALUES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
-             Memory buffer error.
+            시스템 사용자 검사에서 예외로 하는 대상 UID 지정.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-types"></a>6.41.3. 제공하는 모듈 종류</h3></div></div></div><p>
+      <span class="emphasis"><em>session</em></span> 타입만 제공한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-return_values"></a>6.41.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
+             메모리 버퍼 오류.
           </p></dd><dt><span class="term">PAM_PERM_DENIED</span></dt><dd><p>
-            Permission denied by import/export file.
+            import/export 파일 권한 거부됨.
           </p></dd><dt><span class="term">PAM_SESSION_ERR</span></dt><dd><p>
-	    Cannot determine user name, UID or access users home directory.
+	    사용자 이름 내지 UID를 알아낼 수 없거나 사용자 홈 디렉터리에 접근할 수 없음.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-            Success.
+            성공.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-            User not known.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-examples"></a>6.41.5. EXAMPLES</h3></div></div></div><p>
-      Add the following line to <code class="filename">/etc/pam.d/su</code> to
-      forward xauth keys between users when calling su:
+            알 수 없는 사용자.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-examples"></a>6.41.5. 예시</h3></div></div></div><p>
+      다음 행을 <code class="filename">/etc/pam.d/su</code>에 추가해서
+      su 호출 시 사용자 간에 xauth 키를 전달할 수 있다.
       </p><pre class="programlisting">
 session  optional  pam_xauth.so
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-author"></a>6.41.6. AUTHOR</h3></div></div></div><p>
-        pam_xauth was written by Nalin Dahyabhai &lt;nalin@redhat.com&gt;,
-        based on original version by
-        Michael K. Johnson &lt;johnsonm@redhat.com&gt;.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_wheel.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-see-also.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.40. pam_wheel - only permit root access to members of group wheel </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 7. See also</td></tr></table></div></body></html>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_xauth-author"></a>6.41.6. 작성자</h3></div></div></div><p>
+        Michael K. Johnson &lt;johnsonm@redhat.com&gt;의
+        원래 버전을 바탕으로
+        Nalin Dahyabhai &lt;nalin@redhat.com&gt;가 pam_xauth를 작성했다.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_wheel.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-see-also.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.40. pam_wheel - wheel 그룹 멤버만 root 접근 허용 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 7장. 참고</td></tr></table></div></body></html>
