@@ -57,7 +57,7 @@
               기본적으로 각 관리 그룹마다 모듈 함수를 호출하는 방식이
               최대 두 가지씩 있다.
               실제로 <span class="emphasis"><em>authentication</em></span> 및
-              <span class="emphasis"><em>session</em></span> 요소에는
+              <span class="emphasis"><em>session</em></span> 부문에는
               두 가지 별개의 함수가 있다. 인증에서 그 함수는
               <span class="citerefentry"><span class="refentrytitle">pam_authenticate</span>(3)</span>와
               <span class="citerefentry"><span class="refentrytitle">pam_setcred</span>(3)</span>이며, 이때 <code class="option">run1</code>은
@@ -69,10 +69,10 @@
               필터가 호출된다는 의미고 <span class="emphasis"><em>run2</em></span>는
               <span class="citerefentry"><span class="refentrytitle">pam_close_session</span>(3)</span>을 나타낸다.
             </p><p>
-              account 요소에서는 <span class="emphasis"><em>run1</em></span>과
+              account 부문에서는 <span class="emphasis"><em>run1</em></span>과
               <span class="emphasis"><em>run2</em></span> 어느 쪽도 쓸 수 있다.
             </p><p>
-              password 요소에서 <span class="emphasis"><em>run1</em></span>은
+              password 부문에서 <span class="emphasis"><em>run1</em></span>은
               첫 번째 <span class="citerefentry"><span class="refentrytitle">pam_chauthtok</span>(3)</span>에서
               (<span class="emphasis"><em>PAM_PRELIM_CHECK</em></span> 단계에서)
               필터를 실행한다는 뜻이고 <span class="emphasis"><em>run2</em></span>는
