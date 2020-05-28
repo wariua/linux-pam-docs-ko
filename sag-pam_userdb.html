@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.38. pam_userdb - authenticate against a db database</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_unix.html" title="6.37. pam_unix - traditional password authentication"><link rel="next" href="sag-pam_warn.html" title="6.39. pam_warn - logs all PAM items"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.38. pam_userdb - authenticate against a db database</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_unix.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_warn.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_userdb"></a>6.38. pam_userdb - authenticate against a db database</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_userdb.so</code>   
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.38. pam_userdb - db 데이터베이스로 인증</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_unix.html" title="6.37. pam_unix - 전통적 패스워드 인증"><link rel="next" href="sag-pam_warn.html" title="6.39. pam_warn - PAM 항목 모두 로그 기록"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.38. pam_userdb - db 데이터베이스로 인증</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_unix.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_warn.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_userdb"></a>6.38. pam_userdb - db 데이터베이스로 인증</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_userdb.so</code>   
 	db=<em class="replaceable"><code>/path/database</code></em>
         [
 	debug
@@ -16,94 +16,89 @@
         unknown_ok
       ] [
         key_only
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-description"></a>6.38.1. DESCRIPTION</h3></div></div></div><p>
-      The pam_userdb module is used to verify a username/password pair
-      against values stored in a Berkeley DB database. The database is
-      indexed by the username, and the data fields corresponding to the
-      username keys are the passwords.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-options"></a>6.38.2. OPTIONS</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-description"></a>6.38.1. 설명</h3></div></div></div><p>
+      pam_userdb 모듈을 이용해 버클리 DB 데이터베이스에 저장된 값으로
+      사용자명/패스워드 쌍을 검증한다. 사용자명을 데이터베이스 색인으로
+      하고 사용자명 키에 대응하는 데이터 필드가 패스워드가 된다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-options"></a>6.38.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">crypt=[crypt|none]</code>
         </span></dt><dd><p>
-            Indicates whether encrypted or plaintext passwords are stored
-            in the database.  If it is <code class="option">crypt</code>, passwords
-            should be stored in the database in
-            <span class="citerefentry"><span class="refentrytitle">crypt</span>(3)</span> form.  If <code class="option">none</code> is selected,
-            passwords should be stored in the database as plaintext.
+            데이터베이스에 패스워드가 암호화돼서 저장돼 있는지 아니면
+            평문으로 저장돼 있는지 나타낸다. <code class="option">crypt</code>이면
+            패스워드가 <span class="citerefentry"><span class="refentrytitle">crypt</span>(3)</span>
+            형식으로 데이터베이스에 저장돼 있어야 한다. <code class="option">none</code>을
+            택한 경우에는 패스워드가 데이터베이스에 평문으로 저장돼
+            있어야 한다.
           </p></dd><dt><span class="term">
           <code class="option">db=<em class="replaceable"><code>/path/database</code></em></code>
         </span></dt><dd><p>
-            Use the <code class="filename">/path/database</code> database for
-            performing lookup. There is no default; the module will
-            return <span class="emphasis"><em>PAM_IGNORE</em></span> if no
-            database is provided. Note that the path to the database file
-            should be specified without the <code class="filename">.db</code> suffix.
-          </p></dd><dt><span class="term">
+            데이터베이스 <code class="filename">/path/database</code>를
+            사용해 검색을 수행한다. 기본값이 없고, 데이터베이스를 지정하지
+            않으면 모듈에서 <span class="emphasis"><em>PAM_IGNORE</em></span>를
+            반환한다. 뒤에 <code class="filename">.db</code>를 붙이지 않고
+            데이터베이스 파일 경로를 지정한다는 점에 유의하라.
+          </:></dd><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
-            Print debug information.
+            디버그 정보 찍기.
           </p></dd><dt><span class="term">
           <code class="option">dump</code>
         </span></dt><dd><p>
-            Dump all the entries in the database to the log.
-            Don't do this by default!
+            데이터베이스의 모든 항목을 로그로 찍는다.
+            특별한 이유가 없으면 하지 말 것!
           </p></dd><dt><span class="term">
           <code class="option">icase</code>
         </span></dt><dd><p>
-            Make the password verification to be case insensitive
-            (ie when working with registration numbers and such).
-            Only works with plaintext password storage.
+            패스워드 검증에서 대소문자를 무시하게 한다.
+            (등록 번호를 이용하는 등의 경우.)
+            패스워드 평문 저장 방식에서만 제대로 동작한다.
           </p></dd><dt><span class="term">
           <code class="option">try_first_pass</code>
         </span></dt><dd><p>
-            Use the authentication token previously obtained by
-            another module that did the conversation with the
-            application.  If this token can not be obtained then
-            the module will try to converse. This option can
-            be used for stacking different modules that need to
-            deal with the authentication tokens.
+            앞서 다른 모듈에서 응용과 대화를 해서 얻은 인증
+            토큰을 이용한다. 토큰을 얻을 수 없으면 모듈에서
+            대화를 시도하게 된다. 인증 토큰을 다뤄야 하는
+            여러 모듈을 함께 이용할 때 이 옵션을 쓸 수 있다.
           </p></dd><dt><span class="term">
           <code class="option">use_first_pass</code>
         </span></dt><dd><p>
-            Use the authentication token previously obtained by
-            another module that did the conversation with the
-            application.  If this token can not be obtained then
-            the module will fail. This option can be used for
-            stacking different modules that need to deal with
-            the authentication tokens.
+            앞서 다른 모듈에서 응용과 대화를 해서 얻은 인증
+            토큰을 이용한다. 토큰을 얻을 수 없으면 실패로
+            처리하게 된다. 인증 토큰을 다뤄야 하는 여러
+            모듈을 함께 이용할 때 이 옵션을 쓸 수 있다.
           </p></dd><dt><span class="term">
           <code class="option">unknown_ok</code>
         </span></dt><dd><p>
-            Do not return error when checking for a user that is
-            not in the database. This can be used to stack more
-            than one pam_userdb module that will check a
-            username/password pair in more than a database.
+            검사 대상 사용자가 데이터베이스에 없는 경우에
+            오류를 반환하지 않는다. 이를 이용하면 pam_userdb
+            모듈을 여러 번 쌓아서 여러 데이터베이스를 가지고
+            사용자명/패스워드를 검사할 수 있다.
           </p></dd><dt><span class="term">
           <code class="option">key_only</code>
         </span></dt><dd><p>
-            The username and password are concatenated together
-            in the database hash as 'username-password' with a
-            random value.  if the concatenation of the username and
-            password with a dash in the middle returns any result,
-            the user is valid.  this is useful in cases where
-            the username may not be unique but the username and
-            password pair are.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-types"></a>6.38.3. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      The <code class="option">auth</code> and <code class="option">account</code> module
-      types are provided.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-return_values"></a>6.38.4. RETURN VALUES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>Authentication failure.</p></dd><dt><span class="term">PAM_AUTHTOK_RECOVERY_ERR</span></dt><dd><p>
-            Authentication information cannot be recovered.
+            사용자명과 패스워드를 'username-password'처럼
+            붙여서 데이터베이스 해시로 하고 값은 신경쓰지 않는다.
+            사용자명과 패스워드를 대시로 연결한 키가 뭐든
+            결과를 반환하면 그 사용자가 유효한 것이다.
+            사용자명은 유일하지 않을 수도 있지만 사용자명과
+            패스워드의 쌍은 유일한 경우에 유용하다.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-types"></a>6.38.3. 제공하는 모듈 종류</h3></div></div></div><p>
+      <code class="option">auth</code> 및 <code class="option">account</code>
+      모듈 타입을 제공한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-return_values"></a>6.38.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>인증 실패.</p></dd><dt><span class="term">PAM_AUTHTOK_RECOVERY_ERR</span></dt><dd><p>
+            인증 정보를 얻어 올 수 없음.
           </p></dd><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
-             Memory buffer error.
+             메모리 버퍼 오류.
           </p></dd><dt><span class="term">PAM_CONV_ERR</span></dt><dd><p>
-             Conversation failure.
+             대화 실패.
           </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
-             Error in service module.
+             서비스 모듈의 오류.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-            Success.
+            성공.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-            User not known to the underlying authentication module.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-examples"></a>6.38.5. EXAMPLES</h3></div></div></div><pre class="programlisting">
+            기반 인증 모듈에서 사용자를 알 수 없음.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-examples"></a>6.38.5. 예시</h3></div></div></div><pre class="programlisting">
 auth  sufficient pam_userdb.so icase db=/etc/dbtest
-    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-author"></a>6.38.6. AUTHOR</h3></div></div></div><p>
-        pam_userdb was written by Cristian Gafton &gt;gafton@redhat.com&lt;.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_unix.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_warn.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.37. pam_unix - traditional password authentication </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> 6.39. pam_warn - logs all PAM items</td></tr></table></div></body></html>
+    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_userdb-author"></a>6.38.6. 작성자</h3></div></div></div><p>
+        Cristian Gafton &lt;gafton@redhat.com&gt;이 pam_userdb를 작성했다.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_unix.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_warn.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.37. pam_unix - 전통적 패스워드 인증 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.39. pam_warn - PAM 항목 모두 로그 기록</td></tr></table></div></body></html>
