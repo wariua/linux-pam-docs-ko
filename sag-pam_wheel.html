@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.40. pam_wheel - only permit root access to members of group wheel</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="The Linux-PAM System Administrators' Guide"><link rel="up" href="sag-module-reference.html" title="Chapter 6. A reference guide for available modules"><link rel="prev" href="sag-pam_warn.html" title="6.39. pam_warn - logs all PAM items"><link rel="next" href="sag-pam_xauth.html" title="6.41. pam_xauth - forward xauth keys between users"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.40. pam_wheel - only permit root access to members of group wheel</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_warn.html">Prev</a> </td><th width="60%" align="center">Chapter 6. A reference guide for available modules</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_xauth.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_wheel"></a>6.40. pam_wheel - only permit root access to members of group wheel</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_wheel.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.40. pam_wheel - wheel 그룹 멤버만 root 접근 허용</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_warn.html" title="6.39. pam_warn - PAM 항목 모두 로그 기록"><link rel="next" href="sag-pam_xauth.html" title="6.41. pam_xauth - 사용자 간 xauth 키 전달"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.40. pam_wheel - wheel 그룹 멤버만 root 접근 허용</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_warn.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_xauth.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_wheel"></a>6.40. pam_wheel - wheel 그룹 멤버만 root 접근 허용</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_wheel.so</code>  [
 	debug
       ] [
         deny
@@ -10,77 +10,74 @@
 	trust
       ] [
 	use_uid
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-description"></a>6.40.1. DESCRIPTION</h3></div></div></div><p>
-      The pam_wheel PAM module is used to enforce the so-called
-      <span class="emphasis"><em>wheel</em></span> group. By default it permits root
-      access to the system if the applicant user is a member of the
-      <span class="emphasis"><em>wheel</em></span> group. If no group with this name exist,
-      the module is using the group with the group-ID
-      <span class="emphasis"><em>0</em></span>.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-options"></a>6.40.2. OPTIONS</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-description"></a>6.40.1. 설명</h3></div></div></div><p>
+      pam_wheel은 소위 <span class="emphasis"><em>wheel</em></span> 그룹을
+      강제할 수 있는 PAM 모듈이다. 따로 인자를 주지 않으면 요청 사용자가
+      <span class="emphasis"><em>wheel</em></span> 그룹에 속한 경우에
+      시스템 root 접근을 허가한다. 그런 이름의 그룹이 없는 경우에는
+      그룹 ID가 <span class="emphasis"><em>0</em></span>인 그룹을 쓴다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-options"></a>6.40.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
-            Print debug information.
+            디버그 정보 찍기.
           </p></dd><dt><span class="term">
           <code class="option">deny</code>
         </span></dt><dd><p>
-            Reverse the sense of the auth operation: if the user
-            is trying to get UID 0 access and is a member of the
-            wheel group (or the group of the <code class="option">group</code> option),
-            deny access. Conversely, if the user is not in the group, return
-            PAM_IGNORE (unless <code class="option">trust</code> was also specified,
-            in which case we return PAM_SUCCESS).
+            인증 동작의 의미를 뒤집는다. 즉 UID 0 접근 권한을
+            얻으려고 하는 사용자가 wheel 그룹(내지 
+            <code class="option">group</code> 옵션 그룹)에
+            속해 있으면 접근을 거부한다. 반대로 사용자가 그 그룹에
+            없으면 PAM_IGNORE를 반환한다. (단 <code class="option">trust</code>도
+            지정한 경우에는 PAM_SUCCESS를 반환한다.)
           </p></dd><dt><span class="term">
           <code class="option">group=<em class="replaceable"><code>name</code></em></code>
         </span></dt><dd><p>
-            Instead of checking the wheel or GID 0 groups, use
-            the <code class="option"><em class="replaceable"><code>name</code></em></code> group
-            to perform the authentication.
+            wheel 그룹 내지 GID 0 그룹 대신
+            <code class="option"><em class="replaceable"><code>name</code></em></code>
+            그룹을 사용해 인증을 수행한다.
           </p></dd><dt><span class="term">
           <code class="option">root_only</code>
         </span></dt><dd><p>
-            The check for wheel membership is done only when the target user
-            UID is 0.
+            목표 사용자 UID가 0일 때만 wheel 소속 검사를 한다.
           </p></dd><dt><span class="term">
           <code class="option">trust</code>
         </span></dt><dd><p>
-            The pam_wheel module will return PAM_SUCCESS instead
-            of PAM_IGNORE if the user is a member of the wheel group
-            (thus with a little play stacking the modules the wheel
-            members may be able to su to root without being prompted
-            for a passwd).
+            사용자가 wheel 그룹에 속해 있으면 pam_wheel 모듈이
+            PAM_IGNORE 대신 PAM_SUCCESS를 반환한다. (그래서 모듈들을
+            잘 쌓으면 wheel 멤버가 패스워드 입력 없이 root로
+            su 하는 게 가능할 수도 있다.)
           </p></dd><dt><span class="term">
           <code class="option">use_uid</code>
         </span></dt><dd><p>
-            The check for wheel membership will be done against
-            the current uid instead of the original one (useful when
-            jumping with su from one account to another for example).
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-types"></a>6.40.3. MODULE TYPES PROVIDED</h3></div></div></div><p>
-      The <span class="emphasis"><em>auth</em></span> and
-      <span class="emphasis"><em>account</em></span> module types are provided.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-return_values"></a>6.40.4. RETURN VALUES</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>
-             Authentication failure.
+            wheel 소속 검사를 원래의 목표 uid가 아니라 현재 uid로
+            한다. (예를 들어 su로 한 계정에서 다른 계정으로
+            넘어갈 때 유용하다.)
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-types"></a>6.40.3. 제공하는 모듈 종류</h3></div></div></div><p>
+      <span class="emphasis"><em>auth</em></span> 및
+      <span class="emphasis"><em>account</em></span> 모듈 타입을 제공한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-return_values"></a>6.40.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>
+             인증 실패.
           </p></dd><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
-             Memory buffer error.
+             메모리 버퍼 오류.
           </p></dd><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
-            The return value should be ignored by PAM dispatch.
+            PAM 처리부에서 반환 값을 무시해야 함.
           </p></dd><dt><span class="term">PAM_PERM_DENY</span></dt><dd><p>
-            Permission denied.
+            권한 거부.
           </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
-	    Cannot determine the user name.
+	    사용자 이름을 알아낼 수 없음.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-            Success.
+            성공.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-            User not known.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-examples"></a>6.40.5. EXAMPLES</h3></div></div></div><p>
-      The root account gains access by default (rootok), only wheel
-      members can become root (wheel) but Unix authenticate non-root
-      applicants.
+            알 수 없는 사용자.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-examples"></a>6.40.5. 예시</h3></div></div></div><p>
+      root 계정은 기본적으로 접근권을 얻고 (rootok), wheel 멤버만
+      root가 될 수 있되 (wheel) root 외 신청자들을 유닉스 방식으로
+      인증한다.
       </p><pre class="programlisting">
 su      auth     sufficient     pam_rootok.so
 su      auth     required       pam_wheel.so
 su      auth     required       pam_unix.so
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-author"></a>6.40.6. AUTHOR</h3></div></div></div><p>
-        pam_wheel was written by Cristian Gafton &lt;gafton@redhat.com&gt;.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_warn.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_xauth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.39. pam_warn - logs all PAM items </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">Home</a></td><td width="40%" align="right" valign="top"> 6.41. pam_xauth - forward xauth keys between users</td></tr></table></div></body></html>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_wheel-author"></a>6.40.6. 작성자</h3></div></div></div><p>
+        Cristian Gafton &lt;gafton@redhat.com&gt;이 pam_wheel을 작성했다.
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_warn.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_xauth.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.39. pam_warn - PAM 항목 모두 로그 기록 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.41. pam_xauth - 사용자 간 xauth 키 전달</td></tr></table></div></body></html>
