@@ -1,21 +1,21 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.2. pam_cracklib - 사전의 단어들로 패스워드 검사</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_access.html" title="6.1. pam_access - logdaemon 방식 로그인 접근 제어"><link rel="next" href="sag-pam_debug.html" title="6.3. pam_debug - PAM 스택 디버깅"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. pam_cracklib - 사전의 단어들로 패스워드 검사</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_access.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_debug.html">이전</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_cracklib"></a>6.2. pam_cracklib - 사전의 단어들로 패스워드 검사</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_cracklib.so</code>  [
         <em class="replaceable"><code>...</code></em>
       ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_cracklib-description"></a>6.2.1. 설명</h3></div></div></div><p>
-      이 모듈을 어느 응용의 <span class="emphasis"><em>password</em></span> 스택에
+      이 모듈을 응용의 <span class="emphasis"><em>password</em></span> 스택에
       끼워 넣어서 패스워드에 대한 강도 검사를 제공할 수 있다.
     </p><p>
-      이 모듈이 하는 동작은 사용자에게 패스워드를 입력받아서 시스템
+      이 모듈이 하는 동작은 사용자에게 패스워드를 입력받아서 시스템의
       사전과 여러 규칙들로 패스워드 강도를 검사해서 안 좋은 값인지
       확인하는 것이다.
     </p><p>
-      첫 동작은 패스워드를 한 번 입력받는 것이고, 강도를 검사해서
-      강력한 패스워드인 것 같으면 (첫 번째를 올바로 입력했던 건지
-      검증하기 위해) 두 번째로 패스워드를 입력받는다. 모두 괜찮으면
+      첫 번째 동작은 패스워드를 한 번 입력받는 것이고, 강도를
+      검사해서 강력한 패스워드인 것 같으면 (올바로 입력했던 건지
+      검증하기 위해) 두 번째로 패스워드를 입력받는다. 문제가 없으면
       그 패스워드가 후속 모듈들로 전달돼서 새 인증 토큰으로 설치된다.
     </p><p>
       강도 검사를 하는 방법은 이렇다. 먼저 <code class="function">Cracklib</code>
       루틴을 호출해서 패스워드가 사전에 있는 단어인지 확인한다.
-      아니라면 추가로 여러 강도 검사를 하는데, 다음 검사들이다.
+      없으면 추가로 여러 강도 검사를 하는데, 다음 검사들이다.
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">회문</span></dt><dd><p>
             새 패스워드가 회문(팰린드롬)인가?
           </p></dd><dt><span class="term">대소문자 변경</span></dt><dd><p>
