@@ -1,102 +1,94 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 2. Overview</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="up" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="prev" href="adg-introduction-synopsis.html" title="1.2. Synopsis"><link rel="next" href="adg-interface.html" title="Chapter 3.  The public interface to Linux-PAM"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 2. Overview</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-introduction-synopsis.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="adg-interface.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="adg-overview"></a>Chapter 2. Overview</h1></div></div></div><p>
-      Most service-giving applications are restricted. In other words,
-      their service is not available to all and every prospective client.
-      Instead, the applying client must jump through a number of hoops to
-      convince the serving application that they are authorized to obtain
-      service.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>2장. 개요</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="up" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="prev" href="adg-introduction-synopsis.html" title="1.2. 사용법"><link rel="next" href="adg-interface.html" title="3장. Linux-PAM 공식 인터페이스"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2장. 개요</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-introduction-synopsis.html">이전</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="adg-interface.html">다음</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="adg-overview"></a>2장. 개요</h1></div></div></div><p>
+      서비스를 제공하는 응용 대부분에는 제약이 있다. 달리 말해
+      모든 예비 클라이언트가 서비스를 이용할 수 있는 게 아니다.
+      지원 클라이언트는 여러 복잡한 단계를 거쳐서 자기가 서비스를
+      받을 자격이 있다는 걸 서비스 제공 응용에게 납득시켜야 한다.
     </p><p>
-      The process of <span class="emphasis"><em>authenticating</em></span> a client is what
-      PAM is designed to manage. In addition to authentication, PAM provides
-      account management, credential management, session management and
-      authentication-token (password changing) management services.  It is
-      important to realize when writing a PAM based application that these
-      services are provided in a manner that is
-      <span class="emphasis"><em>transparent</em></span> to the application. That is
-      to say, when the application is written, no assumptions can be made
-      about <span class="emphasis"><em>how</em></span> the client will be authenticated.
+      PAM은 클라이언트를 <span class="emphasis"><em>인증</em></span>하는
+      과정을 다루도록 만들어졌다. 인증에 더해서 계정 관리, 크리덴셜 관리,
+      세션 관리, 인증 토큰(패스워드 변경) 관리 서비스를 제공한다.
+      PAM 기반 응용을 작성할 때는 이런 서비스들이 응용에
+      <span class="emphasis"><em>투명한</em></span> 방식으로 제공된다는
+      점을 인식할 필요가 있다. 다시 말해 클라이언트가
+      <span class="emphasis"><em>어떻게</em></span> 인증될지에 대해
+      응용을 작성할 때 어떤 가정도 할 수 없다.
     </p><p>
-      The process of authentication is performed by the PAM library via a
-      call to <code class="function">pam_authenticate()</code>. The return value
-      of this function will indicate whether a named client (the
-      <span class="emphasis"><em>user</em></span>) has been authenticated. If the PAM library
-      needs to prompt the user for any information, such as their
-      <span class="emphasis"><em>name</em></span> or a <span class="emphasis"><em>password</em></span>
-      then it will do so. If the PAM library is configured to authenticate
-      the user using some silent protocol, it will do this too. (This
-      latter case might be via some hardware interface for example.)
+      <code class="function">pam_authenticate()</code> 호출을 통해
+      PAM 라이브러리에서 인증 과정을 수행한다. 함수 반환 값이
+      해당 클라이언트(<span class="emphasis"><em>사용자</em></span>)가
+      인증됐는지 여부를 나타내게 된다. PAM 라이브러리에서 사용자에게
+      <span class="emphasis"><em>이름</em></span>이나 <span class="emphasis"><em>패스워드</em></span> 같은
+      정보를 물어봐야 하면 알아서 묻는다. 어떤 조용한 프로토콜을
+      이용해 사용자를 인증하도록 PAM 라이브러리가 구성돼 있으면
+      또한 그렇게 한다. (후자는 예를 들어 어떤 하드웨어 인터페이스를
+      통해 그럴 수 있을 것이다.)
     </p><p>
-      It is important to note that the application must leave all decisions
-      about when to prompt the user at the discretion of the PAM library.
+      중요한 점은 언제 사용자에게 뭔가를 물을지에 대한 모든 결정을
+      PAM 라이브러리의 재량에 맡겨야 한다는 점이다.
     </p><p>
-      The PAM library, however, must work equally well for different styles
-      of application. Some applications, like the familiar
-      <span class="command"><strong>login</strong></span> and <span class="command"><strong>passwd</strong></span> are terminal
-      based applications, exchanges of information with the client in
-      these cases is as plain text messages. Graphically based applications,
-      however, have a more sophisticated interface. They generally interact
-      with the user via specially constructed dialogue boxes. Additionally,
-      network based services require that text messages exchanged with the
-      client are specially formatted for automated processing: one such
-      example is <span class="command"><strong>ftpd</strong></span> which prefixes each exchanged
-      message with a numeric identifier.
+      하지만 PAM 라이브러리는 다른 방식의 응용들과도 마찬가지로 잘
+      동작해야 한다. 우리에게 친숙한 <span class="command"><strong>login</strong></span>이나
+      <span class="command"><strong>passwd</strong></span> 같은 응용들은
+      터미널 기반 응용이며, 이 경우 클라이언트와의 정보 교환은 단순한
+      텍스트 메시지로 이뤄진다. 하지만 그래픽 기반 응용에는 더 복잡한
+      인터페이스가 있다. 일반적으로 특별히 구성한 대화 상자를 통해
+      사용자와 상호작용한다. 더불어 네트워크 기반 서비스에서는 자동
+      처리를 위해 클라이언트와 교환하는 메시지가 특수한 형식이어야
+      한다. 한 예로 <span class="command"><strong>ftpd</strong></span>에서는
+      교환하는 메시지 앞에 숫자 식별자를 붙인다.
     </p><p>
-      The presentation of simple requests to a client is thus something very
-      dependent on the protocol that the serving application will use. In
-      spite of the fact that PAM demands that it drives the whole
-      authentication process, it is not possible to leave such protocol
-      subtleties up to the PAM library.  To overcome this potential problem,
-      the application provides the PAM library with a
-      <span class="emphasis"><em>conversation</em></span> function.  This function is called
-      from <span class="emphasis"><em>within</em></span> the PAM library and enables the PAM
-      to directly interact with the client. The sorts of things that this
-      conversation function must be able to do are prompt the user with
-      text and/or obtain textual input from the user for processing by the
-      PAM library. The details of this function are provided in a later
-      section.
+      즉 클라이언트에게 간단한 요청을 보이는 것도 서비스 제공 응용에서
+      쓰는 프로토콜에 따라 크게 달라지게 된다. PAM에서 인증 과정 전체를
+      주도하려 하기는 하지만 그런 프로토콜 관련 세부 사항들을 PAM
+      라이브러리에게 맡기는 건 불가능하다. 이런 잠재적 문제를 극복하기
+      위해 응용에서 PAM 라이브러리에게
+      <span class="emphasis"><em>대화(conversation)</em></span> 함수를
+      제공한다. 그러면 PAM 라이브러리 <span class="emphasis"><em>내에서</em></span>
+      그 함수를 호출해서 클라이언트와 직접 상호작용할 수 있게 된다.
+      그 대화 함수가 할 수 있어야 하는 일은 사용자에게 텍스트를
+      보이며 입력을 요청하고 PAM 라이브러리에서 처리할 텍스트 입력을
+      사용자로부터 받는 것이다. 이 함수에 대해선 나중에 자세히 설명한다.
     </p><p>
-      For example, the conversation function may be called by the PAM
-      library with a request to prompt the user for a password. Its job is
-      to reformat the prompt request into a form that the client will
-      understand. In the case of <span class="command"><strong>ftpd</strong></span>, this might involve
-      prefixing the string with the number <span class="command"><strong>331</strong></span> and sending
-      the request over the network to a connected client. The conversation
-      function will then obtain any reply and, after extracting the typed
-      password, will return this string of text to the PAM library. Similar
-      concerns need to be addressed in the case of an X-based graphical
-      server.
+      예를 들어 PAM 라이브러리에서 사용자에게 패스워드를 받도록
+      요청하며 대화 함수를 호출할 수 있다. 그럼 함수가 할 일은
+      입력 요청을 클라이언트가 이해할 수 있는 형태로 바꾸는 것이다.
+      <span class="command"><strong>ftpd</strong></span>의 경우라면
+      그 문자열 앞에 <span class="command"><strong>331</strong></span>을
+      붙여서 연결된 클라이언트로 네트워크를 통해 요청을 보낼 수
+      있을 것이다. 그런 다음 대화 함수는 응답을 받고, 입력된 패스워드를
+      추출해서 그 텍스트 문자열을 PAM 라이브러리에게 반환하게 된다.
+      X 기반 그래픽 서버의 경우에도 비슷한 사항들을 처리해 줘야 한다.
     </p><p>
-      There are a number of issues that need to be addressed when one is
-      porting an existing application to become PAM compliant. A section
-      below has been devoted to this: Porting legacy applications.
+      기존 응용을 PAM에 맞게 이식하려 할 때 여러 문제들을 처리해 줘야
+      한다. 구식 응용 이식 절 전체에서 이를 다룬다.
     </p><p>
-      Besides authentication, PAM provides other forms of management.
-      Session management is provided with calls to
-      <code class="function">pam_open_session()</code> and
-      <code class="function">pam_close_session()</code>. What these functions
-      actually do is up to the local administrator. But typically, they
-      could be used to log entry and exit from the system or for mounting
-      and unmounting the user's home directory. If an application provides
-      continuous service for a period of time, it should probably call
-      these functions, first open after the user is authenticated and then
-      close when the service is terminated.
+      인증 외에도 PAM에서는 여러 형태의 관리 동작을 제공한다.
+      세션 관리를 제공하는 것이
+      <code class="function">pam_open_session()</code> 및
+      <code class="function">pam_close_session()</code> 호출이다.
+      이 함수들이 실제로 뭘 할지는 로컬 관리자에게 달려 있다.
+      하지만 보통은 로그 항목을 남기고 시스템에서 빠져 나가거나
+      사용자 홈 디렉터리를 마운트 및 언마운트하는 데 이용할 수 있다.
+      응용에서 일정 기간 동안 연속적으로 어떤 서비스를 제공하는 경우라면
+      아마 이 함수들을 호출해야 할 텐데, 사용자를 인증한 후에 먼저
+      open을 호출하고, 서비스가 종료될 때 close를 호출하면 된다.
     </p><p>
-      Account management is another area that an application developer
-      should include with a call to <code class="function">pam_acct_mgmt()</code>.
-      This call will perform checks on the good health of the user's account
-      (has it expired etc.). One of the things this function may check is
-      whether the user's authentication token has expired - in such a case the
-      application may choose to attempt to update it with a call to
-      <code class="function">pam_chauthtok()</code>, although some applications
-      are not suited to this task (<span class="command"><strong>ftp</strong></span> for example)
-      and in this case the application should deny access to the user.
+      또 다른 영역으로 계정 관리가 있는데, 응용 개발자가
+      <code class="function">pam_acct_mgmt()</code> 호출로 포함시켜야
+      한다. 그 호출은 사용자 계정 상태(만료되었는지 등)에 대한 검사를
+      수행하게 된다. 그 함수에서 검사할 수 있는 것 중에는 사용자의
+      인증 토큰이 만료됐는지 여부도 있다. 만료된 경우에
+      응용에서 <code class="function">pam_chauthtok()</code> 호출로
+      갱신을 시도할 수도 있다. 하지만 어떤 응용은 그런 일을 하기에
+      적합하지 않으며 (예를 들어 <span class="command"><strong>ftp</strong></span>),
+      그 경우 응용에서 사용자에게 접근을 거부해야 한다.
     </p><p>
-      PAM is also capable of setting and deleting the user's credentials with
-      the call <code class="function">pam_setcred()</code>. This function should
-      always be called after the user is authenticated and before service
-      is offered to the user. By convention, this should be the last call
-      to the PAM library before the PAM session is opened. What exactly a
-      credential is, is not well defined. However, some examples are given
-      in the glossary below.
-    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-introduction-synopsis.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="adg-interface.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">1.2. Synopsis </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. 
-      The public interface to <span class="emphasis"><em>Linux-PAM</em></span>
+      <code class="function">pam_setcred()</code> 호출로 사용자 크리덴셜을
+      설정하고 삭제할 수도 있다. 사용자를 인증한 후에 사용자에게 서비스를
+      제공하기 전에 이 함수를 항상 호출해야 한다. 관행적으로 PAM 세션을
+      열기 전 마지막으로 호출하는 PAM 라이브러리 함수가 이 함수다.
+      크리덴셜이 정확히 무엇인지는 명확히 정의돼 있지 않다. 하지만
+      용어집에서 몇 가지 예를 제시한다.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-introduction-synopsis.html">이전</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="adg-interface.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">1.2. 사용법 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">대문</a></td><td width="40%" align="right" valign="top"> 3장. 
+      <span class="emphasis"><em>Linux-PAM</em></span> 공식 인터페이스
     </td></tr></table></div></body></html>
