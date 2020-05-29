@@ -1,25 +1,23 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>1.1. Description</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="up" href="adg-introduction.html" title="Chapter 1. Introduction"><link rel="prev" href="adg-introduction.html" title="Chapter 1. Introduction"><link rel="next" href="adg-introduction-synopsis.html" title="1.2. Synopsis"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">1.1. Description</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-introduction.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Introduction</th><td width="20%" align="right"> <a accesskey="n" href="adg-introduction-synopsis.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adg-introduction-description"></a>1.1. Description</h2></div></div></div><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>1.1. 설명</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="up" href="adg-introduction.html" title="1장. 들어가며"><link rel="prev" href="adg-introduction.html" title="1장. 들어가며"><link rel="next" href="adg-introduction-synopsis.html" title="1.2. 사용법"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">1.1. 설명</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-introduction.html">이전</a> </td><th width="60%" align="center">1장. 들어가며</th><td width="20%" align="right"> <a accesskey="n" href="adg-introduction-synopsis.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adg-introduction-description"></a>1.1. 설명</h2></div></div></div><p>
         <span class="emphasis"><em>Linux-PAM</em></span>
-        (Pluggable Authentication Modules for Linux) is a library that enables
-        the local system administrator to choose how individual applications
-        authenticate users. For an overview of the
-        <span class="emphasis"><em>Linux-PAM</em></span> library see the
-        <span class="emphasis"><em>Linux-PAM System Administrators' Guide</em></span>.
+        (Pluggable Authentication Modules for Linux)은 개별 응용에서
+        사용자를 인증하는 방식을 로컬 시스템 관리자가 선택할 수 있게
+        해 주는 라이브러리다. <span class="emphasis"><em>Linux-PAM</em></span>
+        라이브러리가 어떤 건지 보려면
+        <span class="emphasis"><em>Linux-PAM 시스템 관리자 안내서</em></span>를
+        보면 된다.
       </p><p>
-        It is the purpose of the <span class="emphasis"><em>Linux-PAM</em></span>
-        project to liberate the development of privilege granting software
-        from the development of secure and appropriate authentication schemes.
-        This is accomplished by providing a documented library of functions
-        that an application may use for all forms of user authentication
-        management. This library dynamically loads locally configured
-        authentication modules that actually perform the authentication tasks.
+        <span class="emphasis"><em>Linux-PAM</em><span> 프로젝트의 목표는
+        특권 인가 소프트웨어를 만드는 것에서 안전하고 적절한 인증 체계를
+        만드는 작업을 분리하는 것이다. 이를 위해 문서화된 함수들의 라이브러리를
+        제공하고, 응용에서 그 라이브러리를 온갖 형태의 사용자 인증 관리에
+        이용할 수 있다. 그 라이브러리에선 로컬에 설정된 인증 모듈들을
+        동적으로 적재하고, 그 모듈이 실제 인증 작업을 수행한다.
       </p><p>
-        From the perspective of an application developer the information
-        contained in the local configuration of the PAM library should not be
-        important. Indeed it is intended that an application treat the
-        functions documented here as a 'black box' that will deal with all
-        aspects of user authentication. 'All aspects' includes user
-        verification, account management, session initialization/termination
-        and also the resetting of passwords
-        (<span class="emphasis"><em>authentication tokens</em></span>).
-      </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-introduction.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="adg-introduction.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="adg-introduction-synopsis.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 1. Introduction </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">Home</a></td><td width="40%" align="right" valign="top"> 1.2. Synopsis</td></tr></table></div></body></html>
+        응용 개발자 입장에서 PAM 라이브러리 지역 설정에 담긴 정보는
+        중요치 않게 된다. 실제로 응용에서는 여기 문서화된 함수들을
+        사용자 인증의 모든 측면을 처리해 주는 '블랙박스'처럼 여기면
+        된다. 그 '모든 측면'에는 사용자 검증, 계정 관리, 세션
+        초기화/종결, 그리고 패스워드(<span class="emphasis"><em>인증
+        토큰</em></span>) 재설정까지 포함된다.
+      </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-introduction.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="adg-introduction.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="adg-introduction-synopsis.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">1장. 들어가며 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">대문</a></td><td width="40%" align="right" valign="top"> 1.2. 사용법</td></tr></table></div></body></html>
