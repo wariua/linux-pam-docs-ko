@@ -1,41 +1,39 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 6. Porting legacy applications</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="up" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="prev" href="adg-libpam-functions.html" title="5.1. Functions supplied"><link rel="next" href="adg-glossary.html" title="Chapter 7. Glossary of PAM related terms"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 6. Porting legacy applications</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-libpam-functions.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="adg-glossary.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="adg-porting"></a>Chapter 6. Porting legacy applications</h1></div></div></div><p>
-      The point of PAM is that the application is not supposed to
-      have any idea how the attached authentication modules will choose
-      to authenticate the user. So all they can do is provide a conversation
-      function that will talk directly to the user(client) on the modules'
-      behalf.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6장. 구식 응용 이식</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="up" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="prev" href="adg-libpam-functions.html" title="5.1. 제공 함수"><link rel="next" href="adg-glossary.html" title="7장. PAM 관련 용어"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6장. 구식 응용 이식</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-libpam-functions.html">이전</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="adg-glossary.html">다음</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="adg-porting"></a>6장. 구식 응용 이식</h1></div></div></div><p>
+      PAM에서 중요한 점은 연관 인증 모듈들이 사용자를 어떻게
+      인증하기로 할지에 대해 응용에서 아무것도 모르게 한다는 것이다.
+      그래서 응용에서 할 수 있는 건 모듈들을 대신해 사용자(클라이언트)와
+      직접 소통할 대화 함수를 제공하는 게 전부다.
     </p><p>
-      Consider the case that you plug a retinal scanner into the login
-      program. In this situation the user would be prompted: "please look
-      into the scanner". No username or password would be needed - all this
-      information could be deduced from the scan and a database lookup. The
-      point is that the retinal scanner is an ideal task for a "module".
+      login 프로그램에 망막 스캐너를 연결하는 경우를 생각해 보자.
+      이때 사용자는 "스캐너에 시선을 고정해 주세요"라는 메시지를
+      받게 될 것이다. 사용자명과 패스워드는 필요치 않을 것이다.
+      그 정보는 모두 스캔과 데이터베이스 검색으로 얻을 수 있다.
+      중요한 건 망막 스캐너가 "모듈"에 잘 맞는 작업이라는 점이다.
     </p><p>
-      While it is true that a pop-daemon program is designed with the POP
-      protocol in mind and no-one ever considered attaching a retinal
-      scanner to it, it is also the case that the "clean" PAM'ification of
-      such a daemon would allow for the possibility of a scanner module
-      being be attached to it. The point being that the "standard"
-      pop-authentication protocol(s) [which will be needed to satisfy
-      inflexible/legacy clients] would be supported by inserting an
-      appropriate pam_qpopper module(s).  However, having rewritten
-      <span class="command"><strong>popd</strong></span> once in this way any new protocols can be
-      implemented in-situ.
+      pop 데몬 프로그램이 POP 프로토콜을 염두에 두고 작성된 것이고
+      어느 누구도 거기에 망막 스캐너를 붙일 생각을 하지 않았겠지만
+      그런 데몬을 "깔끔하게" PAM스럽게 만들면 스캐너 모듈을 붙이는
+      게 분명 가능해지는 것도 사실이다. 중요한 건 적절한 pam_qpopper
+      모듈(들)을 추가해서 [경직된/구식 클라이언트들을 위해 필요할]
+      "표준" pop 인증 프로토콜(들)을 지원하는 것이다. 하지만 일단
+      그렇게 <span class="command"><strong>popd</strong></span>를
+      재작성하고 나면 그 자리에 다른 어떤 인증 방식도 구현할 수
+      있게 된다.
     </p><p>
-      One simple test of a ported application would be to insert the
-      <span class="command"><strong>pam_permit</strong></span> module and see if the application
-      demands you type a password...  In such a case, <span class="command"><strong>xlock</strong></span>
-      would fail to lock the terminal - or would at best be a screen-saver,
-      ftp would give password free access to all etc..  Neither of
-      these is a very secure thing to do, but they do illustrate how
-      much flexibility PAM puts in the hands of the local admin.
+      이식된 응용을 간단히 테스트해 보기 위해
+      <span class="command"><strong>pam_permit</strong></span> 모듈을
+      집어넣고 응용에서 패스워드 입력을 요구하는지 볼 수 있다.
+      그렇게 설정하면 <span class="command"><strong>xlock</strong></span>은
+      터미널을 잠그지 못해서 스크린세이버와 다름없을 것이고
+      ftp는 패스워드 없이 모든 파일에 접근을 허용할 것이다.
+      어느 쪽도 그리 안전한 동작이 아니지만, 이를 통해
+      PAM이 어느 정도의 유연성을 로컬 관리자에게 제공하는지
+      볼 수 있다.
     </p><p>
-      The key issue, in doing things correctly, is identifying what is part
-      of the authentication procedure (how many passwords etc..) the
-      exchange protocol (prefixes to prompts etc., numbers like 331 in the
-      case of ftpd) and what is part of the service that the application
-      delivers.  PAM really needs to have total control in the
-      authentication "procedure", the conversation function should only
-      deal with reformatting user prompts and extracting responses from raw
-      input.
-    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-libpam-functions.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="adg-glossary.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">5.1. Functions supplied </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 7. Glossary of PAM related terms</td></tr></table></div></body></html>
+      제대로 된 작업의 핵심은 인증 절차(패스워드 몇 회 등)에 속한
+      부분과 교환 프로토콜(ftpd에서 프롬프트 앞에 331 같은 숫자 붙이기 등),
+      그리고 응용에서 제공하는 서비스에 속한 부분을 구별하는 것이다.
+      PAM에서 인증 "절차"를 완전히 통제해야 하며, 대화 함수에서는
+      사용자 프롬프트의 형태를 조정하는 것과 입력에서 응답을 추출하는
+      것만 다뤄야 한다.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-libpam-functions.html">이전</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="adg-glossary.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">5.1. 제공 함수 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">대문</a></td><td width="40%" align="right" valign="top"> 7장. PAM 관련 용어</td></tr></table></div></body></html>
