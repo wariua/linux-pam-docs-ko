@@ -1,6 +1,6 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.2. What is expected of an application</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="up" href="adg-interface.html" title="Chapter 3.  The public interface to Linux-PAM"><link rel="prev" href="adg-interface-by-app-expected.html" title="3.1. What can be expected by the application"><link rel="next" href="adg-interface-programming-notes.html" title="3.3. Programming notes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. What is expected of an application</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-interface-by-app-expected.html">Prev</a> </td><th width="60%" align="center">Chapter 3. 
-      The public interface to <span class="emphasis"><em>Linux-PAM</em></span>
-    </th><td width="20%" align="right"> <a accesskey="n" href="adg-interface-programming-notes.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adg-interface-of-app-expected"></a>3.2. What is expected of an application</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_conv"></a>3.2.1. The conversation function</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre></div><pre class="programlisting">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.2. 응용에게 기대하는 것</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="up" href="adg-interface.html" title="3장.  Linux-PAM 공식 인터페이스"><link rel="prev" href="adg-interface-by-app-expected.html" title="3.1. 응용에서 기대할 수 있는 것"><link rel="next" href="adg-interface-programming-notes.html" title="3.3. 프로그래밍 노트"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. 응용에게 기대하는 것</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-interface-by-app-expected.html">이전</a> </td><th width="60%" align="center">3장. 
+      <span class="emphasis"><em>Linux-PAM</em></span> 공식 인터페이스
+    </th><td width="20%" align="right"> <a accesskey="n" href="adg-interface-programming-notes.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adg-interface-of-app-expected"></a>3.2. 응용에게 기대하는 것</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_conv"></a>3.2.1. 대화 함수</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre></div><pre class="programlisting">
 struct pam_message {
     int msg_style;
     const char *msg;
@@ -16,93 +16,85 @@ struct pam_conv {
                 struct pam_response **resp, void *appdata_ptr);
     void *appdata_ptr;
 };
-  </pre><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_conv-description"></a>3.2.1.1. DESCRIPTION</h4></div></div></div><p>
-      The PAM library uses an application-defined callback to allow
-      a direct communication between a loaded module and the application.
-      This callback is specified by the
-      <span class="emphasis"><em>struct pam_conv</em></span> passed to
-      <span class="citerefentry"><span class="refentrytitle">pam_start</span>(3)</span>
-      at the start of the transaction.
+  </pre><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_conv-description"></a>3.2.1.1. 설명</h4></div></div></div><p>
+      PAM 라이브러리에선 응용에서 정의한 콜백을 이용해 응용과
+      적재된 모듈이 직접 소통할 수 있게 한다. 트랜잭션 시작 때
+      <span class="citerefentry"><span class="refentrytitle">pam_start</span>(3)</span>에
+      주는 <span class="emphasis"><em>struct pam_conv</em></span>로
+      콜백을 지정한다.
     </p><p>
-      When a module calls the referenced conv() function, the argument
-      <span class="emphasis"><em>appdata_ptr</em></span> is set to the second element of
-      this structure.
+      모듈에서 해당 conv() 함수를 호출할 때 그 구조체의 두 번째 항목을
+      <span class="emphasis"><em>appdata_ptr</em></span> 인자에 설정한다.
     </p><p>
-      The other arguments of a call to conv() concern the information
-      exchanged by module and application. That is to say,
-      <span class="emphasis"><em>num_msg</em></span> holds the length of the array of
-      pointers, <span class="emphasis"><em>msg</em></span>. After a successful return, the
-      pointer <span class="emphasis"><em>resp</em></span> points to an array of pam_response
-      structures, holding the application supplied text. The
-      <span class="emphasis"><em>resp_retcode</em></span> member of this struct is unused and
-      should be set to zero. It is the caller's responsibility to release
-      both, this array and the responses themselves, using
-      <span class="citerefentry"><span class="refentrytitle">free</span>(3)</span>. Note, <span class="emphasis"><em>*resp</em></span> is a
-      <span class="emphasis"><em>struct pam_response</em></span> array and not an array of
-      pointers.
+      conv() 호출의 나머지 인자들은 모듈과 응용 사이에 주고받는 정보에
+      대한 것이다. 말하자면 <span class="emphasis"><em>num_msg</em></span>는
+      포인터의 배열인 <span class="emphasis"><em>msg</em></span>의
+      길이를 담는다. 성공 반환 시 포인터 <span class="emphasis"><em>resp</em></span>가
+      pam_response 구조체의 배열을 가리키는데, 그 구조체들은 응용에서
+      제공한 텍스트를 담는다. 그 구조체의 <span class="emphasis"><em>resp_retcode</em></span>
+      멤버는 쓰지 않으며 0으로 설정해야 한다. 그 배열과 응답들을
+      <span class="citerefentry"><span class="refentrytitle">free</span>(3)</span>로
+      해제하는 건 호출자의 책임이다. <span class="emphasis"><em>*resp</em></span>가
+      포인터의 배열이 아니라 <span class="emphasis"><em>struct pam_response</em></span>
+      배열이라는 점에 유의하자.
     </p><p>
-      The number of responses is always equal to the
-      <span class="emphasis"><em>num_msg</em></span> conversation function argument.
-      This does require that the response array is
-      <span class="citerefentry"><span class="refentrytitle">free</span>(3)</span>'d after
-      every call to the conversation function.  The index of the
-      responses corresponds directly to the prompt index in the
-      pam_message array.
+      응답의 개수는 언제나 대화 함수 인자
+      <span class="emphasis"><em>num_msg</em></span>와 같다.
+      따라서 대화 함수 호출 후마다 응답 배열이
+      <span class="citerefentry"><span class="refentrytitle">free</span>(3)</span>
+      돼야 한다. 응답들의 인덱스는 pam_message 배열 프롬프트의
+      인덱스와 대응한다.
     </p><p>
-      On failure, the conversation function should release any resources
-      it has allocated, and return one of the predefined PAM error codes.
+      실패 시 대화 함수는 할당한 자원이 있으면 모두 해제한 후
+      미리 규정된 PAM 오류 코드들 중 하나를 반환해야 한다.
     </p><p>
-      Each message can have one of four types, specified by the
-      <span class="emphasis"><em>msg_style</em></span> member of
-      <span class="emphasis"><em>struct pam_message</em></span>:
+      각 메시지는 네 가지 타입 중 하나이며,
+      <span class="emphasis"><em>struct pam_message</em></span>의
+      <span class="emphasis"><em>msg_style</em></span> 멤버에
+      지정돼 있다.
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_PROMPT_ECHO_OFF</span></dt><dd><p>
-             Obtain a string without echoing any text.
+             텍스트 반향 없이 문자열 얻기.
           </p></dd><dt><span class="term">PAM_PROMPT_ECHO_ON</span></dt><dd><p>
-            Obtain a string whilst echoing text.
+            텍스트 반향하면서 문자열 얻기.
           </p></dd><dt><span class="term">PAM_ERROR_MSG</span></dt><dd><p>
-            Display an error message.
+            오류 메시지 표시하기.
           </p></dd><dt><span class="term">PAM_TEXT_INFO</span></dt><dd><p>
-            Display some text.
+            어떤 텍스트 표시하기.
           </p></dd></dl></div><p>
-      The point of having an array of messages is that it becomes possible
-      to pass a number of things to the application in a single call from
-      the module. It can also be convenient for the application that related
-      things come at once: a windows based application can then present a
-      single form with many messages/prompts on at once.
+      메시지가 배열로 돼 있으므로 모듈에서 한 번의 호출로 여러 가지를
+      응용으로 전달하는 게 가능해진다. 응용 입장에서도 관련 항목들이
+      한번에 오는 게 편할 수 있다. 그 경우 창 형태 응용에서 양식
+      하나로 여러 메시지/프롬프트를 한꺼번에 표시할 수 있다.
     </p><p>
-      In passing, it is worth noting that there is a descrepency between
-      the way Linux-PAM handles the const struct pam_message **msg
-      conversation function argument from the way that Solaris' PAM
-      (and derivitives, known to include HP/UX, are there others?) does.
-      Linux-PAM interprets the msg argument as entirely equivalent to the
-      following prototype
-  const struct pam_message *msg[] (which, in spirit, is consistent with
-  the commonly used prototypes for argv argument to the familiar main()
-  function: char **argv; and char *argv[]). Said another way Linux-PAM
-  interprets the msg argument as a pointer to an array of num_msg read
-  only 'struct pam_message' pointers.  Solaris' PAM implementation
-  interprets this argument as a pointer to a pointer to an array of
-  num_msg pam_message structures.  Fortunately, perhaps, for most
-  module/application developers when num_msg has a value of one these
-  two definitions are entirely equivalent. Unfortunately, casually
-  raising this number to two has led to unanticipated compatibility
-  problems.
+      여담으로, Linux-PAM에서 대화 함수 인자 const struct pam_message
+      **msg를 다루는 방식이 솔라리스의 PAM과 (또 그에 기반한 HP/UX 등과)
+      차이가 있다는 점을 언급해 둬야겠다. Linux-PAM은 msg 인자를
+      프로토타입 const struct pam_message *msg[]와 완전히 동등하게
+      해석한다. (다들 아는 main() 함수의 argv 인자에 흔히 쓰는 프로토타입이
+      char **argv와 char *argv[]인 것과 같은 식이다.) 요컨데
+      Linux-PAM에서는 msg 인자를 읽기 전용 'struct pam_message' 포인터
+      num_msg 개짜리 배열에 대한 포인터로 해석한다. 솔라리스 PAM
+      구현에서는 이 인자를 pam_message 구조체 num_msg개짜리 배열에
+      대한 포인터에 대한 포인터로 해석한다. 대부분 모듈 응용 개발자에게는
+      (아마도) 다행스럽게도 num_msg의 값이 1일 때 두 정의는 완전히
+      동등하다. 그러다 별 생각 없이 그 수를 2개로 올리면 예상치 않은
+      호환성 문제가 발생한다.
     </p><p>
-  For what its worth the two known module writer work-arounds for trying
-  to maintain source level compatibility with both PAM implementations
-  are:
+      어느 쪽이 바람직한가는 제쳐 두고, 모듈 작성자가 두 가지 PAM 구현
+      모두와 소스 수준 호환성을 유지하기 위한 방법으로 두 가지가 있다.
     </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>
-          never call the conversation function with num_msg greater than one.
+          절대 num_msg를 1보다 크게 해서 대화 함수를 호출하지 않기.
         </p></li><li class="listitem"><p>
-          set up msg as doubly referenced so both types of conversation
-          function can find the messages. That is, make
+          msg를 이중 참조 구조로 만들어서 두 가지 대화 함수 모두
+          메시지를 찾아낼 수 있게 하기. 즉 다음처럼 만들기:
         </p><pre class="programlisting">
        msg[n] = &amp; (( *msg )[n])
-       </pre></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_conv-return_values"></a>3.2.1.2. RETURN VALUES</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
-             Memory buffer error.
+       </pre></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_conv-return_values"></a>3.2.1.2. 반환 값</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
+             메모리 버퍼 오류.
           </p></dd><dt><span class="term">PAM_CONV_ERR</span></dt><dd><p>
-             Conversation failure. The application should not set
-             <span class="emphasis"><em>*resp</em></span>.
+             대화 실패. 응용에선
+             <span class="emphasis"><em>*resp</em></span>를
+             설정하지 않아야 한다.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-             Success.
-          </p></dd></dl></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-interface-by-app-expected.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="adg-interface.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="adg-interface-programming-notes.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. What can be expected by the application </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">Home</a></td><td width="40%" align="right" valign="top"> 3.3. Programming notes</td></tr></table></div></body></html>
+             성공.
+          </p></dd></dl></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-interface-by-app-expected.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="adg-interface.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="adg-interface-programming-notes.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. 응용에서 기대할 수 있는 것 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">대문</a></td><td width="40%" align="right" valign="top"> 3.3. 프로그래밍 노트</td></tr></table></div></body></html>
