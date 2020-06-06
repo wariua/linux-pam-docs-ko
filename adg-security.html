@@ -1,23 +1,21 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 4.  Security issues of Linux-PAM</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="up" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="prev" href="adg-interface-programming-notes.html" title="3.3. Programming notes"><link rel="next" href="adg-security-library-calls.html" title="4.1. Care about standard library calls"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 4. 
-      Security issues of <span class="emphasis"><em>Linux-PAM</em></span>
-    </th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-interface-programming-notes.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="adg-security-library-calls.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="adg-security"></a>Chapter 4. 
-      Security issues of <span class="emphasis"><em>Linux-PAM</em></span>
-    </h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl class="toc"><dt><span class="section"><a href="adg-security-library-calls.html">4.1. Care about standard library calls</a></span></dt><dt><span class="section"><a href="adg-security-service-name.html">4.2. Choice of a service name</a></span></dt><dt><span class="section"><a href="adg-security-conv-function.html">4.3. The conversation function</a></span></dt><dt><span class="section"><a href="adg-security-user-identity.html">4.4. The identity of the user</a></span></dt><dt><span class="section"><a href="adg-security-resources.html">4.5. Sufficient resources</a></span></dt></dl></div><p>
-      PAM, from the perspective of an application, is a convenient API for
-      authenticating users. PAM modules generally have no increased
-      privilege over that possessed by the application that is making use of
-      it. For this reason, the application must take ultimate responsibility
-      for protecting the environment in which PAM operates.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>4장.  Linux-PAM 보안 관련 사안</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="up" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="prev" href="adg-interface-programming-notes.html" title="3.3. 프로그래밍 노트"><link rel="next" href="adg-security-library-calls.html" title="4.1. 표준 라이브러리 호출에 유의하기"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4장. 
+      <span class="emphasis"><em>Linux-PAM</em></span> 보안 관련 사안
+    </th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-interface-programming-notes.html">이전</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="adg-security-library-calls.html">다음</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="adg-security"></a>4장. 
+      <span class="emphasis"><em>Linux-PAM</em></span> 보안 관련 사안
+    </h1></div></div></div><div class="toc"><p><b>차례</b></p><dl class="toc"><dt><span class="section"><a href="adg-security-library-calls.html">4.1. 표준 라이브러리 호출에 유의하기</a></span></dt><dt><span class="section"><a href="adg-security-service-name.html">4.2. 서비스 이름 선정</a></span></dt><dt><span class="section"><a href="adg-security-conv-function.html">4.3. 대화 함수</a></span></dt><dt><span class="section"><a href="adg-security-user-identity.html">4.4. 사용자 신원</a></span></dt><dt><span class="section"><a href="adg-security-resources.html">4.5. 충분한 자원</a></span></dt></dl></div><p>
+      응용 관점에서 PAM은 사용자 인증을 위한 편리한 API다. PAM 모듈들은
+      일반적으로 응용에서 소유한 것 이상의 특권을 가지지 않는다.
+      그러므로 PAM이 동작하는 환경을 보호할 궁극적 책임을 응용에서
+      져야 한다.
     </p><p>
-      A poorly (or maliciously) written application can defeat any
-      <span class="emphasis"><em>Linux-PAM</em></span> module's authentication
-      mechanisms by simply ignoring it's return values. It is the
-      applications task and responsibility to grant privileges and access
-      to services.  The <span class="emphasis"><em>Linux-PAM</em></span> library
-      simply assumes the responsibility of <span class="emphasis"><em>authenticating</em></span>
-      the user; ascertaining that the user <span class="emphasis"><em>is</em></span> who they
-      say they are. Care should be taken to anticipate all of the documented
-      behavior of the <span class="emphasis"><em>Linux-PAM</em></span> library
-      functions. A failure to do this will most certainly lead to a future
-      security breach.
-    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-interface-programming-notes.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="adg-security-library-calls.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.3. Programming notes </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">Home</a></td><td width="40%" align="right" valign="top"> 4.1. Care about standard library calls</td></tr></table></div></body></html>
+      잘못 (또는 악의적으로) 작성된 응용에서는 반환 값을 무시하는
+      것만으로 모든 <span class="emphasis"><em>Linux-PAM</em></span> 모듈의
+      인증 메커니즘을 무력화할 수 있다. 특권과 서비스 접근을 인가하는
+      것은 응용의 일이자 책임이다. <span class="emphasis"><em>Linux-PAM</em></span>
+      라이브러리는 사용자 <span class="emphasis"><em>인증</em></span>을,
+      즉 사용자가 자칭하는 그 사람이 <span class="emphasis"><em>맞는지</em></span>
+      확인하는 일을 맡을 뿐이다. <span class="emphasis"><em>Linux-PAM</em></span>
+      라이브러리 함수의 문서에 나와 있는 모든 동작 방식에 대응할 수 있도록
+      주의를 기울여야 한다. 그렇게 하지 못하면 틀림없이 미래의 보안 침해로
+      이어지게 된다.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-interface-programming-notes.html">이전</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="adg-security-library-calls.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">3.3. 프로그래밍 노트 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">대문</a></td><td width="40%" align="right" valign="top"> 4.1. 표준 라이브러리 호출에 유의하기</td></tr></table></div></body></html>
