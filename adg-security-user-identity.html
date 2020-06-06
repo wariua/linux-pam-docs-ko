@@ -1,52 +1,49 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>4.4. The identity of the user</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="The Linux-PAM Application Developers' Guide"><link rel="up" href="adg-security.html" title="Chapter 4.  Security issues of Linux-PAM"><link rel="prev" href="adg-security-conv-function.html" title="4.3. The conversation function"><link rel="next" href="adg-security-resources.html" title="4.5. Sufficient resources"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.4. The identity of the user</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-security-conv-function.html">Prev</a> </td><th width="60%" align="center">Chapter 4. 
-      Security issues of <span class="emphasis"><em>Linux-PAM</em></span>
-    </th><td width="20%" align="right"> <a accesskey="n" href="adg-security-resources.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adg-security-user-identity"></a>4.4. The identity of the user</h2></div></div></div><p>
-        The <span class="emphasis"><em>Linux-PAM</em></span> modules will need
-        to determine the identity of the user who requests a service,
-        and the identity of the user who grants the service. These two
-        users will seldom be the same. Indeed there is generally a third
-        user identity to be considered, the new (assumed) identity of
-        the user once the service is granted.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>4.4. 사용자 신원</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_ADG.html" title="Linux-PAM 응용 개발자 안내서"><link rel="up" href="adg-security.html" title="4장.  Linux-PAM 보안 관련 사안"><link rel="prev" href="adg-security-conv-function.html" title="4.3. 대화 함수"><link rel="next" href="adg-security-resources.html" title="4.5. 충분한 자원"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.4. 사용자 신원</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="adg-security-conv-function.html">이전</a> </td><th width="60%" align="center">4장. 
+      <span class="emphasis"><em>Linux-PAM</em></span> 보안 관련 사안
+    </th><td width="20%" align="right"> <a accesskey="n" href="adg-security-resources.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adg-security-user-identity"></a>4.4. 사용자 신원</h2></div></div></div><p>
+        <span class="emphasis"><em>Linux-PAM</em></span> 모듈들에선
+        서비스를 요청하는 사용자의 신원과 서비스를 인가하는 사용자의
+        신원을 알아낼 필요가 있다. 이 두 사용자는 보통 같지 않다.
+        그런데 고려해야 할 사용자 신원이 일반적으로 하나 더 있는데,
+        바로 사용자에게 서비스가 인가된 후의 새 (가)신원이다.
       </p><p>
-        The need for keeping tabs on these identities is clearly an
-        issue of security. One convention that is actively used by
-        some modules is that the identity of the user requesting a
-        service should be the current <span class="emphasis"><em>UID</em></span>
-        (user ID) of the running process; the identity of the
-        privilege granting user is the <span class="emphasis"><em>EUID</em></span>
-        (effective user ID) of the running process; the identity of
-        the user, under whose name the service will be executed, is
-        given by the contents of the <span class="emphasis"><em>PAM_USER</em></span>
-        <span class="citerefentry"><span class="refentrytitle">pam_get_item</span>(3)</span>. Note, modules can change the values of
-        <span class="emphasis"><em>PAM_USER</em></span> and <span class="emphasis"><em>PAM_RUSER</em></span>
-        during any of the <code class="function">pam_*()</code> library calls.
-        For this reason, the application should take care to use the
-        <code class="function">pam_get_item()</code> every time it wishes to
-        establish who the authenticated user is (or will currently be).
+        이 신원들을 정확하게 다루는 건 분명한 보안 관련 사안이다.
+        일부 모듈들에서 활발히 쓰는 관행은 서비스를 요청하는
+        사용자의 신원은 동작 중인 프로세스의 현재
+        <span class="emphasis"><em>UID</em></span>(사용자 ID)여야 하고,
+        특권을 가진 인가 사용자의 신원은 동작 중인 프로세스의
+        <span class="emphasis"><em>EUID</em></span>(실효 사용자 ID)이고,
+        서비스를 실행하는 데 쓸 사용자의 신원은 <span class="emphasis"><em>PAM_USER</em></span>
+        <span class="citerefentry"><span class="refentrytitle">pam_get_item</span>(3)</span>의
+        내용으로 받는 것이다. 참고로 <code class="function">pam_*()</code>
+        라이브러리 호출 내에서 모듈이 <span class="emphasis"><em>PAM_USER</em></span>와
+        <span class="emphasis"><em>PAM_RUSER</em></span>의 값을 바꿀 수
+        있다. 따라서 응용에서는 인증된 사용자가 누구인지 (즉 현재로선
+        누가 될 것 같은지) 확실히 하고 싶을 때마다
+        <code class="function">pam_get_item()</code>을 쓰도록 해야 한다.
       </p><p>
-        For network-serving databases and other applications that provide
-        their own security model (independent of the OS kernel) the above
-        scheme is insufficient to identify the requesting user.
+        (OS 커널과 독립적으로) 자체 보안 모델을 제공하는 네트워크 서비스
+        제공 데이터베이스와 기타 응용들에서는 요청 사용자를 식별하는 데
+        위 체계로는 충분치 않다.
       </p><p>
-        A more portable solution to storing the identity of the requesting
-        user is to use the <span class="emphasis"><em>PAM_RUSER</em></span> <span class="citerefentry"><span class="refentrytitle">pam_get_item</span>(3)</span>. The application should supply this value before
-        attempting to authenticate the user with
-        <code class="function">pam_authenticate()</code>. How well this name can be
-        trusted will ultimately be at the discretion of the local
-        administrator (who configures PAM for your application) and a
-        selected module may attempt to override the value where it can
-        obtain more reliable data. If an application is unable to determine
-        the identity of the requesting entity/user, it should not call
-        <span class="citerefentry"><span class="refentrytitle">pam_set_item</span>(3)</span> to set <span class="emphasis"><em>PAM_RUSER</em></span>.
+        요청하는 사용자의 신원을 저장하기 위한 더 이식성 높은 방법은
+        <span class="emphasis"><em>PAM_RUSER</em></span> <span class="citerefentry"><span class="refentrytitle">pam_get_item</span>(3)</span>을
+        이용하는 것이다. <code class="function">pam_authenticate()</code>로
+        사용자 인증을 시도하기 전에 응용에서 이 값을 제공해야 한다.
+        그 이름을 얼마나 신뢰할 수 있을지는 궁극적으로 (응용을 위한
+        PAM 설정을 하는) 로컬 관리자에게 달려 있으며, 설정된 모듈에서
+        더 신뢰성 있는 데이터를 얻을 수 있는 경우 그 값을 바꾸려고
+        할 수도 있다. 응용에서 요청 개체/사용자의 신원을 알아낼 수
+        없으면 <span class="citerefentry"><span class="refentrytitle">pam_set_item</span>(3)</span>
+        호출로 <span class="emphasis"><em>PAM_RUSER</em></span>를
+        설정하지 말아야 한다.
       </p><p>
-        In addition to the <span class="emphasis"><em>PAM_RUSER</em></span> item, the
-        application should supply the <span class="emphasis"><em>PAM_RHOST</em></span>
-        (<span class="emphasis"><em>requesting host</em></span>) item. As a general rule,
-        the following convention for its value can be assumed:
-        NULL = unknown; localhost = invoked directly from the local system;
-        <span class="emphasis"><em>other.place.xyz</em></span> = some component of the
-        user's connection originates from this remote/requesting host. At
-        present, PAM has no established convention for indicating whether
-        the application supports a trusted path to communication from
-        this host.
-      </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-security-conv-function.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="adg-security.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="adg-security-resources.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">4.3. The conversation function </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">Home</a></td><td width="40%" align="right" valign="top"> 4.5. Sufficient resources</td></tr></table></div></body></html>
+        <span class="emphasis"><em>PAM_RUSER</em></span> 항목에 더해서
+        <span class="emphasis"><em>PAM_RHOST</em></span>(<span class="emphasis"><em>요청 호스트</em></span>)
+        항목을 응용에서 제공해 줘야 한다. 그 값에 대해 대체로 상정할 수
+        있는 관행은 이렇다: NULL = 알 수 없음, localhost = 로컬 시스템에서
+        바로 호출, <span class="emphasis"><em>other.place.xyz</em></span> =
+        사용자 연결의 어떤 요소가 이 원격/요청 호스트에서 기원한 것임.
+        이 호스트로부터의 통신에 대해 신뢰할 수 있는 경로를 응용에서
+        지원하는지 여부를 나타내기 위한 확립된 PAM 관행은 현재 없다.
+      </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="adg-security-conv-function.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="adg-security.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="adg-security-resources.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">4.3. 대화 함수 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_ADG.html">대문</a></td><td width="40%" align="right" valign="top"> 4.5. 충분한 자원</td></tr></table></div></body></html>
