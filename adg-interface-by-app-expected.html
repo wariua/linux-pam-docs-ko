@@ -143,7 +143,7 @@
           </p></dd></dl></div><p>
      다음 추가 항목들은 Linux-PAM 한정이므로 이식 가능한 응용에선 쓰지 말아야 한다.
    </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_FAIL_DELAY</span></dt><dd><p>
-            공용 실패 지연 시간 동작 방식을 바꾸기 위한 함수 포인터.
+            실패 시 지연 공통 동작 방식을 바꾸기 위한 함수 포인터.
             <span class="citerefentry"><span class="refentrytitle">pam_fail_delay</span>(3)</span> 참고.
           </p></dd><dt><span class="term">PAM_XDISPLAY</span></dt><dd><p>
             X 디스플레이 이름. X 기반의 그래픽 응용에서 이 항목의 값은
@@ -250,7 +250,7 @@
           </p></dd></dl></div><p>
      다음 추가 항목들은 Linux-PAM 한정이므로 이식 가능한 응용에선 쓰지 말아야 한다.
    </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_FAIL_DELAY</span></dt><dd><p>
-            공용 실패 지연 시간 동작 방식을 바꾸기 위한 함수 포인터.
+            실패 시 지연 공통 동작 방식을 바꾸기 위한 함수 포인터.
             <span class="citerefentry"><span class="refentrytitle">pam_fail_delay</span>(3)</span> 참고.
           </p></dd><dt><span class="term">PAM_XDISPLAY</span></dt><dd><p>
             X 디스플레이 이름. X 기반의 그래픽 응용에서 이 항목의 값은
@@ -296,7 +296,7 @@
        변경하지 않는다.
     </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_strerror-return_values"></a>3.1.5.2. 반환 값</h4></div></div></div><p>
        이 함수는 항상 문자열 포인터를 반환한다.
-    </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_fail_delay"></a>3.1.6. 실패 시 지연 시간 요청하기</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_fail_delay</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">usec</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>unsigned int <var class="pdparam">usec</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_fail_delay-description"></a>3.1.6.1. 설명</h4></div></div></div><p>
+    </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_fail_delay"></a>3.1.6. 실패 시 지연 요청하기</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_fail_delay</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">usec</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>unsigned int <var class="pdparam">usec</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_fail_delay-description"></a>3.1.6.1. 설명</h4></div></div></div><p>
       <code class="function">pam_fail_delay</code> 함수는 응용이나 모듈에서
       <span class="emphasis"><em>usec</em></span> 마이크로초의 최소 지연
       시간을 제안할 수 있는 방법을 제공한다. 이 함수로 요청한 가장 긴
