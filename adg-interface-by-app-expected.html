@@ -91,8 +91,8 @@
             사용자 이름. 그 신원으로 서비스가 제공된다. 즉, 인증 후에
             <span class="emphasis"><em>PAM_USER</em></span>는
             서비스를 이용하게 된 로컬 개체를 나타낸다. 참고로
-            PAM 스택의 모듈에서 뭔가(예: "anonymous")에서 다른
-            뭔가(예: "guest119")로 이 값을 매핑할 수 있다.
+            PAM 스택의 모듈에서 이 값을 뭔가(예: "anonymous")에서
+            다른 뭔가(예: "guest119")로 매핑할 수 있다.
             그러므로 응용에선 PAM 함수를 호출한 다음에
             <span class="emphasis"><em>PAM_USER</em></span>의 값을
             확인해 봐야 한다.
@@ -198,8 +198,8 @@
             사용자 이름. 그 신원으로 서비스가 제공된다. 즉, 인증 후에
             <span class="emphasis"><em>PAM_USER</em></span>는
             서비스를 이용하게 된 로컬 개체를 나타낸다. 참고로
-            PAM 스택의 모듈에서 뭔가(예: "anonymous")에서 다른
-            뭔가(예: "guest119")로 이 값을 매핑할 수 있다.
+            PAM 스택의 모듈에서 이 값을 뭔가(예: "anonymous")에서
+            다른 뭔가(예: "guest119")로 매핑할 수 있다.
             그러므로 응용에선 PAM 함수를 호출한 다음에
             <span class="emphasis"><em>PAM_USER</em></span>의 값을
             확인해 봐야 한다.
@@ -211,8 +211,8 @@
             붙는다. X 기반의 그래픽 응용에서 이 항목의 값은
             <span class="emphasis"><em>$DISPLAY</em></span> 변수여야 한다.
           </p></dd><dt><span class="term">PAM_RUSER</span></dt><dd><p>
-            요청하는 사용자의 이름. 지역에서 요청하는 사용자면
-            지역의 이름이고 원격에서 요청하는 사용자면 원격의
+            요청하는 사용자의 이름. 로컬에서 요청하는 사용자면
+            로컬의 이름이고 원격에서 요청하는 사용자면 원격의
             사용자 이름.
           </p><p>
             일반적으로 응용 내지 모듈에서는 강력하게 인증된 쪽을
@@ -222,8 +222,8 @@
             달려 있다.
           </p><p>
             <span class="emphasis"><em>PAM_RUSER@PAM_RHOST</em></span>가 항상
-            요청하는 사용자를 나타낼 것이다. 일부 경우에선
-            <span class="emphasis"><em>PAM_RUSER</em></span>가 비어 있을 수
+            요청하는 사용자를 나타내게 된다. 일부 경우에는
+            <span class="emphasis"><em>PAM_RUSER</em></span>가 NULL일 수
             있다. 그 경우는 요청하는 개체가 누구인지 분명하지 않은 것이다.
           </p></dd><dt><span class="term">PAM_RHOST</span></dt><dd><p>
             요청하는 호스트의 이름 (<span class="emphasis"><em>PAM_RUSER</em></span> 개체가
@@ -236,14 +236,14 @@
             인증 토큰 (보통은 패스워드).
             <span class="citerefentry"><span class="refentrytitle">pam_sm_authenticate</span>(3)</span> 및
             <span class="citerefentry"><span class="refentrytitle">pam_sm_chauthtok</span>(3)</span>을
-            제외한 모듈 함수들에선 이 토큰을 무시해야 한다.
+            제외한 다른 모듈 함수에선 이 토큰을 무시해야 한다.
             앞쪽 함수에선 한 모듈에서 다른 모듈로 최신 인증 토큰을
             전달하는 데 쓴다. 뒤쪽 함수에선 다른 용도로 쓰는데,
             현재 활성인 인증 토큰을 담는다.
           </p></dd><dt><span class="term">PAM_OLDAUTHTOK</span></dt><dd><p>
             이전 인증 토큰.
             <span class="citerefentry"><span class="refentrytitle">pam_sm_chauthtok</span>(3)</span>을
-            제외한 모듈 함수들에선 이 토큰을 무시해야 한다.
+            제외한 다른 모듈 함수에선 이 토큰을 무시해야 한다.
           </p></dd><dt><span class="term">PAM_CONV</span></dt><dd><p>
             pam_conv 구조체.
             <span class="citerefentry"><span class="refentrytitle">pam_conv</span>(3)</span> 참고.
@@ -548,7 +548,7 @@ void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
              PAM 환경에 추가한다.
           </p></dd><dt><span class="term">NAME=</span></dt><dd><p>
             변수를 빈 값으로 설정한다. 그렇게 설정하려면 이 방식으로
-            해야 한다는 걸 보이기 위해 따로 나열하는 것이다.
+            해야 한다는 걸 보이기 위해 따로 나열한다.
           </p></dd><dt><span class="term">NAME</span></dt><dd><p>
             '='가 없으면 <code class="function">pam_putenv</code>()
             함수에서 해당 변수를 PAM 환경에서 삭제하게 된다.
@@ -557,7 +557,7 @@ void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
       <span class="emphasis"><em>name_value</em></span>의 사본을
       가지고 동작한다. 따라서
       <span class="citerefentry"><span class="refentrytitle">putenv</span>(3)</span>와
-      달리 응용에서 데이터를 해제할 책임이 있다.
+      달리 응용에서 데이터의 메모리를 해제할 책임이 있다.
     </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_putenv-return_values"></a>3.1.13.2. 반환 값</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_PERM_DENIED</span></dt><dd><p>
              <span class="emphasis"><em>name_value</em></span> 인자를 NULL로 줬음.
           </p></dd><dt><span class="term">PAM_BAD_ITEM</span></dt><dd><p>
@@ -573,7 +573,7 @@ void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
       <span class="emphasis"><em>pamh</em></span> 핸들에 연계된
       PAM 환경 목록에서 <span class="emphasis"><em>name</em></span>이
       가리키는 문자열과 일치하는 항목을 찾아서 그 환경 변수의 값에 대한
-      포인터를 반환한다. 응용에서 그 데이터를 해제해선 안 된다.
+      포인터를 반환한다. 응용에서 그 데이터의 메모리를 해제해선 안 된다.
     </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_getenv-return_values"></a>3.1.14.2. 반환 값</h4></div></div></div><p>
       <code class="function">pam_getenv</code> 함수는 실패 시 NULL을
       반환한다.
