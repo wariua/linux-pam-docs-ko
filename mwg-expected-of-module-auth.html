@@ -1,90 +1,85 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.2. Authentication management</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="The Linux-PAM Module Writers' Guide"><link rel="up" href="mwg-expected-of-module.html" title="Chapter 3. What is expected of a module"><link rel="prev" href="mwg-expected-of-module-overview.html" title="3.1. Overview"><link rel="next" href="mwg-expected-of-module-acct.html" title="3.3. Account management"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. Authentication management</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-of-module-overview.html">Prev</a> </td><th width="60%" align="center">Chapter 3. What is expected of a module</th><td width="20%" align="right"> <a accesskey="n" href="mwg-expected-of-module-acct.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mwg-expected-of-module-auth"></a>3.2. Authentication management</h2></div></div></div><p>
-        To be correctly initialized, <em class="parameter"><code>PAM_SM_AUTH</code></em>
-        must be <span class="command"><strong>#define</strong></span>'d prior to including
-        <code class="function">&lt;security/pam_modules.h&gt;</code>. This will
-        ensure that the prototypes for static modules are properly declared.
-      </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-pam_sm_authenticate"></a>3.2.1. Service function for user authentication</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#define PAM_SM_AUTH</pre><pre class="funcsynopsisinfo">#include &lt;security/pam_modules.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_sm_authenticate</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">flags</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argc</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argv</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">flags</var></code>;<br><code>int <var class="pdparam">argc</var></code>;<br><code>const char **<var class="pdparam">argv</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_authenticate-description"></a>3.2.1.1. DESCRIPTION</h4></div></div></div><p>
-      The <code class="function">pam_sm_authenticate</code> function is the service
-      module's implementation of the
-      <span class="citerefentry"><span class="refentrytitle">pam_authenticate</span>(3)</span> interface.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.2. 인증 관리</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="Linux-PAM 모듈 작성자 안내서"><link rel="up" href="mwg-expected-of-module.html" title="3장. 모듈에게 기대하는 것"><link rel="prev" href="mwg-expected-of-module-overview.html" title="3.1. 개요"><link rel="next" href="mwg-expected-of-module-acct.html" title="3.3. 계정 관리"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2. 인증 관리</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-of-module-overview.html">이전</a> </td><th width="60%" align="center">3장. 모듈에게 기대하는 것</th><td width="20%" align="right"> <a accesskey="n" href="mwg-expected-of-module-acct.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mwg-expected-of-module-auth"></a>3.2. 인증 관리</h2></div></div></div><p>
+        올바로 초기화하려면 <code class="function">&lt;security/pam_modules.h&gt;</code>를
+        포함시키기 전에 <em class="parameter"><code>PAM_SM_AUTH</code></em>를
+        <span class="command"><strong>#define</strong></span> 해 두어야 한다.
+        그러면 정적 모듈을 위한 프로토타입들이 올바로 선언된다.
+      </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-pam_sm_authenticate"></a>3.2.1. 사용자 인증을 위한 서비스 함수</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#define PAM_SM_AUTH</pre><pre class="funcsynopsisinfo">#include &lt;security/pam_modules.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_sm_authenticate</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">flags</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argc</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argv</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">flags</var></code>;<br><code>int <var class="pdparam">argc</var></code>;<br><code>const char **<var class="pdparam">argv</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_authenticate-description"></a>3.2.1.1. 설명</h4></div></div></div><p>
+      <code class="function">pam_sm_authenticate</code> 함수는
+      <span class="citerefentry"><span class="refentrytitle">pam_authenticate</span>(3)</span>
+      인터페이스에 대한 서비스 모듈의 구현이다.
     </p><p>
-      This function performs the task of authenticating the user.
+      이 함수는 사용자를 인증하는 작업을 수행한다.
     </p><p>
-       Valid flags, which may be logically OR'd with
-       <span class="emphasis"><em>PAM_SILENT</em></span>, are:
+       유효한 플래그는 다음과 같으며,
+       <span class="emphasis"><em>PAM_SILENT</em></span>와
+       논리 OR 되어 있을 수 있다.
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SILENT</span></dt><dd><p>
-             Do not emit any messages.
+             어떤 메시지도 찍지 않기.
           </p></dd><dt><span class="term">PAM_DISALLOW_NULL_AUTHTOK</span></dt><dd><p>
-            Return <span class="emphasis"><em>PAM_AUTH_ERR</em></span> if the
-            database of authentication tokens for this authentication
-            mechanism has a <span class="emphasis"><em>NULL</em></span> entry for the user.
-            Without this flag, such a <span class="emphasis"><em>NULL</em></span> token
-            will lead to a success without the user being prompted.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_authenticate-return_values"></a>3.2.1.2. RETURN VALUES</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>
-            Authentication failure.
+            이 인증 메커니즘을 위한 인증 토큰 데이터베이스에 사용자
+            항목이 <span class="emphasis"><em>NULL</em></span>이면
+            <span class="emphasis"><em>PAM_AUTH_ERR</em></span>를 반환한다.
+            이 플래그가 없으면 그렇게 <span class="emphasis"><em>NULL</em></span>
+            토큰인 경우 사용자 입력을 요구하지 않고 성공으로 이어지게 된다.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_authenticate-return_values"></a>3.2.1.2. 반환 값</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>
+            인증 실패.
           </p></dd><dt><span class="term">PAM_CRED_INSUFFICIENT</span></dt><dd><p>
-            For some reason the application does not have sufficient
-            credentials to authenticate the user.
+            어떤 이유로 사용자를 인증하기 위한 크리덴셜이 충분치 않다.
           </p></dd><dt><span class="term">PAM_AUTHINFO_UNAVAIL</span></dt><dd><p>
-            The modules were not able to access the authentication
-            information. This might be due to a network or hardware
-            failure etc.
+            모듈에서 인증 정보에 접근할 수 없었다. 네트워크나
+            하드웨어 장애 등이 원인일 수 있다.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-             The authentication token was successfully updated.
+             사용자가 성공적으로 인증되었다.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-            The supplied username is not known to the authentication
-            service.
+            인증 서비스에서 알지 못하는 사용자다.
           </p></dd><dt><span class="term">PAM_MAXTRIES</span></dt><dd><p>
-            One or more of the authentication modules has reached its
-            limit of tries authenticating the user. Do not try again.
-          </p></dd></dl></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-pam_sm_setcred"></a>3.2.2. Service function to alter credentials</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#define PAM_SM_AUTH</pre><pre class="funcsynopsisinfo">#include &lt;security/pam_modules.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_sm_setcred</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">flags</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argc</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argv</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">flags</var></code>;<br><code>int <var class="pdparam">argc</var></code>;<br><code>const char **<var class="pdparam">argv</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_setcred-description"></a>3.2.2.1. DESCRIPTION</h4></div></div></div><p>
-      The <code class="function">pam_sm_setcred</code> function is the service
-      module's implementation of the
-      <span class="citerefentry"><span class="refentrytitle">pam_setcred</span>(3)</span> interface.
+            인증 모듈들 중 하나 이상에서 사용자 인증 시도 최대 횟수에
+            도달했다. 재시도 하지 말 것.
+          </p></dd></dl></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-pam_sm_setcred"></a>3.2.2. 크리덴셜을 변경하기 위한 서비스 함수</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#define PAM_SM_AUTH</pre><pre class="funcsynopsisinfo">#include &lt;security/pam_modules.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_sm_setcred</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">flags</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argc</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argv</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">flags</var></code>;<br><code>int <var class="pdparam">argc</var></code>;<br><code>const char **<var class="pdparam">argv</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_setcred-description"></a>3.2.2.1. 설명</h4></div></div></div><p>
+      <code class="function">pam_sm_setcred</code> 함수는
+      <span class="citerefentry"><span class="refentrytitle">pam_setcred</span>(3)</span>
+      인터페이스에 대한 서비스 모듈의 구현이다.
     </p><p>
-      This function performs the task of altering the credentials of the
-      user with respect to the corresponding authorization
-      scheme. Generally, an authentication module may have access to more
-      information about a user than their authentication token. This
-      function is used to make such information available to the
-      application. It should only be called <span class="emphasis"><em>after</em></span> the
-      user has been authenticated but before a session has been established.
+      이 함수는 해당 인증 체계에 대한 사용자 크리덴셜을 변경하는 작업을
+      수행한다. 일반적으로 인증 모듈에서는 사용자에 대한 인증 토큰 이상의
+      정보에 접근이 가능할 수도 있다. 이 함수를 이용해 그런 정보를
+      응용에서 이용할 수 있게 만든다. 사용자가 인증된 <span class="emphasis"><em>후에</em></span>
+      세션 수립 전에 호출해야 한다.
     </p><p>
-       Valid flags, which may be logically OR'd with
-       <span class="emphasis"><em>PAM_SILENT</em></span>, are:
+       유효한 플래그는 다음과 같으며,
+       <span class="emphasis"><em>PAM_SILENT</em></span>와
+       논리 OR 되어 있을 수 있다.
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SILENT</span></dt><dd><p>
-             Do not emit any messages.
-          </p></dd><dt><span class="term">PAM_ESTABLISH_CRED</span></dt><dd><p>Initialize the credentials for the user.</p></dd><dt><span class="term">PAM_DELETE_CRED</span></dt><dd><p>
-            Delete the credentials associated with the authentication service.
+             어떤 메시지도 찍지 않기.
+          </p></dd><dt><span class="term">PAM_ESTABLISH_CRED</span></dt><dd><p>사용자의 크리덴셜 설정.</p></dd><dt><span class="term">PAM_DELETE_CRED</span></dt><dd><p>
+            인증 서비스와 관련된 크리덴셜 삭제.
           </p></dd><dt><span class="term">PAM_REINITIALIZE_CRED</span></dt><dd><p>
-            Reinitialize the user credentials.
+            사용자 크리덴셜 재설정.
           </p></dd><dt><span class="term">PAM_REFRESH_CRED</span></dt><dd><p>
-            Extend the lifetime of the user credentials.
+            사용자 크리덴셜의 수명 연장.
           </p></dd></dl></div><p>
-      The way the <span class="emphasis"><em>auth</em></span> stack is
-      navigated in order to evaluate the <code class="function">pam_setcred</code>()
-      function call, independent of the <code class="function">pam_sm_setcred</code>()
-      return codes, is exactly the same way that it was navigated when
-      evaluating the <code class="function">pam_authenticate</code>() library
-      call. Typically, if a stack entry was ignored in evaluating
-      <code class="function">pam_authenticate</code>(), it will be ignored when
-      libpam evaluates the <code class="function">pam_setcred</code>() function
-      call. Otherwise, the return codes from each module specific
-      <code class="function">pam_sm_setcred</code>() call are treated as
-      <span class="emphasis"><em>required</em></span>.
-    </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_setcred-return_values"></a>3.2.2.2. RETURN VALUES</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_CRED_UNAVAIL</span></dt><dd><p>
-            This module cannot retrieve the user's credentials.
+      <code class="function">pam_sm_setcred</code>() 반환 코드가 어떻든 상관없이,
+      <code class="function">pam_setcred</code>() 함수 호출을 평가하기 위해
+      <span class="emphasis"><em>auth</em></span> 스택을 탐색하는 방식은
+      <code class="function">pam_authenticate</code>() 라이브러리 호출을
+      평가할 때와 정확히 같다. 그리고 보통 <code class="function">pam_authenticate</code>()
+      평가 시 무시된 스택 항목은 libpam에서 <code class="function">pam_setcred</code>()
+      함수를 평가할 때도 무시된다. 무시되지 않는 경우에 모듈별
+      <code class="function">pam_sm_setcred</code>() 호출의 반환 코드를
+      <span class="emphasis"><em>required</em></span>로 처리한다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_setcred-return_values"></a>3.2.2.2. 반환 값</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_CRED_UNAVAIL</span></dt><dd><p>
+            모듈에서 사용자의 크리덴셜을 얻을 수 없다.
           </p></dd><dt><span class="term">PAM_CRED_EXPIRED</span></dt><dd><p>
-            The user's credentials have expired.
+            사용자의 크리덴셜이 만료되었다.
           </p></dd><dt><span class="term">PAM_CRED_ERR</span></dt><dd><p>
-            This module was unable to set the credentials of the user.
+            모듈에서 사용자의 크리덴셜을 설정할 수 없다.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-             The user credential was successfully set.
+             사용자 크리덴셜이 성공적으로 설정되었다.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-            The user is not known to this authentication module.
+            인증 모듈에서 알지 못하는 사용자다.
           </p></dd></dl></div><p>
-      These, non-<span class="emphasis"><em>PAM_SUCCESS</em></span>, return values will
-      typically lead to the credential stack <span class="emphasis"><em>failing</em></span>.
-      The first such error will dominate in the return value of
-      <code class="function">pam_setcred</code>().
-    </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-of-module-overview.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mwg-expected-of-module.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mwg-expected-of-module-acct.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. Overview </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">Home</a></td><td width="40%" align="right" valign="top"> 3.3. Account management</td></tr></table></div></body></html>
+      <span class="emphasis"><em>PAM_SUCCESS</em></span> 외의 반환 값들은
+      보통 크리덴셜 스택 <span class="emphasis"><em>실패 처리</em></span>로 이어진다.
+      처음 발생한 오류가 <code class="function">pam_setcred</code>()의
+      반환 값을 결정하게 된다.
+    </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-of-module-overview.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="mwg-expected-of-module.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="mwg-expected-of-module-acct.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">3.1. 개요 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">대문</a></td><td width="40%" align="right" valign="top"> 3.3. 계정 관리</td></tr></table></div></body></html>
