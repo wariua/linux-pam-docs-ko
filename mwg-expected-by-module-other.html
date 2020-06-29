@@ -1,71 +1,68 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>2.2.  Other functions provided by libpam</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="The Linux-PAM Module Writers' Guide"><link rel="up" href="mwg-expected-by-module.html" title="Chapter 2. What can be expected by the module"><link rel="prev" href="mwg-expected-by-module-item.html" title="2.1.  Getting and setting PAM_ITEMs and data"><link rel="next" href="mwg-expected-of-module.html" title="Chapter 3. What is expected of a module"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.2. 
-        Other functions provided by <code class="filename">libpam</code>
-      </th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-by-module-item.html">Prev</a> </td><th width="60%" align="center">Chapter 2. What can be expected by the module</th><td width="20%" align="right"> <a accesskey="n" href="mwg-expected-of-module.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mwg-expected-by-module-other"></a>2.2. 
-        Other functions provided by <code class="filename">libpam</code>
-      </h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_strerror"></a>2.2.1. Strings describing PAM error codes</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">const char *<b class="fsfunc">pam_strerror</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">errnum</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">errnum</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_strerror-description"></a>2.2.1.1. DESCRIPTION</h4></div></div></div><p>
-       The <code class="function">pam_strerror</code> function returns a pointer to
-       a string describing the error code passed in the argument
-       <span class="emphasis"><em>errnum</em></span>, possibly using the LC_MESSAGES part of
-       the current locale to select the appropriate language. This string
-       must not be modified by the application. No library function will
-       modify this string.
-    </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_strerror-return_values"></a>2.2.1.2. RETURN VALUES</h4></div></div></div><p>
-       This function returns always a pointer to a string.
-    </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_fail_delay"></a>2.2.2. Request a delay on failure</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_fail_delay</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">usec</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>unsigned int <var class="pdparam">usec</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_fail_delay-description"></a>2.2.2.1. DESCRIPTION</h4></div></div></div><p>
-      The <code class="function">pam_fail_delay</code> function provides a
-      mechanism by which an application or module can suggest a minimum
-      delay of <span class="emphasis"><em>usec</em></span> micro-seconds. The
-      function  keeps a record of the longest time requested with this
-      function. Should
-      <span class="citerefentry"><span class="refentrytitle">pam_authenticate</span>(3)</span> fail, the failing return to the application is
-      delayed by an amount of time randomly distributed (by up to 50%)
-      about this longest value.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>2.2.  libpam에서 제공하는 기타 함수들</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="Linux-PAM 모듈 작성자 안내서"><link rel="up" href="mwg-expected-by-module.html" title="2장. 모듈에서 기대할 수 있는 것"><link rel="prev" href="mwg-expected-by-module-item.html" title="2.1.  PAM_ITEM과 데이터 얻고 설정하기"><link rel="next" href="mwg-expected-of-module.html" title="3장. 모듈에게 기대하는 것"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">2.2. 
+        <code class="filename">libpam</code>에서 제공하는 기타 함수들
+      </th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-by-module-item.html">이전</a> </td><th width="60%" align="center">2장. 모듈에서 기대할 수 있는 것</th><td width="20%" align="right"> <a accesskey="n" href="mwg-expected-of-module.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mwg-expected-by-module-other"></a>2.2. 
+        <code class="filename">libpam</code>에서 제공하는 기타 함수들
+      </h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_strerror"></a>2.2.1. PAM 오류 코드 서술 문자열</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">const char *<b class="fsfunc">pam_strerror</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">errnum</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">errnum</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_strerror-description"></a>2.2.1.1. 설명</h4></div></div></div><p>
+       <code class="function">pam_strerror</code> 함수는 인자
+       <span class="emphasis"><em>errnum</em></span>로 준 오류 코드를
+       설명하는 문자열에 대한 포인터를 반환한다. 가능한 경우 현재 로캘의
+       LC_MESSAGES 부분을 사용해 적절한 언어를 선택한다. 응용에서
+       그 문자열을 변경해선 안 된다. 어떤 라이브러리 함수에서도
+       그 문자열을 변경하지 않을 것이다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_strerror-return_values"></a>2.2.1.2. 반환 값</h4></div></div></div><p>
+       이 함수는 항상 문자열 포인터를 반환한다.
+    </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_fail_delay"></a>2.2.2. 실패 시 지연 요청하기</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_fail_delay</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">usec</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>unsigned int <var class="pdparam">usec</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_fail_delay-description"></a>2.2.2.1. 설명</h4></div></div></div><p>
+      <code class="function">pam_fail_delay</code> 함수는 응용이나 모듈에서
+      <span class="emphasis"><em>usec</em></span> 마이크로초의 최소 지연
+      시간을 제안할 수 있는 방법을 제공한다. 이 함수로 요청한 가장 긴
+      시간이 기록된다. <span class="citerefentry"><span class="refentrytitle">pam_authenticate</span>(3)</span>가
+      실패하면 응용으로 실패를 반환하는 동작이 그 가장 긴 값 정도의
+      (50%까지의) 난수 분포 시간만큼 지연된다.
     </p><p>
-      Independent of success, the delay time is reset to its zero
-      default value when the PAM service module returns control to
-      the application. The delay occurs <span class="emphasis"><em>after</em></span> all
-      authentication modules have been called, but <span class="emphasis"><em>before</em></span>
-      control is returned to the service application.
+      성공 여부와 무관하게 PAM 서비스 모듈에서 응용으로 제어가
+      반환될 때 지연 시간이 기본값 0으로 재설정된다.
+      인증 모듈들이 호출된 후이자 서비스 응용으로 제어가 반환되기는
+      전에 지연이 이뤄진다.
     </p><p>
-      When using this function the programmer should check if it is
-      available with:
+      이 함수를 쓸 때 프로그래머는 다음처럼 이용 가능 여부를
+      확인해야 한다.
     </p><pre class="programlisting">
 #ifdef HAVE_PAM_FAIL_DELAY
     ....
 #endif /* HAVE_PAM_FAIL_DELAY */
       </pre><p>
-      For applications written with a single thread that are event
-      driven in nature, generating this delay may be undesirable.
-      Instead, the application may want to register the delay in some
-      other way. For example, in a single threaded server that serves
-      multiple authentication requests from a single event loop, the
-      application might want to simply mark a given connection as
-      blocked until an application timer expires. For this reason
-      the delay function can be changed with the
-      <span class="emphasis"><em>PAM_FAIL_DELAY</em></span> item. It can be queried and
-      set with
-      <span class="citerefentry"><span class="refentrytitle">pam_get_item</span>(3)</span>
-      and
-      <span class="citerefentry"><span class="refentrytitle">pam_set_item </span>(3)</span>  respectively. The value used to set it should be
-      a function pointer of the following prototype:
+      이벤트 주도 방식으로 작성된 단일 스레드 응용에서는 이렇게
+      지연을 만드는 게 바람직하지 않을 수도 있다. 응용에서 어떤
+      다른 방식으로 지연을 처리하고 싶을 수 있다. 예를 들어 단일
+      이벤트 루프에서 여러 인증 요청을 처리하는 단일 스레드 서버라면
+      응용의 타이머가 만료될 때까지 해당 연결에 차단 표시만 해 두고
+      싶을 수 있다. 그런 이유로 지연 함수를
+      <span class="emphasis"><em>PAM_FAIL_DELAY</em></span> 항목으로
+      교체할 수 있다.
+      <span class="citerefentry"><span class="refentrytitle">pam_get_item</span>(3)</span>과
+      <span class="citerefentry"><span class="refentrytitle">pam_set_item</span>(3)</span>으로
+      질의하고 설정할 수 있다. 설정하는 값은 다음 원형의 함수
+      포인터여야 한다.
       </p><pre class="programlisting">
 void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
       </pre><p>
-      The arguments being the <span class="emphasis"><em>retval</em></span> return code
-      of the module stack, the <span class="emphasis"><em>usec_delay</em></span>
-      micro-second delay that libpam is requesting and the
-      <span class="emphasis"><em>appdata_ptr</em></span> that the application has associated
-      with the current <span class="emphasis"><em>pamh</em></span>. This last value was set
-      by the application when it called
-      <span class="citerefentry"><span class="refentrytitle">pam_start</span>(3)</span> or explicitly with
-      <span class="citerefentry"><span class="refentrytitle">pam_set_item</span>(3)</span>.
-      Note, if PAM_FAIL_DELAY item is unset (or set to NULL), then no delay
-      will be performed.
-    </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_fail_delay-return_values"></a>2.2.2.2. RETURN VALUES</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-            Delay was successful adjusted.
+      인자 <span class="emphasis"><em>retval</em></span>은 모듈 스택의
+      반환 코드이고, <span class="emphasis"><em>usec_delay</em></span>는
+      libpam에서 요청하는 마이크로초 단위 지연 시간이다. 그리고
+      <span class="emphasis"><em>appdata_ptr</em></span>은 현재
+      <span class="emphasis"><em>pamh</em></span>에 응용에서 연계시켜 둔
+      값이다. 이 마지막 인자는
+      <span class="citerefentry"><span class="refentrytitle">pam_start</span>(3)</span>를
+      호출할 때, 또는 명시적으로
+      <span class="citerefentry"><span class="refentrytitle">pam_set_item</span>(3)</span>를
+      호출해서 응용에서 설정해 둔 값이다.
+      참고로 PAM_FAIL_DELAY 항목을 설정 해제하면 (즉 NULL로 설정하면)
+      지연이 전혀 이뤄지지 않는다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_fail_delay-return_values"></a>2.2.2.2. 반환 값</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
+            지연 시간이 성공적으로 조정되었음.
           </p></dd><dt><span class="term">PAM_SYSTEM_ERR</span></dt><dd><p>
-             A NULL pointer was submitted as PAM handle.
-          </p></dd></dl></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-by-module-item.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mwg-expected-by-module.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mwg-expected-of-module.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">2.1. 
-        Getting and setting <span class="emphasis"><em>PAM_ITEM</em></span>s and
-        <span class="emphasis"><em>data</em></span>
-       </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 3. What is expected of a module</td></tr></table></div></body></html>
+             PAM 핸들로 NULL 포인터를 줬음.
+          </p></dd></dl></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-by-module-item.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="mwg-expected-by-module.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="mwg-expected-of-module.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">2.1. 
+        <span class="emphasis"><em>PAM_ITEM</em></span>과
+        <span class="emphasis"><em>데이터</em></span> 얻고 설정하기
+       </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">대문</a></td><td width="40%" align="right" valign="top"> 3장. 모듈에게 기대하는 것</td></tr></table></div></body></html>
