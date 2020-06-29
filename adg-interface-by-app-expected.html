@@ -290,10 +290,10 @@
           </p></dd></dl></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_strerror"></a>3.1.5. PAM 오류 코드 서술 문자열</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">const char *<b class="fsfunc">pam_strerror</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">errnum</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">errnum</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_strerror-description"></a>3.1.5.1. 설명</h4></div></div></div><p>
        <code class="function">pam_strerror</code> 함수는 인자
        <span class="emphasis"><em>errnum</em></span>로 준 오류 코드를
-       설명하는 문자열에 대한 포인터를 반환한다. 현재 로캘의 LC_MESSAGES
-       부분을 사용해 적절한 언어를 택할 수도 있다. 응용에서 그 문자열을
-       변경해선 안 된다. 어떤 라이브러리 함수에서도 그 문자열을
-       변경하지 않는다.
+       설명하는 문자열에 대한 포인터를 반환한다. 가능한 경우 현재 로캘의
+       LC_MESSAGES 부분을 사용해 적절한 언어를 선택한다. 응용에서
+       그 문자열을 변경해선 안 된다. 어떤 라이브러리 함수에서도
+       그 문자열을 변경하지 않을 것이다.
     </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_strerror-return_values"></a>3.1.5.2. 반환 값</h4></div></div></div><p>
        이 함수는 항상 문자열 포인터를 반환한다.
     </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_fail_delay"></a>3.1.6. 실패 시 지연 요청하기</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_fail_delay</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">usec</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>unsigned int <var class="pdparam">usec</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_fail_delay-description"></a>3.1.6.1. 설명</h4></div></div></div><p>
@@ -346,7 +346,7 @@ void (*delay_fn)(int retval, unsigned usec_delay, void *appdata_ptr);
     </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_fail_delay-return_values"></a>3.1.6.2. 반환 값</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
             지연 시간이 성공적으로 조정되었음.
           </p></dd><dt><span class="term">PAM_SYSTEM_ERR</span></dt><dd><p>
-             PAM 핸들러로 NULL 포인터를 줬음.
+             PAM 핸들로 NULL 포인터를 줬음.
           </p></dd></dl></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="adg-pam_authenticate"></a>3.1.7. 사용자 인증하기</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include &lt;security/pam_appl.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_authenticate</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">flags</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">flags</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="adg-pam_authenticate-description"></a>3.1.7.1. 설명</h4></div></div></div><p>
       <code class="function">pam_authenticate</code> 함수를 이용해
       사용자를 인증한다. 사용자는 인증 서비스에 따라 인증 토큰을
