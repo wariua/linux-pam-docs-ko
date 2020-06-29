@@ -1,59 +1,54 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.1. Overview</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="The Linux-PAM Module Writers' Guide"><link rel="up" href="mwg-expected-of-module.html" title="Chapter 3. What is expected of a module"><link rel="prev" href="mwg-expected-of-module.html" title="Chapter 3. What is expected of a module"><link rel="next" href="mwg-expected-of-module-auth.html" title="3.2. Authentication management"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.1. Overview</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-of-module.html">Prev</a> </td><th width="60%" align="center">Chapter 3. What is expected of a module</th><td width="20%" align="right"> <a accesskey="n" href="mwg-expected-of-module-auth.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mwg-expected-of-module-overview"></a>3.1. Overview</h2></div></div></div><p>
-        The six module functions are grouped into four independent
-        management groups. These groups are as follows:
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.1. 개요</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="Linux-PAM 모듈 작성자 안내서"><link rel="up" href="mwg-expected-of-module.html" title="3장. 모듈에게 기대하는 것"><link rel="prev" href="mwg-expected-of-module.html" title="3장. 모듈에게 기대하는 것"><link rel="next" href="mwg-expected-of-module-auth.html" title="3.2. 인증 관리"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.1. 개요</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-of-module.html">이전</a> </td><th width="60%" align="center">3장. 모듈에게 기대하는 것</th><td width="20%" align="right"> <a accesskey="n" href="mwg-expected-of-module-auth.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mwg-expected-of-module-overview"></a>3.1. 개요</h2></div></div></div><p>
+        여섯 가지 모듈 함수를 독립적인 네 가지 관리 그룹으로 나눌 수
+        있는데, 바로
         <span class="emphasis"><em>authentication</em></span>, <span class="emphasis"><em>account</em></span>,
-        <span class="emphasis"><em>session</em></span> and <span class="emphasis"><em>password</em></span>.
-        To be properly defined, a module must define all functions within
-        at least one of these groups. A single module may contain the
-        necessary functions for <span class="emphasis"><em>all</em></span> four groups.
-      </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-expected-of-module-overview-1"></a>3.1.1. Functional independence</h3></div></div></div><p>
-          The independence of the four groups of service a module can
-          offer means that the module should allow for the possibility
-          that any one of these four services may legitimately be called
-          in any order. Thus, the module writer should consider the
-          appropriateness of performing a service without the prior
-          success of some other part of the module.
+        <span class="emphasis"><em>session</em></span>, <span class="emphasis"><em>password</em></span> 그룹이다.
+        올바로 정의된 모듈에는 이 그룹들 중 적어도 하나의 모든 함수가
+        정의돼 있어야 한다. 한 모듈에 네 가지 그룹 <span class="emphasis"><em>모두</em></span>에
+        필요한 함수들이 담겨 있을 수도 있다.
+      </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-expected-of-module-overview-1"></a>3.1.1. 기능의 독립</h3></div></div></div><p>
+          모듈에서 제공할 수 있는 네 가지 서비스 그룹이 서로
+          독립적이란 것은 그 서비스들이 어떤 순서로도 호출될 수
+          있다는 점을 모듈에서 감안해야 한다는 뜻이다. 따라서
+          모듈 작성자는 서비스 수행의 적합성을 고려할 때
+          모듈 다른 부분이 앞서 성공적으로 동작했는지를 따지지
+          않아야 한다.
         </p><p>
-          As an informative example, consider the possibility that an
-          application applies to change a user's authentication token,
-          without having first requested that
-          <span class="emphasis"><em>Linux-PAM</em></span> authenticate the
-          user. In some cases this may be deemed appropriate: when
-          <span class="command"><strong>root</strong></span> wants to change the authentication
-          token of some lesser user. In other cases it may not be
-          appropriate: when <span class="command"><strong>joe</strong></span> maliciously wants
-          to reset <span class="command"><strong>alice</strong></span>'s password; or when anyone
-          other than the user themself wishes to reset their
-          <span class="emphasis"><em>KERBEROS</em></span> authentication token. A policy
-          for this action should be defined by any reasonable
-          authentication scheme, the module writer should consider
-          this when implementing a given module.
-        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-expected-of-module-overview-2"></a>3.1.2. Minimizing administration problems</h3></div></div></div><p>
-          To avoid system administration problems and the poor
-          construction of a <code class="filename">/etc/pam.conf</code> file,
-          the module developer may define all six of the following
-          functions. For those functions that would not be called,
-          the module should return <span class="errorname">PAM_SERVICE_ERR</span>
-          and write an appropriate message to the system log. When
-          this action is deemed inappropriate, the function would
-          simply return <span class="errorname">PAM_IGNORE</span>.
-        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-expected-of-module-overview-3"></a>3.1.3. Arguments supplied to the module</h3></div></div></div><p>
-          The <em class="parameter"><code>flags</code></em> argument of each of
-          the following functions can be logically OR'd with
-          <em class="parameter"><code>PAM_SILENT</code></em>, which is used to inform the
-          module to not pass any <span class="emphasis"><em>text</em></span> (errors or
-          warnings) application.
+          예를 들어, 응용에서 사용자 인증 토큰 변경을 요청하는데
+          <span class="emphasis"><em>Linux-PAM</em></span>에서 먼저
+          사용자를 인증하지 않는 경우를 생각해 보자. 어떤 경우에는
+          그게 적절할 수도 있다. <span class="command"><strong>root</strong></span>가
+          하위 사용자의 인증 토큰을 변경할 때가 그렇다. 하지만 다른
+          경우에는 적절치 않을 수도 있다. <span class="command"><strong>joe</strong></span>가
+          악의적으로 <span class="command"><strong>alice</strong></span>의
+          패스워드를 재설정하려 하거나, 사용자 본인이 아닌 누가
+          <span class="emphasis"><em>KERBEROS</em></span> 인증 토큰을
+          재설정하려 할 때가 그렇다. 어떤 적절한 인증 체계를 이용해
+          그런 행동에 대한 정책을 규정해야 하며, 모듈 작성자는
+          모듈을 구현할 때 이를 감안해야 한다.
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-expected-of-module-overview-2"></a>3.1.2. 관리적 문제 최소화하기</h3></div></div></div><p>
+          시스템 관리 상의 문제와 <code class="filename">/etc/pam.conf</code>
+          파일 구성 오류를 피하기 위해 모듈 개발자가 여섯 가지
+          함수를 모두 정의하기로 할 수도 있다. 호출되지 않을
+          함수들에 대해선 모듈에서 <span class="errorname">PAM_SERVICE_ERR</span>를
+          반환하며 시스템 로그로 적절한 메시지를 찍으면 된다.
+          이런 동작이 적절치 않아 보이는 경우에는 함수에서 그냥
+          <span class="errorname">PAM_IGNORE</span>를 반환하면 된다.
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-expected-of-module-overview-3"></a>3.1.3. 모듈로 제공되는 인자</h3></div></div></div><p>
+          아래 함수들 각각의 <em class="parameter"><code>flags</code></em>
+          인자가 <em class="parameter"><code>PAM_SILENT</code></em>와
+          논리 OR 되어 있을 수 있는데, 이는 모듈에서 응용으로 어떤
+          <span class="emphasis"><em>텍스트</em></span>(오류나 경고)도
+          주지 말아야 한다는 표시다.
         </p><p>
-          The <em class="parameter"><code>argc</code></em> and <em class="parameter"><code>argv</code></em>
-          arguments are taken from the line appropriate to this
-          module---that is, with the <span class="emphasis"><em>service_name</em></span>
-          matching that of the application---in the configuration file
-          (see the <span class="emphasis"><em>Linux-PAM</em></span>
-          System Administrators' Guide). Together these two parameters
-          provide the number of arguments and an array of pointers to
-          the individual argument tokens. This will be familiar to C
-          programmers as the ubiquitous method of passing command arguments
-          to the function <code class="function">main()</code>. Note, however, that
-          the first argument (<em class="parameter"><code>argv[0]</code></em>) is a true
-          argument and <span class="emphasis"><em>not</em></span> the name of the module.
-        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-of-module.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mwg-expected-of-module.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mwg-expected-of-module-auth.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3. What is expected of a module </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">Home</a></td><td width="40%" align="right" valign="top"> 3.2. Authentication management</td></tr></table></div></body></html>
+          <em class="parameter"><code>args</code></em> 및 <em class="parameter"><code>argv</code></em>
+          인자는 설정 파일의 해당하는 (즉 <span class="emphasis"><em>service_name</em></span>이
+          응용의 요청과 일치하는) 모듈 행에서 가져온다.
+          (<span class="emphasis"><em>Linux-PAM</em></span> 시스템
+          관리자 안내서 참고.) 이 두 매개변수는 인자 개수와 각 인자
+          토큰에 대한 포인터들의 배열이다. <code class="function">main()</code>
+          함수에 명령행 인자를 전달하는 흔히 쓰는 방식이므로
+          C 프로그래머에겐 익숙할 것이다. 단, 첫 번째 인자(<em class="parameter"><code>argv[0]</code></em>)가
+          모듈 이름이 <span class="emphasis"><em>아니라</em></span>
+          실제 인자라는 점에 유의하자.
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-of-module.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="mwg-expected-of-module.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="mwg-expected-of-module-auth.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">3. 모듈에게 기대하는 것 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">대문</a></td><td width="40%" align="right" valign="top"> 3.2. 인증 관리</td></tr></table></div></body></html>
