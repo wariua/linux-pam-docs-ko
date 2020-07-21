@@ -1,16 +1,16 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 4. Generic optional arguments</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="The Linux-PAM Module Writers' Guide"><link rel="up" href="Linux-PAM_MWG.html" title="The Linux-PAM Module Writers' Guide"><link rel="prev" href="mwg-expected-of-module-chauthtok.html" title="3.5. Authentication token management"><link rel="next" href="mwg-see-programming.html" title="Chapter 5. Programming notes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 4. Generic optional arguments</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-of-module-chauthtok.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="mwg-see-programming.html">Next</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="mwg-see-options"></a>Chapter 4. Generic optional arguments</h1></div></div></div><p>
-      Here we list the generic arguments that all modules can expect to
-      be passed. They are not mandatory, and their absence should be
-      accepted without comment by the module.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>4장. 일반적인 옵션 인자</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="Linux-PAM 모듈 작성자 안내서"><link rel="up" href="Linux-PAM_MWG.html" title="Linux-PAM 모듈 작성자 안내서"><link rel="prev" href="mwg-expected-of-module-chauthtok.html" title="3.5. 인증 토큰 관리"><link rel="next" href="mwg-see-programming.html" title="5장. 프로그래밍 노트"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4장. 일반적인 옵션 인자</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-of-module-chauthtok.html">이전</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="mwg-see-programming.html">다음</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="mwg-see-options"></a>4장. 일반적인 옵션 인자</h1></div></div></div><p>
+      다음은 모든 모듈에서 받게 될 수 있는 일반적인 인자들이다.
+      필수 옵션은 아니며, 없으면 조용히 받아들이면 된다.
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">debug</span></dt><dd><p>
-             Use the <span class="citerefentry"><span class="refentrytitle">pam_syslog</span>(3)</span> call to log debugging information to the system
-             log files.
+             <span class="citerefentry"><span class="refentrytitle">pam_syslog</span>(3)</span>
+             호출을 사용해 시스템 로그 파일로 디버깅 정보를 찍는다.
           </p></dd><dt><span class="term">use_first_pass</span></dt><dd><p>
-             The module should not prompt the user for a password.
-             Instead, it should obtain the previously typed password
-             (by a call to <code class="function">pam_get_item()</code> for the
-             <em class="parameter"><code>PAM_AUTHTOK</code></em> item), and use that. If
-             that doesn't work, then the user will not be authenticated.
-             (This option is intended for <span class="command"><strong>auth</strong></span> and
-             <span class="command"><strong>passwd</strong></span> modules only).
-          </p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-of-module-chauthtok.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="mwg-see-programming.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.5. Authentication token management </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 5. Programming notes</td></tr></table></div></body></html>
+             모듈에서 사용자에게 패스워드를 묻지 말아야 한다.
+             대신 (<em class="parameter"><code>PAM_AUTHTOK</code></em> 항목
+             <code class="function">pam_get_item()</code> 호출로)
+             앞서 입력받은 패스워드를 얻어서 이용해야 한다. 그게
+             불가능하다면 사용자 인증에 실패하게 된다.
+             (이 옵션은 <span class="command"><strong>auth</strong></span>
+             및 <span class="command"><strong>passwd</strong></span> 모듈을
+             위한 것이다.)
+          </p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-of-module-chauthtok.html">이전</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="mwg-see-programming.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">3.5. 인증 토큰 관리 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">대문</a></td><td width="40%" align="right" valign="top"> 5장. 프로그래밍 노트</td></tr></table></div></body></html>
