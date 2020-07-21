@@ -1,67 +1,65 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.5. Authentication token management</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="The Linux-PAM Module Writers' Guide"><link rel="up" href="mwg-expected-of-module.html" title="Chapter 3. What is expected of a module"><link rel="prev" href="mwg-expected-of-module-session.html" title="3.4. Session management"><link rel="next" href="mwg-see-options.html" title="Chapter 4. Generic optional arguments"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.5. Authentication token management</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-of-module-session.html">Prev</a> </td><th width="60%" align="center">Chapter 3. What is expected of a module</th><td width="20%" align="right"> <a accesskey="n" href="mwg-see-options.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mwg-expected-of-module-chauthtok"></a>3.5. Authentication token management</h2></div></div></div><p>
-        To be correctly initialized, <em class="parameter"><code>PAM_SM_PASSWORD</code></em>
-        must be <span class="command"><strong>#define</strong></span>'d prior to including
-        <code class="function">&lt;security/pam_modules.h&gt;</code>. This will
-        ensure that the prototypes for static modules are properly declared.
-      </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-pam_sm_chauthtok"></a>3.5.1. Service function to alter authentication token</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#define PAM_SM_PASSWORD</pre><pre class="funcsynopsisinfo">#include &lt;security/pam_modules.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_sm_chauthtok</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">flags</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argc</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argv</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">flags</var></code>;<br><code>int <var class="pdparam">argc</var></code>;<br><code>const char **<var class="pdparam">argv</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_chauthtok-description"></a>3.5.1.1. DESCRIPTION</h4></div></div></div><p>
-      The <code class="function">pam_sm_chauthtok</code> function is the service
-      module's implementation of the
-      <span class="citerefentry"><span class="refentrytitle">pam_chauthtok</span>(3)</span> interface.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.5. 인증 토큰 관리</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_MWG.html" title="Linux-PAM 모듈 작성자 안내서"><link rel="up" href="mwg-expected-of-module.html" title="3장. 모듈에게 기대하는 것"><link rel="prev" href="mwg-expected-of-module-session.html" title="3.4. 세션 관리"><link rel="next" href="mwg-see-options.html" title="4장. 일반적인 옵션 인자"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.5. 인증 토큰 관리</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mwg-expected-of-module-session.html">이전</a> </td><th width="60%" align="center">3장. 모듈에게 기대하는 것</th><td width="20%" align="right"> <a accesskey="n" href="mwg-see-options.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mwg-expected-of-module-chauthtok"></a>3.5. 인증 토큰 관리</h2></div></div></div><p>
+        올바로 초기화하려면 <code class="function">&lt;security/pam_modules.h&gt;</code>를
+        포함시키기 전에 <em class="parameter"><code>PAM_SM_PASSWORD</code></em>를
+        <span class="command"><strong>#define</strong></span> 해 두어야 한다.
+        그러면 정적 모듈을 위한 프로토타입들이 올바로 선언된다.
+      </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="mwg-pam_sm_chauthtok"></a>3.5.1. 인증 토큰을 변경하기 위한 서비스 함수</h3></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#define PAM_SM_PASSWORD</pre><pre class="funcsynopsisinfo">#include &lt;security/pam_modules.h&gt;</pre><table border="0" class="funcprototype-table" summary="Function synopsis" style="cellspacing: 0; cellpadding: 0;"><tr><td><code class="funcdef">int <b class="fsfunc">pam_sm_chauthtok</b>(</code></td><td><var class="pdparam">pamh</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">flags</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argc</var>, </td><td> </td></tr><tr><td> </td><td><var class="pdparam">argv</var><code>)</code>;</td><td> </td></tr></table><div class="paramdef-list"><code>pam_handle_t *<var class="pdparam">pamh</var></code>;<br><code>int <var class="pdparam">flags</var></code>;<br><code>int <var class="pdparam">argc</var></code>;<br><code>const char **<var class="pdparam">argv</var></code>;</div><div class="funcprototype-spacer"> </div></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_chauthtok-description"></a>3.5.1.1. 설명</h4></div></div></div><p>
+      <code class="function">pam_sm_chauthtok</code> 함수는
+      <span class="citerefentry"><span class="refentrytitle">pam_chauthtok</span>(3)</span>
+      인터페이스에 대한 서비스 모듈의 구현이다.
     </p><p>
-      This function is used to (re-)set the authentication token of the user.
+      이 함수를 사용해 사용자의 인증 토큰을 (재)설정한다.
     </p><p>
-       Valid flags, which may be logically OR'd with
-       <span class="emphasis"><em>PAM_SILENT</em></span>, are:
+       유효한 플래그는 다음과 같으며,
+       <span class="emphasis"><em>PAM_SILENT</em></span>와
+       논리 OR 되어 있을 수 있다.
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SILENT</span></dt><dd><p>
-             Do not emit any messages.
+             어떤 메시지도 찍지 않기.
           </p></dd><dt><span class="term">PAM_CHANGE_EXPIRED_AUTHTOK</span></dt><dd><p>
-            This argument indicates to the module that the user's
-            authentication token (password) should only be changed if
-            it has expired. This flag is optional and
-            <span class="emphasis"><em>must</em></span> be combined with one of the
-            following two flags. Note, however, the following two options
-            are <span class="emphasis"><em>mutually exclusive</em></span>.
+            이 인자는 사용자의 인증 토큰(패스워드)이 만료된 경우에만
+            변경해야 한다는 뜻이다. 이 플래그는 선택적이며
+            <span class="emphasis"><em>반드시</em></span> 다음 두 플래그
+            중 하나와 조합돼 있다. 참고로 다음 두 옵션은
+            <span class="emphasis"><em>상호 배타적</em></span>이다.
           </p></dd><dt><span class="term">PAM_PRELIM_CHECK</span></dt><dd><p>
-            This indicates that the modules are being probed as to
-            their ready status for altering the user's authentication
-            token. If the module requires access to another system over
-            some network it should attempt to verify it can connect to
-            this system on receiving this flag. If a module cannot establish
-            it is ready to update the user's authentication token it should
-            return <span class="emphasis"><em>PAM_TRY_AGAIN</em></span>, this
-            information will be passed back to the application.
+            모듈에서 사용자의 인증 토큰을 변경할 준비가 돼 있는지를
+            확인하고 있는 중이라는 뜻이다. 모듈에서 어떤 네트워크를
+            통해 다른 시스템에 접속해야 한다면 이 플래그를 받았을 때
+            그 시스템에 연결할 수 있는지 확인을 해 봐야 한다.
+            모듈에서 사용자의 인증 토큰을 갱신할 준비가 돼 있다고
+            확신할 수 없다면 <span class="emphasis"><em>PAM_TRY_AGAIN</em></span>을
+            반환해야 하며, 그 정보가 응용으로 전해지게 된다.
           </p><p>
-             If the control value <span class="emphasis"><em>sufficient</em></span> is used in
-             the password stack, the <span class="emphasis"><em>PAM_PRELIM_CHECK</em></span> section
-             of the modules following that control value is not always executed.
+             password 스택에 control 값으로
+             <span class="emphasis"><em>sufficient</em></span>를 쓰면
+             그 control 값 이후에 오는 모듈들의
+             <span class="emphasis"><em>PAM_PRELIM_CHECK</em></span>
+             부분이 항상 실행되는 건 아니게 된다.
           </p></dd><dt><span class="term">PAM_UPDATE_AUTHTOK</span></dt><dd><p>
-            This informs the module that this is the call it should change
-            the authorization tokens. If the flag is logically OR'd with
-            <span class="emphasis"><em>PAM_CHANGE_EXPIRED_AUTHTOK</em></span>, the
-            token is only changed if it has actually expired.
+            인증 토큰을 바꿔야 하는 호출이라는 표시다. 플래그가
+            <span class="emphasis"><em>PAM_CHANGE_EXPIRED_AUTHTOK</em></span>과
+            논리 OR 되어 있으면 만료돼 있는 경우에만 토큰을 바꾼다.
           </p></dd></dl></div><p>
-      The PAM library calls this function twice in succession. The first
-      time with <span class="emphasis"><em>PAM_PRELIM_CHECK</em></span> and then,
-      if the module does not return
-      <span class="emphasis"><em>PAM_TRY_AGAIN</em></span>, subsequently with
-      <span class="emphasis"><em>PAM_UPDATE_AUTHTOK</em></span>. It is only on
-      the second call that the authorization token is (possibly) changed.
-    </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_chauthtok-return_values"></a>3.5.1.2. RETURN VALUES</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTHTOK_ERR</span></dt><dd><p>
-             The module was unable to obtain the new authentication token.
+      PAM 라이브러리에서 이 함수를 연속으로 두 번 호출한다. 첫 번째는
+      <span class="emphasis"><em>PAM_PRELIM_CHECK</em></span>로 호출하며,
+      모듈에서 <span class="emphasis"><em>PAM_TRY_AGAIN</em></span>을
+      반환하지 않으면 이어서 <span class="emphasis"><em>PAM_UPDATE_AUTHTOK</em></span>으로
+      호출한다. 인증 토큰이 (필요시) 바뀌는 건 두 번째 호출에서다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a name="mwg-pam_sm_chauthtok-return_values"></a>3.5.1.2. 반환 값</h4></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTHTOK_ERR</span></dt><dd><p>
+             모듈에서 새 인증 토큰을 얻을 수 없음.
           </p></dd><dt><span class="term">PAM_AUTHTOK_RECOVERY_ERR</span></dt><dd><p>
-            The module was unable to obtain the old authentication token.
+            모듈에서 이전 인증 토큰을 얻을 수 없음.
           </p></dd><dt><span class="term">PAM_AUTHTOK_LOCK_BUSY</span></dt><dd><p>
-            Cannot change the authentication token since it is currently
-            locked.
+            인증 토큰이 현재 잠겨 있어서 인증 토큰을 변경할 수 없음.
           </p></dd><dt><span class="term">PAM_AUTHTOK_DISABLE_AGING</span></dt><dd><p>
-            Authentication token aging has been disabled.
+            인증 토큰 만료 동작이 꺼져 있음.
           </p></dd><dt><span class="term">PAM_PERM_DENIED</span></dt><dd><p>
-            Permission denied.
+            권한 거부됨.
           </p></dd><dt><span class="term">PAM_TRY_AGAIN</span></dt><dd><p>
-            Preliminary check was unsuccessful. Signals an immediate
-            return to the application is desired.
+            예비 검사가 성공하지 않았음. 응용으로 즉시 반환하는 게
+            좋다는 뜻이다.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
-             The authentication token was successfully updated.
+             인증 토큰이 성공적으로 갱신되었다.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
-            User unknown to password service.
-          </p></dd></dl></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-of-module-session.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="mwg-expected-of-module.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mwg-see-options.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">3.4. Session management </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 4. Generic optional arguments</td></tr></table></div></body></html>
+            패스워드 서비스에서 알지 못하는 사용자다.
+          </p></dd></dl></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mwg-expected-of-module-session.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="mwg-expected-of-module.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="mwg-see-options.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">3.4. 세션 관리 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_MWG.html">대문</a></td><td width="40%" align="right" valign="top"> 4장. 일반적인 옵션 인자</td></tr></table></div></body></html>
