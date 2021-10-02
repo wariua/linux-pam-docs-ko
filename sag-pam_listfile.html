@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.16. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_limits.html" title="6.15. pam_limits - 자원 제한"><link rel="next" href="sag-pam_localuser.html" title="6.17. pam_localuser - /etc/passwd에 있는 사용자여야 함"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.16. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_limits.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_localuser.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_listfile"></a>6.16. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_listfile.so</code>   
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.15. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_limits.html" title="6.14. pam_limits - 자원 제한"><link rel="next" href="sag-pam_localuser.html" title="6.16. pam_localuser - /etc/passwd에 있는 사용자여야 함"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.15. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_limits.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_localuser.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_listfile"></a>6.15. pam_listfile - 임의 파일에 따라 서비스 거부하거나 허용하기</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_listfile.so</code>   
 	item=[tty|user|rhost|ruser|group|shell]
          
         sense=[allow|deny]
@@ -10,7 +10,7 @@
         apply=[<em class="replaceable"><code>user</code></em>|<em class="replaceable"><code>@group</code></em>]
       ] [
         quiet
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-description"></a>6.16.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-description"></a>6.15.1. 설명</h3></div></div></div><p>
       pam_listfile은 임의 파일을 가지고 서비스를 거부하거나
       허용할 수 있게 해 주는 PAM 모듈이다.
     </p><p>
@@ -49,7 +49,7 @@
       방식에 의지해선 안 된다.
     </p><p>
       이 모듈에선 어떤 크리덴셜도 받지 않는다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-options"></a>6.16.2. 옵션</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-options"></a>6.15.2. 옵션</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
             <code class="option">item=[tty|user|rhost|ruser|group|shell]</code>
           </span></dt><dd><p>
@@ -83,10 +83,10 @@
               오류로 처리하지 않기.
             </p></dd></dl></div><p>
 
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-types"></a>6.16.3. 제공하는 모듈 종류</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-types"></a>6.15.3. 제공하는 모듈 종류</h3></div></div></div><p>
       모든 모듈 타입(<code class="option">auth</code>, <code class="option">account</code>,
       <code class="option">password</code>, <code class="option">session</code>)을 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-return_values"></a>6.16.4. 반환 값</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-return_values"></a>6.15.4. 반환 값</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>인증 실패.</p></dd><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
                메모리 버퍼 오류.
             </p></dd><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
@@ -96,7 +96,7 @@
             </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
               성공.
             </p></dd></dl></div><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-examples"></a>6.16.5. 예시</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-examples"></a>6.15.5. 예시</h3></div></div></div><p>
       다음 내용을 <code class="filename">/etc/pam.d/ftpd</code>에 넣어서
       전통적인 'ftpusers' 인증을 구현할 수 있다.
       </p><pre class="programlisting">
@@ -125,7 +125,7 @@ auth    required       pam_listfile.so \
       <code class="filename">/etc/loginusers</code>에 포함시키거나
       root 계정으로 <span class="emphasis"><em>su</em></span> 할 수 있는
       사용자를 포함시켜서 root로 로그인할 방법을 남겨 두도록 하자.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-author"></a>6.16.6. 작성자</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_listfile-author"></a>6.15.6. 작성자</h3></div></div></div><p>
         Michael K. Johnson &lt;johnsonm@redhat.com&gt;과
         Elliot Lee &lt;sopwith@cuc.edu&gt;가 pam_listfile을 작성했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_limits.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_localuser.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.15. pam_limits - 자원 제한 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.17. pam_localuser - /etc/passwd에 있는 사용자여야 함</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_limits.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_localuser.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.14. pam_limits - 자원 제한 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.16. pam_localuser - /etc/passwd에 있는 사용자여야 함</td></tr></table></div></body></html>

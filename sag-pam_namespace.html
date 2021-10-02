@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.22. pam_namespace - 비공개 네임스페이스 구성</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_motd.html" title="6.21. pam_motd - motd 파일 표시"><link rel="next" href="sag-pam_nologin.html" title="6.23. pam_nologin - root 외 사용자 로그인 막기"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.22. pam_namespace - 비공개 네임스페이스 구성</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_motd.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_nologin.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_namespace"></a>6.22. pam_namespace - 비공개 네임스페이스 구성</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_namespace.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.21. pam_namespace - 비공개 네임스페이스 구성</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_motd.html" title="6.21. pam_motd - motd 파일 표시"><link rel="next" href="sag-pam_nologin.html" title="6.22. pam_nologin - root 외 사용자 로그인 막기"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.21. pam_namespace - 비공개 네임스페이스 구성</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_motd.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_nologin.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_namespace"></a>6.21. pam_namespace - 비공개 네임스페이스 구성</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_namespace.so</code>  [
         debug
       ] [
         unmnt_remnt
@@ -20,7 +20,7 @@
         use_default_context
       ] [
         mount_private
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-description"></a>6.22.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-description"></a>6.21.1. 설명</h3></div></div></div><p>
       pam_namespace는 다형화 디렉터리로 세션을 위한 비공개 네임스페이스를
       구성해 주는 PAM 모듈이다. 다형화 디렉터리란 사용자 이름에 따라서,
       또는 SELinux를 쓰는 경우 사용자 이름이나 보안 문맥, 또는 둘 모두에
@@ -40,7 +40,7 @@
       기능에 대한 자세한 내용은 mount(8) 맨페이지, 그리고
       http://lwn.net/Articles/159077 및 http://lwn.net/Articles/159092 에
       있는 공유 서브트리 설명을 참고할 수 있다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-namespace.conf-description"></a>6.22.2. 설명</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-namespace.conf-description"></a>6.21.2. 설명</h3></div></div></div><p>
       <span class="emphasis"><em>pam_namespace.so</em></span> 모듈을 통해
       다형화 디렉터리로 비공개 네임스페이스를 구성할 수 있다. 사용자 이름에
       따라서, 또는 SELinux 사용 시 사용자 이름이나 민감도 단계, 또는
@@ -113,7 +113,11 @@
     </p><p><span class="emphasis"><em>mntopts</em></span>=<em class="replaceable"><code>value</code></em>
       - tmpfs 마운트를 할 때 이 플래그 값을 mount 호출로 전달한다.
       그래서 예를 들어 mount 호출로 만드는 tmpfs 인스턴스의 최대 크기를
-      지정할 수 있다. 자세한 내용은 <span class="citerefentry"><span class="refentrytitle">mount</span>(8)</span> 참고.
+      지정할 수 있다. <span class="citerefentry"><span class="refentrytitle">tmpfs</span>(5)</span>
+      매뉴얼에 있는 옵션들 외에도 <span class="emphasis"><em>nosuid</em></span>,
+      <span class="emphasis"><em>noexec</em></span>, <span class="emphasis"><em>nodev</em></span>
+      플래그를 사용해 마운트할 tmpfs 파일 시스템에서 setuid 비트 효과를 끄거나,
+      실행 파일을 실행하지 못하게 하거나, 장치 파일들이 해석되지 않게 할 수 있다.
     </p><p>
       다형화 인스턴스가 만들어질 디렉터리가 존재해야 하고 기본적으로는
       모드가 0000이어야 한다. 인스턴스 부모의 모드가 0000이어야 한다는
@@ -131,7 +135,7 @@
       값&gt;이다. 전체 문자열이 너무 길면 끝부분을 그 문자열의 md5sum으로
       바꾼다. 그리고 명령행 옵션 <span class="emphasis"><em>gen_hash</em></span>를
       쓰면 전체 문자열을 md5sum으로 바꾼다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-options"></a>6.22.3. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-options"></a>6.21.3. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
             syslog를 이용해 많은 디버그 정보를 기록한다.
@@ -213,16 +217,16 @@
 	    참고로 이 옵션을 쓰거나 공유된 / 마운트 포인트를 자동 탐지했을
 	    때는 비공개 네임스페이스에서 이뤄진 마운트 및 언마운트가 부모
 	    네임스페이스에 영향을 끼치지 않는다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-types"></a>6.22.4. 제공하는 모듈 종류</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-types"></a>6.21.4. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">session</code> 모듈 타입만 제공한다.
       멀티스레드 프로세스에서 이 모듈을 호출해선 안 된다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-return_values"></a>6.22.5. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-return_values"></a>6.21.5. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
              네임스페이스 구성에 성공했다.
           </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
              네임스페이스를 준비하는 중 예상치 못한 시스템 오류가 발생했다.
           </p></dd><dt><span class="term">PAM_SESSION_ERR</span></dt><dd><p>
              예상치 못한 네임스페이스 구성 오류가 발생했다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-files"></a>6.22.6. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/namespace.conf</code></span></dt><dd><p>주 설정 파일</p></dd><dt><span class="term"><code class="filename">/etc/security/namespace.d</code></span></dt><dd><p>추가 설정 파일 디렉터리</p></dd><dt><span class="term"><code class="filename">/etc/security/namespace.init</code></span></dt><dd><p>인스턴스 디렉터리 초기화 스크립트</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-namespace.conf-examples"></a>6.22.7. 예시</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-files"></a>6.21.6. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/namespace.conf</code></span></dt><dd><p>주 설정 파일</p></dd><dt><span class="term"><code class="filename">/etc/security/namespace.d</code></span></dt><dd><p>추가 설정 파일 디렉터리</p></dd><dt><span class="term"><code class="filename">/etc/security/namespace.init</code></span></dt><dd><p>인스턴스 디렉터리 초기화 스크립트</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-namespace.conf-examples"></a>6.21.7. 예시</h3></div></div></div><p>
       다음은 <code class="filename">/etc/security/namespace.conf</code>에
       지정할 수 있는 예시 설정이다.
     </p><div class="literallayout"><p><br>
@@ -250,11 +254,11 @@
       session  required  pam_namespace.so [arguments]
     </p><p>
       이 모듈을 위해 pam_selinux.so로 문맥을 설정해 줘야 한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-authors"></a>6.22.8. 작성자</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_namespace-authors"></a>6.21.8. 작성자</h3></div></div></div><p>
       Stephen Smalley, Janak Desai, Chad Sellers가 네임스페이스 구성 체계를
       설계했다.
       Janak Desai &lt;janak@us.ibm.com&gt;, Chad Sellers &lt;csellers@tresys.com&gt;,
       Steve Grubb &lt;sgrubb@redhat.com&gt;이 PAM 모듈 pam_namespace를 개발했다.
       Xavier Toth &lt;txtoth@gmail.com&gt;, Tomas Mraz &lt;tmraz@redhat.com&gt;가
       추가 개선을 했다.
-    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_motd.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_nologin.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.21. pam_motd - motd 파일 표시 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.23. pam_nologin - root 외 사용자 로그인 막기</td></tr></table></div></body></html>
+    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_motd.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_nologin.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.20. pam_motd - motd 파일 표시 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.22. pam_nologin - root 외 사용자 로그인 막기</td></tr></table></div></body></html>

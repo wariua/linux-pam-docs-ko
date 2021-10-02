@@ -1,6 +1,6 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.18. pam_loginuid - 사용자의 로그인 uid를 프로세스 속성에 기록</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_localuser.html" title="6.17. pam_localuser - /etc/passwd에 있는 사용자여야 함"><link rel="next" href="sag-pam_mail.html" title="6.19. pam_mail - 받은 메일 알림"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.18. pam_loginuid - 사용자의 로그인 uid를 프로세스 속성에 기록</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_localuser.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_mail.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_loginuid"></a>6.18. pam_loginuid - 사용자의 로그인 uid를 프로세스 속성에 기록</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_loginuid.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.17. pam_loginuid - 사용자의 로그인 uid를 프로세스 속성에 기록</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_localuser.html" title="6.16. pam_localuser - /etc/passwd에 있는 사용자여야 함"><link rel="next" href="sag-pam_mail.html" title="6.18. pam_mail - 받은 메일 알림"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.17. pam_loginuid - 사용자의 로그인 uid를 프로세스 속성에 기록</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_localuser.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_mail.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_loginuid"></a>6.17. pam_loginuid - 사용자의 로그인 uid를 프로세스 속성에 기록</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_loginuid.so</code>  [
         require_auditd
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-description"></a>6.18.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-description"></a>6.17.1. 설명</h3></div></div></div><p>
       pam_loginuid 모듈은 인증된 프로세스에 프로세스 속성 loginuid를
       설정한다. 응용을 정확하게 감사하려면 필요하다. 이 PAM 모듈은
       login이나 sshd, gdm, vsftpd, crond, atd 같은 진입점 응용에만
@@ -8,14 +8,14 @@
       sudo나 su 같은 응용에는 사용하지 않는 게 좋은데, loginuid를
       방금 전환해 들어간 계정으로 바꾸면 응용의 목적이 무력화되기
       때문이다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-options"></a>6.18.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-options"></a>6.17.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">require_auditd</code>
         </span></dt><dd><p>
             이 옵션을 주면 모듈에서 감사 데몬 상태를 확인해서
             동작 중이 아니면 로그인을 거부하게 된다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-types"></a>6.18.3. 제공하는 모듈 종류</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-types"></a>6.17.3. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">session</code> 모듈 타입만 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-return_values"></a>6.18.4. 반환 값</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-return_values"></a>6.17.4. 반환 값</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
               loginuid 값을 설정했으며 (확인 요청 시) auditd가 동작 중이다.
             </p></dd><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
@@ -25,7 +25,7 @@
             </p></dd><dt><span class="term">PAM_SESSION_ERR</span></dt><dd><p>
               다른 오류 때문에 loginuid를 설정하지 못했거나 auditd가 동작하고 있지 않다.
             </p></dd></dl></div><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-examples"></a>6.18.5. 예시</h3></div></div></div><pre class="programlisting">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-examples"></a>6.17.5. 예시</h3></div></div></div><pre class="programlisting">
 #%PAM-1.0
 auth       required     pam_unix.so
 auth       required     pam_nologin.so
@@ -33,6 +33,6 @@ account    required     pam_unix.so
 password   required     pam_unix.so
 session    required     pam_unix.so
 session    required     pam_loginuid.so
-    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-author"></a>6.18.6. 작성자</h3></div></div></div><p>
+    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_loginuid-author"></a>6.17.6. 작성자</h3></div></div></div><p>
         Steve Grubb &lt;sgrubb@redhat.com&gt;이 pam_loginuid를 작성했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_localuser.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_mail.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.17. pam_localuser - /etc/passwd에 있는 사용자여야 함 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.19. pam_mail - 받은 메일 알림</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_localuser.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_mail.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.16. pam_localuser - /etc/passwd에 있는 사용자여야 함 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.18. pam_mail - 받은 메일 알림</td></tr></table></div></body></html>

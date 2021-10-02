@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.26. pam_rhosts - .rhosts 파일 이용 접근 허가</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_pwhistory.html" title="6.25. pam_pwhistory - .pwhistory 파일 이용 접근 허가"><link rel="next" href="sag-pam_rootok.html" title="6.27. pam_rootok - root 접근만 허가"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.26. pam_rhosts - .rhosts 파일 이용 접근 허가</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_pwhistory.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_rootok.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_rhosts"></a>6.26. pam_rhosts - .rhosts 파일 이용 접근 허가</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_rhosts.so</code> </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-description"></a>6.26.1. 설명</h3></div></div></div><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.25. pam_rhosts - .rhosts 파일 이용 접근 허가</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_pwhistory.html" title="6.24. pam_pwhistory - .pwhistory 파일 이용 접근 허가"><link rel="next" href="sag-pam_rootok.html" title="6.26. pam_rootok - root 접근만 허가"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.25. pam_rhosts - .rhosts 파일 이용 접근 허가</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_pwhistory.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_rootok.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_rhosts"></a>6.25. pam_rhosts - .rhosts 파일 이용 접근 허가</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_rhosts.so</code> </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-description"></a>6.25.1. 설명</h3></div></div></div><p>
       이 모듈은 전통적인 <span class="command"><strong>rlogin</strong></span>
       및 <span class="command"><strong>rsh</strong></span> 등의 구현에서처럼
       서비스에 대해 표준 네트워크 인증을 수행한다.
@@ -20,7 +20,7 @@
       <code class="function">pam_authenticate()</code>를 호출하기 전에
       그 항목들을 설정해 둬야 한다. 모듈에서 자체적으로 네트워크 연결을
       조사해서 그 정보를 얻지는 못한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-options"></a>6.26.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-options"></a>6.25.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
             디버그 정보 찍기.
@@ -32,15 +32,15 @@
           <code class="option">superuser=<em class="replaceable"><code>account</code></em></code>
         </span></dt><dd><p>
             <em class="replaceable"><code>account</code></em>를 root로 다루기.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-types"></a>6.26.3. 제공하는 모듈 종류</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-types"></a>6.25.3. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">auth</code> 모듈 타입만 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-return_values"></a>6.26.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-return_values"></a>6.25.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTH_ERR</span></dt><dd><p>
             원격 호스트나 원격 사용자 이름, 로컬 사용자 이름을
             알아낼 수 없거나, <code class="filename">.rhosts</code>
             파일에 의해 접근이 거부되었다.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
             시스템에서 알지 못하는 사용자다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-examples"></a>6.26.5. 예시</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-examples"></a>6.25.5. 예시</h3></div></div></div><p>
       <code class="filename">/etc/hosts.equiv</code>나 <code class="filename">.rhosts</code>에 따라
       <span class="command"><strong>rsh</strong></span>에 원격 사용자 접근을
       인가하려면 <code class="filename">/etc/pam.d/rsh</code>에 다음 내용을
@@ -53,6 +53,6 @@ auth     required       pam_nologin.so
 auth     required       pam_env.so
 auth     required       pam_unix.so
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-author"></a>6.26.6. 작성자</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_rhosts-author"></a>6.25.6. 작성자</h3></div></div></div><p>
         Thorsten Kukuk &lt;kukuk@thkukuk.de&gt;이 pam_rhosts를 작성했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_pwhistory.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_rootok.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.25. pam_pwhistory - .pwhistory 파일 이용 접근 허가 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.27. pam_rootok - root 접근만 허가</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_pwhistory.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_rootok.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.24. pam_pwhistory - .pwhistory 파일 이용 접근 허가 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.26. pam_rootok - root 접근만 허가</td></tr></table></div></body></html>

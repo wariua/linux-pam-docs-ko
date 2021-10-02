@@ -1,12 +1,14 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.36. pam_umask - 파일 모드 생성 마스크 설정</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_timestamp.html" title="6.35. pam_timestamp - 인증 시도 성공 기록을 이용한 인증"><link rel="next" href="sag-pam_unix.html" title="6.37. pam_unix - 전통적 패스워드 인증"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.36. pam_umask - 파일 모드 생성 마스크 설정</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_timestamp.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_unix.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_umask"></a>6.36. pam_umask - 파일 모드 생성 마스크 설정</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_umask.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.33. pam_umask - 파일 모드 생성 마스크 설정</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_timestamp.html" title="6.32. pam_timestamp - 인증 시도 성공 기록을 이용한 인증"><link rel="next" href="sag-pam_unix.html" title="6.33. pam_unix - 전통적 패스워드 인증"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.33. pam_umask - 파일 모드 생성 마스크 설정</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_timestamp.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_unix.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_umask"></a>6.33. pam_umask - 파일 모드 생성 마스크 설정</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_umask.so</code>  [
 	debug
       ] [
         silent
       ] [
         usergroups
       ] [
+        nousergroups
+      ] [
         umask=<em class="replaceable"><code>mask</code></em>
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-description"></a>6.36.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-description"></a>6.33.1. 설명</h3></div></div></div><p>
       pam_umask는 현재 환경의 파일 모드 생성 마스크를 설정하는
       PAM 모듈이다. 새로 생성되는 파일에 할당되는 기본 권한에
       umask가 영향을 준다.
@@ -26,7 +28,7 @@
       pri= 항목을 인식해서 세션의 나이스 우선순위 값을 설정하고,
       ulimit= 항목을 인식해서 세션 내의 프로세스가 만들 수 있는
       파일 최대 크기를 설정한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-options"></a>6.36.2. 옵션</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-options"></a>6.33.2. 옵션</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
             <code class="option">debug</code>
           </span></dt><dd><p>
@@ -42,6 +44,12 @@
               같으면 umask의 그룹 비트를 소유자 비트와 같은 값으로
               설정한다. (예: 022 -&gt; 002, 077 -&gt; 007)
             </p></dd><dt><span class="term">
+            <code class="option">nousergroups</code>
+          </span></dt><dd><p>
+              위에서 설명한 usergroups 옵션의 반대다.
+              기본적으로 usergroups가 켜지도록 pam_umask를 컴파일했는데
+              런타임에 끄고 싶은 경우에 유용할 수 있다.
+            </p></dd><dt><span class="term">
             <code class="option">umask=<em class="replaceable"><code>mask</code></em></code>
           </span></dt><dd><p>
                호출 프로세스의 파일 모드 생성 마스크(umask)를
@@ -49,22 +57,29 @@
                값을 8진수로 해석한다.
             </p></dd></dl></div><p>
 
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-types"></a>6.36.3. 제공하는 모듈 종류</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-types"></a>6.33.3. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">session</code> 타입만 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-return_values"></a>6.36.4. 반환 값</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-return_values"></a>6.33.4. 반환 값</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
               새 umask를 성공적으로 설정했다.
+            </p></dd><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
+              메모리 버퍼 오류.
+            </p></dd><dt><span class="term">PAM_CONV_ERR</span></dt><dd><p>
+              응용에서 제공한 대화 함수에서 사용자명을
+              얻는 데 실패했다.
+            </p></dd><dt><span class="term">PAM_INCOMPLETE</span></dt><dd><p>
+              응용에서 제공한 대화 함수에서 PAM_CONV_AGAIN을 반환했다.
             </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
 	      사용자 이름 알 수 없음.
             </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
 	      알 수 없는 사용자.
             </p></dd></dl></div><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-examples"></a>6.36.5. 예시</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-examples"></a>6.33.5. 예시</h3></div></div></div><p>
       다음 행을 <code class="filename">/etc/pam.d/login</code>에 추가해서
       로그인 시 사용자별 umask를 설정할 수 있다.
       </p><pre class="programlisting">
         session optional pam_umask.so umask=0022
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-author"></a>6.36.6. 작성자</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_umask-author"></a>6.33.6. 작성자</h3></div></div></div><p>
         Thorsten Kukuk &lt;kukuk@thkukuk.de&gt;이 pam_umask를 작성했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_timestamp.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_unix.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.35. pam_timestamp - 인증 시도 성공 기록을 이용한 인증 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.37. pam_unix - 전통적 패스워드 인증</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_timestamp.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_unix.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.32. pam_timestamp - 인증 시도 성공 기록을 이용한 인증 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.34. pam_unix - 전통적 패스워드 인증</td></tr></table></div></body></html>

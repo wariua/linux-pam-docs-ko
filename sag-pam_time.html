@@ -1,8 +1,10 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.34. pam_time - 시간에 의한 접근 통제</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_tally2.html" title="6.33. pam_tally2 - 로그인 카운터 (집계) 모듈"><link rel="next" href="sag-pam_timestamp.html" title="6.35. pam_timestamp - 인증 시도 성공 기록을 이용한 인증"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.34. pam_time - 시간에 의한 접근 통제</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_tally2.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_timestamp.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_time"></a>6.34. pam_time - 시간에 의한 접근 통제</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_time.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.31. pam_time - 시간에 의한 접근 통제</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_succeed_if.html" title="6.30. pam_succeed_if - 계정 속성 검사"><link rel="next" href="sag-pam_timestamp.html" title="6.32. pam_timestamp - 인증 시도 성공 기록을 이용한 인증"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.31. pam_time - 시간에 의한 접근 통제</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_succeed_if.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_timestamp.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_time"></a>6.31. pam_time - 시간에 의한 접근 통제</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_time.so</code>  [
+        conffile=conf-file
+      ] [
         debug
       ] [
         noaudit
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-description"></a>6.34.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-description"></a>6.31.1. 설명</h3></div></div></div><p>
       pam_time 모듈은 사용자를 인증하는 게 아니라 시스템이나 특정 응용에 대한
       접근을 특정 요일의 특정 시간으로, 또 여러 터미널 회선으로 제한한다.
       사용자 이름, 하루 중의 시간, 요일, 요청 서비스, 요청을 하고 있는
@@ -10,10 +12,12 @@
     </p><p>
       시간/포트 접근 규칙을 가져오는 설정 파일은 기본적으로
       <code class="filename">/etc/security/time.conf</code>다.
+      <span class="emphasis"><em>conffile</em></span> 옵션으로
+      다른 파일을 지정할 수 있다.
     </p><p>
       감사 지원을 포함해서 Linux-PAM이 컴파일돼 있으면 모듈에서 접근을
       거부하는 경우 보고를 하게 된다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-time.conf-description"></a>6.34.2. 설명</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-time.conf-description"></a>6.31.2. 설명</h3></div></div></div><p>
       pam_time 모듈은 사용자를 인증하는 게 아니라 시스템이나 특정 응용에 대한
       접근을 특정 요일의 특정 시간으로, 또 여러 터미널 회선으로 제한한다.
       사용자 이름, 하루 중의 시간, 요일, 요청 서비스, 요청을 하고 있는
@@ -42,6 +46,9 @@
       세 번째 필드인 <em class="replaceable"><code>users</code></em> 필드는
       이 규칙이 적용되는 사용자의 논리식, 또는 사용자 netgroup이다.
     </p><p>
+      논리식이란 선택적으로 개별 토큰 앞에 '!'(논리 not)를 붙이고
+      '&amp;'(논리 and)나 '|'(논리 or)로 이어 붙인 것이다.
+    </p><p>
       이 항목들에서 단순 와일드카드 '*'를 한 번만 쓸 수 있다.
       netgroup에는 와일드카드나 논리 연산자를 쓸 수 없다.
     </p><p>
@@ -67,7 +74,11 @@
       잘못된 형식의 규칙이 있으면
       <span class="citerefentry"><span class="refentrytitle">syslog</span>(3)</span>로
       오류로 남긴다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-options"></a>6.34.3. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-options"></a>6.31.3. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+          <code class="option">conffile=/path/to/time.conf</code>
+        </span></dt><dd><p>
+            기본 파일 대신 사용할 time.conf 스타일 설정 파일을 나타낸다.
+          </p></dd><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
             <span class="citerefentry"><span class="refentrytitle">syslog</span>(3)</span>로
@@ -76,9 +87,9 @@
           <code class="option">noaudit</code>
         </span></dt><dd><p>
             허가 안 된 시간의 로그인을 감사 서브시스템으로 알리지 않는다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-types"></a>6.34.4. 제공하는 모듈 종류</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-types"></a>6.31.4. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">account</code> 타입만 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-return_values"></a>6.34.5. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-return_values"></a>6.31.5. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
              접근이 인가되었다.
           </p></dd><dt><span class="term">PAM_ABORT</span></dt><dd><p>
              관련 데이터를 모두 얻지 못했다.
@@ -88,7 +99,7 @@
             접근이 인가되지 않았다.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
              시스템에게 알지 못하는 사용자다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-files"></a>6.34.6. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/time.conf</code></span></dt><dd><p>기본 설정 파일</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-time.conf-examples"></a>6.34.7. 예시</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-files"></a>6.31.6. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/time.conf</code></span></dt><dd><p>기본 설정 파일</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-time.conf-examples"></a>6.31.7. 예시</h3></div></div></div><p>
       다음은 <code class="filename">/etc/security/time.conf</code>에
       지정할 수 있는 예시 몇 가지다.
     </p><p>
@@ -104,6 +115,6 @@ login ; tty* &amp; !ttyp* ; !root ; !Al0000-2400
       </p><pre class="programlisting">
 games ; * ; !waster ; Wd0000-2400 | Wk1800-0800
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-authors"></a>6.34.8. 작성자</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_time-authors"></a>6.31.8. 작성자</h3></div></div></div><p>
       Andrew G. Morgan &lt;morgan@kernel.org&gt;이 pam_time을 작성했다.
-    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_tally2.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_timestamp.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.33. pam_tally2 - 로그인 카운터 (집계) 모듈 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.35. pam_timestamp - 인증 시도 성공 기록을 이용한 인증</td></tr></table></div></body></html>
+    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_succeed_if.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_timestamp.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.30. pam_succeed_if - 계정 속성 검사 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.32. pam_timestamp - 인증 시도 성공 기록을 이용한 인증</td></tr></table></div></body></html>

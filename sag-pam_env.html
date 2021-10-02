@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.6. pam_env - 환경 변수 설정/해제</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_echo.html" title="6.5. pam_echo - 텍스트 메시지 찍기"><link rel="next" href="sag-pam_exec.html" title="6.7. pam_exec - 외부 명령 호출"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.6. pam_env - 환경 변수 설정/해제</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_echo.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_exec.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_env"></a>6.6. pam_env - 환경 변수 설정/해제</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_env.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.5. pam_env - 환경 변수 설정/해제</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_echo.html" title="6.4. pam_echo - 텍스트 메시지 찍기"><link rel="next" href="sag-pam_exec.html" title="6.6. pam_exec - 외부 명령 호출"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.5. pam_env - 환경 변수 설정/해제</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_echo.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_exec.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_env"></a>6.5. pam_env - 환경 변수 설정/해제</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_env.so</code>  [
         debug
       ] [
         conffile=<em class="replaceable"><code>conf-file</code></em>
@@ -10,7 +10,7 @@
         user_envfile=<em class="replaceable"><code>env-file</code></em>
       ] [
         user_readenv=<em class="replaceable"><code>0|1</code></em>
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-description"></a>6.6.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-description"></a>6.5.1. 설명</h3></div></div></div><p>
       PAM 모듈 pam_env를 이용해 환경 변수를 설정 및 해제할 수 있다.
       앞서 설정된 환경 변수들뿐 아니라 <span class="emphasis"><em>PAM_RHOST</em></span>
       같은 <span class="emphasis"><em>PAM_ITEM</em></span>
@@ -34,7 +34,7 @@
     </p><p>
       PAM 환경 변수 설정이 다른 모듈에 부작용을 일으킬 수 있으므로
       이 모듈을 스택에서 마지막 모듈로 하는 게 좋다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env.conf-description"></a>6.6.2. 설명</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env.conf-description"></a>6.5.2. 설명</h3></div></div></div><p>
       <span class="citerefentry"><span class="refentrytitle">pam_env</span>(8)</span>에서
       설정, 해제, 변경할 환경 변수를 <code class="filename">/etc/security/pam_env.conf</code>
       파일에서 지정한다. 누군가 로그인 할 때 이 파일을 읽어서
@@ -71,7 +71,7 @@
       <span class="citerefentry"><span class="refentrytitle">pam_env</span>(8)</span>
       모듈에서 <code class="filename">pam_env.conf</code> 다음에
       그 파일을 읽는다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-options"></a>6.6.3. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-options"></a>6.5.3. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">conffile=<em class="replaceable"><code>/path/to/pam_env.conf</code></em></code>
         </span></dt><dd><p>
             기본 파일 대신 사용할 <code class="filename">pam_env.conf</code>
@@ -95,12 +95,18 @@
           <code class="option">readenv=<em class="replaceable"><code>0|1</code></em></code>
         </span></dt><dd><p>
             envfile로 지정한 파일 읽기를 켜거나 끈다.
-            0은 끄고 1은 켠다. 기본적으로 이 옵션이 켜져 있다.
+            0은 끄고 1은 켠다. 기본적으로 이 옵션이 꺼져 있다.
+            PAM 환경의 사용자 제공 환경 변수들이 시스템 관리자의
+            의도와 달리 스택에 있는 후속 모듈의 동작에 영향을
+            줄 수도 있기 때문이다.
+          </p><p>
+            보안상 문제 때문에 1.5.0부터 이 기능이 폐기 예정 상태이며
+            향후 어느 시점에 완전히 제거될 예정이다.
           </p></dd><dt><span class="term">
           <code class="option">user_envfile=<em class="replaceable"><code>filename</code></em></code>
         </span></dt><dd><p>
             기본 파일 대신 사용할 <code class="filename">.pam_environment</code>
-            파일을 나타낸다. 문법은 <span class="emphasis"><em>/etc/environment</em></span>와
+            파일을 나타낸다. 문법은 <span class="emphasis"><em>/etc/security/pam_env.conf</em></span>와
             같다. 사용자 홈 디렉터리를 기준으로 한 파일명이다.
             서비스별로 다른 환경이 필요할 때 유용할 수 있다.
           </p></dd><dt><span class="term">
@@ -108,9 +114,9 @@
         </span></dt><dd><p>
             사용자별 environment 파일 읽기를 켜거나 끈다.
             0은 끄고 1은 켠다. 기본적으로 이 옵션이 켜져 있다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-types"></a>6.6.4. 제공하는 모듈 종류</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-types"></a>6.5.4. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">auth</code> 및 <code class="option">session</code> 모듈 타입을 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-return_values"></a>6.6.5. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_ABORT</span></dt><dd><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-return_values"></a>6.5.5. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_ABORT</span></dt><dd><p>
              관련 데이터나 옵션을 모두 얻지 못했다.
           </p></dd><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
               메모리 버퍼 오류.
@@ -118,7 +124,7 @@
              pam_env.conf 및 환경 파일을 찾을 수 없다.
           </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
              환경 변수를 설정했다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-files"></a>6.6.6. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/pam_env.conf</code></span></dt><dd><p>기본 설정 파일</p></dd><dt><span class="term"><code class="filename">/etc/environment</code></span></dt><dd><p>기본 환경 파일</p></dd><dt><span class="term"><code class="filename">$HOME/.pam_environment</code></span></dt><dd><p>사용자별 환경 파일</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env.conf-examples"></a>6.6.7. 예시</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-files"></a>6.5.6. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/pam_env.conf</code></span></dt><dd><p>기본 설정 파일</p></dd><dt><span class="term"><code class="filename">/etc/environment</code></span></dt><dd><p>기본 환경 파일</p></dd><dt><span class="term"><code class="filename">$HOME/.pam_environment</code></span></dt><dd><p>사용자별 환경 파일</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env.conf-examples"></a>6.5.7. 예시</h3></div></div></div><p>
       <code class="filename">/etc/security/pam_env.conf</code>
       파일에 지정할 수 있는 몇 가지 예시들이다.
     </p><p>
@@ -139,7 +145,7 @@
       NNTPSERVER     DEFAULT=localhost
       PATH           DEFAULT=${HOME}/bin:/usr/local/bin:/bin\
       :/usr/bin:/usr/local/bin/X11:/usr/bin/X11
-      XDG_DATA_HOME  @{HOME}/share/
+      XDG_DATA_HOME  DEFAULT=@{HOME}/share/
     </pre><p>
       실용성과는 거리가 있는 변수 문법 이스케이프 예시들.
     </p><pre class="programlisting">
@@ -147,6 +153,6 @@
       DOLLARDOLLAR   DEFAULT=        OVERRIDE=\$${DOLLAR}
       DOLLARPLUS     DEFAULT=\${REMOTEHOST}${REMOTEHOST}
       ATSIGN         DEFAULT=""      OVERRIDE=\@
-    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-authors"></a>6.6.8. 작성자</h3></div></div></div><p>
+    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_env-authors"></a>6.5.8. 작성자</h3></div></div></div><p>
       Dave Kinchlea &lt;kinch@kinch.ark.com&gt;가 pam_env를 작성했다.
-    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_echo.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_exec.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.5. pam_echo - 텍스트 메시지 찍기 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.7. pam_exec - 외부 명령 호출</td></tr></table></div></body></html>
+    </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_echo.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_exec.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.4. pam_echo - 텍스트 메시지 찍기 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.6. pam_exec - 외부 명령 호출</td></tr></table></div></body></html>

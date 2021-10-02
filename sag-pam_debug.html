@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.3. pam_debug - PAM 스택 디버깅</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_cracklib.html" title="6.2. pam_cracklib - 사전의 단어들로 패스워드 검사"><link rel="next" href="sag-pam_deny.html" title="6.4. pam_deny - 차단용 PAM 모듈"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.3. pam_debug - PAM 스택 디버깅</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_cracklib.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_deny.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_debug"></a>6.3. pam_debug - PAM 스택 디버깅</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_debug.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.2. pam_debug - PAM 스택 디버깅</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_access.html" title="6.1. pam_access - logdaemon 방식 로그인 접근 제어"><link rel="next" href="sag-pam_deny.html" title="6.4. pam_deny - 차단용 PAM 모듈"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.2. pam_debug - PAM 스택 디버깅</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_access.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_deny.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_debug"></a>6.2. pam_debug - PAM 스택 디버깅</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_debug.so</code>  [
 	auth=<em class="replaceable"><code>value</code></em>
       ] [
 	cred=<em class="replaceable"><code>value</code></em>
@@ -14,11 +14,11 @@
 	open_session=<em class="replaceable"><code>value</code></em>
       ] [
 	close_session=<em class="replaceable"><code>value</code></em>
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-description"></a>6.3.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-description"></a>6.2.1. 설명</h3></div></div></div><p>
       PAM 모듈 pam_debug는 PAM 스택이 어떻게 동작하고 있는지
       알아내기 위한 디버깅 보조 모듈이다. 모듈 인자로
       반환하라고 한 값을 반환한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-options"></a>6.3.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-options"></a>6.2.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">auth=<em class="replaceable"><code>value</code></em></code>
         </span></dt><dd><p>
 	    <span class="citerefentry"><span class="refentrytitle">pam_sm_authenticate</span>(3)</span> 함수가
@@ -66,19 +66,19 @@
       authtok_recover_err, authtok_lock_busy, authtok_disable_aging,
       try_again, ignore, abort, authtok_expired, module_unknown,
       bad_item, conv_again, incomplete 중 하나다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-types"></a>6.3.3. 제공하는 모듈 종류</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-types"></a>6.2.3. 제공하는 모듈 종류</h3></div></div></div><p>
       모든 모듈 타입(<code class="option">auth</code>, <code class="option">account</code>,
       <code class="option">password</code>, <code class="option">session</code>)을 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-return_values"></a>6.3.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-return_values"></a>6.2.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
             아무 값도 지정하지 않은 경우의 기본 반환 코드.
             지정했으면 그 값 반환.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-examples"></a>6.3.5. 예시</h3></div></div></div><pre class="programlisting">
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-examples"></a>6.2.5. 예시</h3></div></div></div><pre class="programlisting">
 auth    requisite       pam_permit.so
 auth    [success=2 default=ok]  pam_debug.so auth=perm_denied cred=success
 auth    [default=reset]         pam_debug.so auth=success cred=perm_denied
 auth    [success=done default=die] pam_debug.so
 auth    optional        pam_debug.so auth=perm_denied cred=perm_denied
 auth    sufficient      pam_debug.so auth=success cred=success
-    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-author"></a>6.3.6. 작성자</h3></div></div></div><p>
+    </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_debug-author"></a>6.2.6. 작성자</h3></div></div></div><p>
         Andrew G. Morgan &lt;morgan@kernel.org&gt;이 pam_debug를 작성했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_cracklib.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_deny.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.2. pam_cracklib - 사전의 단어들로 패스워드 검사 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.4. pam_deny - 차단용 PAM 모듈</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_access.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_deny.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.1. pam_access - logdaemon 방식 로그인 접근 제어 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.3. pam_deny - 차단용 PAM 모듈</td></tr></table></div></body></html>

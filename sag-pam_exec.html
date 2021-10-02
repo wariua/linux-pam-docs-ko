@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.7. pam_exec - 외부 명령 호출</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_env.html" title="6.6. pam_env - 환경 변수 설정/해제"><link rel="next" href="sag-pam_faildelay.html" title="6.8. pam_faildelay - 응용별로 실패 시 지연 시간 바꾸기"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.7. pam_exec - 외부 명령 호출</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_env.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_faildelay.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_exec"></a>6.7. pam_exec - 외부 명령 호출</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_exec.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.6. pam_exec - 외부 명령 호출</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_env.html" title="6.5. pam_env - 환경 변수 설정/해제"><link rel="next" href="sag-pam_faildelay.html" title="6.7. pam_faildelay - 응용별로 실패 시 지연 시간 바꾸기"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.6. pam_exec - 외부 명령 호출</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_env.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_faildelay.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_exec"></a>6.6. pam_exec - 외부 명령 호출</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_exec.so</code>  [
 	debug
       ] [
          expose_authtok
@@ -6,6 +6,8 @@
         seteuid
       ] [
         quiet
+      ] [
+        quiet_log
       ] [
         stdout
       ] [
@@ -16,7 +18,7 @@
        <em class="replaceable"><code>command</code></em>
         [
         <em class="replaceable"><code>...</code></em>
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-description"></a>6.7.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-description"></a>6.6.1. 설명</h3></div></div></div><p>
       pam_exec는 외부 명령을 실행하는 데 쓸 수 있는
       PAM 모듈이다.
     </p><p>
@@ -33,7 +35,7 @@
     </p><p>
       pam_exec로 호출되는 명령들에선 사용자가 환경을 제어할 수
       있다는 점을 염두에 둘 필요가 있다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-options"></a>6.7.2. 옵션</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-options"></a>6.6.2. 옵션</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
             <code class="option">debug</code>
           </span></dt><dd><p>
@@ -65,6 +67,12 @@
               종료 상태 정보를 찍는다.
               이 옵션을 지정하면 그 메시지를 찍지 않는다.
             </p></dd><dt><span class="term">
+            <code class="option">quiet_log</code>
+          </span></dt><dd><p>
+              기본적으로 pam_exec.so는 외부 명령 실패 시
+              종료 상태 정보를 로그로 남긴다.
+              이 옵션을 지정하면 그 로그 메시지를 찍지 않는다.
+            </p></dd><dt><span class="term">
             <code class="option">seteuid</code>
           </span></dt><dd><p>
               기본적으로 pam_exec.so는 호출 프로세스의
@@ -73,12 +81,19 @@
               명령을 실행하게 된다.
             </p></dd></dl></div><p>
 
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-types"></a>6.7.3. 제공하는 모듈 종류</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-types"></a>6.6.3. 제공하는 모듈 종류</h3></div></div></div><p>
       모든 모듈 타입(<code class="option">auth</code>, <code class="option">account</code>,
       <code class="option">password</code>, <code class="option">session</code>)을 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-return_values"></a>6.7.4. 반환 값</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-return_values"></a>6.6.4. 반환 값</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
               외부 명령을 성공적으로 실행했다.
+            </p></dd><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
+              메모리 버퍼 오류.
+            </p></dd><dt><span class="term">PAM_CONV_ERR</span></dt><dd><p>
+              응용에서 제공한 대화 함수에서 사용자명을
+              얻는 데 실패했다.
+            </p></dd><dt><span class="term">PAM_INCOMPLETE</span></dt><dd><p>
+              응용에서 제공한 대화 함수에서 PAM_CONV_AGAIN을 반환했다.
             </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
           인자를 주지 않았거나 틀리게 줬다.
             </p></dd><dt><span class="term">PAM_SYSTEM_ERR</span></dt><dd><p>
@@ -88,7 +103,7 @@
           호출됐다. 또는 type= 매개변수에 준 값이 모듈 타입과
           일치하지 않는다.
             </p></dd></dl></div><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-examples"></a>6.7.5. 예시</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-examples"></a>6.6.5. 예시</h3></div></div></div><p>
       <code class="filename">/etc/pam.d/passwd</code>에 다음 행을 추가하면
       로컬 패스워드 변경 시마다 NIS 데이터베이스를 재구축한다.
       </p><pre class="programlisting">
@@ -97,7 +112,7 @@
 
       실효 사용자 ID로 다음 명령을 실행하게 된다.
       </p><pre class="programlisting">make -C /var/yp</pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-author"></a>6.7.6. 작성자</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_exec-author"></a>6.6.6. 작성자</h3></div></div></div><p>
         Thorsten Kukuk &lt;kukuk@thkukuk.de&gt;과 Josh Triplett
         &lt;josh@joshtriplett.org&gt;이 pam_exec를 작성했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_env.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_faildelay.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.6. pam_env - 환경 변수 설정/해제 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.8. pam_faildelay - 응용별로 실패 시 지연 시간 바꾸기</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_env.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_faildelay.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.5. pam_env - 환경 변수 설정/해제 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.7. pam_faildelay - 응용별로 실패 시 지연 시간 바꾸기</td></tr></table></div></body></html>

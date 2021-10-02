@@ -1,8 +1,8 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.12. pam_issue - 사용자 프롬프트에 이슈 파일 추가 표시</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_group.html" title="6.11. pam_group - 그룹 접근 변경 모듈"><link rel="next" href="sag-pam_keyinit.html" title="6.13. pam_keyinit - keyinit 파일 표시"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.12. pam_issue - 사용자 프롬프트에 이슈 파일 추가 표시</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_group.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_keyinit.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_issue"></a>6.12. pam_issue - 사용자 프롬프트에 이슈 파일 추가 표시</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_issue.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.11. pam_issue - 사용자 프롬프트에 이슈 파일 추가 표시</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_group.html" title="6.10. pam_group - 그룹 접근 변경 모듈"><link rel="next" href="sag-pam_keyinit.html" title="6.12. pam_keyinit - keyinit 파일 표시"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.11. pam_issue - 사용자 프롬프트에 이슈 파일 추가 표시</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_group.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_keyinit.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_issue"></a>6.11. pam_issue - 사용자 프롬프트에 이슈 파일 추가 표시</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_issue.so</code>  [
         noesc
       ] [
         issue=<em class="replaceable"><code>issue-file-name</code></em>
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-description"></a>6.12.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-description"></a>6.11.1. 설명</h3></div></div></div><p>
       pam_issue는 사용자 이름 프롬프트 앞에 이슈 파일 내용을 집어넣는
       PAM 모듈이다. 기본적으로 많이 쓰는 몇 가지 getty와 비슷한 방식으로
       (\x 형식을 이용한) 이슈 파일 내의 이스케이프 코드를 처리한다.
@@ -11,7 +11,7 @@
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><span class="emphasis"><em>\d</em></span></span></dt><dd><p>현재 날짜</p></dd><dt><span class="term"><span class="emphasis"><em>\l</em></span></span></dt><dd><p>tty 이름</p></dd><dt><span class="term"><span class="emphasis"><em>\m</em></span></span></dt><dd><p>머신 아키텍처 (uname -m)</p></dd><dt><span class="term"><span class="emphasis"><em>\n</em></span></span></dt><dd><p>머신의 네트워크 노드 호스트 이름 (uname -n)</p></dd><dt><span class="term"><span class="emphasis"><em>\o</em></span></span></dt><dd><p>시스템의 도메인 이름</p></dd><dt><span class="term"><span class="emphasis"><em>\r</em></span></span></dt><dd><p>운영 체제 릴리스 번호 (uname -r)</p></dd><dt><span class="term"><span class="emphasis"><em>\t</em></span></span></dt><dd><p>현재 시간</p></dd><dt><span class="term"><span class="emphasis"><em>\s</em></span></span></dt><dd><p>운영 체제 이름 (uname -s)</p></dd><dt><span class="term"><span class="emphasis"><em>\u</em></span></span></dt><dd><p>현재 로그인된 사용자 수</p></dd><dt><span class="term"><span class="emphasis"><em>\U</em></span></span></dt><dd><p>
             \u와 같되 뒤에 "user" 또는 "users"를 붙임.
             (예: "1 user", "10 users")
-          </p></dd><dt><span class="term"><span class="emphasis"><em>\v</em></span></span></dt><dd><p>운영 체제 버전 및 빌드 날짜 (uname -v)</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-options"></a>6.12.2. 옵션</h3></div></div></div><p>
+          </p></dd><dt><span class="term"><span class="emphasis"><em>\v</em></span></span></dt><dd><p>운영 체제 버전 및 빌드 날짜 (uname -v)</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-options"></a>6.11.2. 옵션</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
             <code class="option">noesc</code>
           </span></dt><dd><p>
@@ -22,9 +22,9 @@
               기본 파일 대신 출력할 파일.
             </p></dd></dl></div><p>
 
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-types"></a>6.12.3. 제공하는 모듈 종류</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-types"></a>6.11.3. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">auth</code> 모듈 타입만 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-return_values"></a>6.12.4. 반환 값</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-return_values"></a>6.11.4. 반환 값</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_BUF_ERR</span></dt><dd><p>
                메모리 버퍼 오류.
             </p></dd><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
@@ -34,12 +34,12 @@
             </p></dd><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
               새 프롬프트를 성공적으로 설정했다.
             </p></dd></dl></div><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-examples"></a>6.12.5. 예시</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-examples"></a>6.11.5. 예시</h3></div></div></div><p>
       <code class="filename">/etc/pam.d/login</code>에 다음 행을 추가해서
       로그인 시 사용자별 이슈를 표시하게 설정할 수 있다.
       </p><pre class="programlisting">
         auth optional pam_issue.so issue=/etc/issue
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-author"></a>6.12.6. 작성자</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_issue-author"></a>6.11.6. 작성자</h3></div></div></div><p>
         Ben Collins &lt;bcollins@debian.org&gt;가 pam_issue를 작성했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_group.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_keyinit.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.11. pam_group - 그룹 접근 변경 모듈 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.13. pam_keyinit - keyinit 파일 표시</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_group.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_keyinit.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.10. pam_group - 그룹 접근 변경 모듈 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.12. pam_keyinit - keyinit 파일 표시</td></tr></table></div></body></html>

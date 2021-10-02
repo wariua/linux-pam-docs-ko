@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.25. pam_pwhistory - .pwhistory 파일 이용 접근 허가</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_permit.html" title="6.24. pam_permit - 무조건 허용 모듈"><link rel="next" href="sag-pam_rhosts.html" title="6.26. pam_rhosts - .rhosts 파일 이용 접근 허가"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.25. pam_pwhistory - .pwhistory 파일 이용 접근 허가</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_permit.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_rhosts.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_pwhistory"></a>6.25. pam_pwhistory - .pwhistory 파일 이용 접근 허가</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_pwhistory.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.24. pam_pwhistory - .pwhistory 파일 이용 접근 허가</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_permit.html" title="6.23. pam_permit - 무조건 허용 모듈"><link rel="next" href="sag-pam_rhosts.html" title="6.25. pam_rhosts - .rhosts 파일 이용 접근 허가"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.24. pam_pwhistory - .pwhistory 파일 이용 접근 허가</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_permit.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_rhosts.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_pwhistory"></a>6.24. pam_pwhistory - .pwhistory 파일 이용 접근 허가</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_pwhistory.so</code>  [
         debug
       ] [
         use_authtok
@@ -10,7 +10,7 @@
         retry=<em class="replaceable"><code>N</code></em>
       ] [
         authtok_type=<em class="replaceable"><code>STRING</code></em>
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-description"></a>6.25.1. 설명</h3></div></div></div><p>
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-description"></a>6.24.1. 설명</h3></div></div></div><p>
       이 모듈은 사용자별로 최근 패스워드들을 저장해 둔다.
       패스워드 변경 이력을 적용해서 사용자가 같은 패스워드를
       너무 자주 돌려쓰는 걸 막는다.
@@ -19,7 +19,7 @@
       NIS나 LDAP과 결합해 쓰는 것이 맞지 않은데, 이전 패스워드가
       로컬 머신에 저장되므로 다른 머신에서 패스워드 이력 검사에
       이용할 수 없기 때문이다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-options"></a>6.25.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-options"></a>6.24.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
             <span class="citerefentry"><span class="refentrytitle">syslog</span>(3)</span>
@@ -29,7 +29,7 @@
         </span></dt><dd><p>
            패스워드 변경 시 스택 앞쪽 <code class="option">password</code>
            모듈에서 제공하는 새 패스워드를 이용하도록 강제한다.
-           (아래의 <span class="command"><strong>pam_cracklib</strong></span>
+           (아래의 <span class="command"><strong>pam_passwdqc</strong></span>
            모듈 조합 예시에서 사용함.)
           </p></dd><dt><span class="term">
           <code class="option">enforce_for_root</code>
@@ -54,9 +54,9 @@
             <code class="option">authtok_type=<em class="replaceable"><code>STRING</code></em></code>
           </span></dt><dd><p>
               자세한 내용은 <span class="citerefentry"><span class="refentrytitle">pam_get_authtok</span>(3)</span> 참고.
-            </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-types"></a>6.25.3. 제공하는 모듈 종류</h3></div></div></div><p>
+            </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-types"></a>6.24.3. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">password</code> 모듈 타입만 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-return_values"></a>6.25.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTHTOK_ERR</span></dt><dd><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-return_values"></a>6.24.4. 반환 값</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_AUTHTOK_ERR</span></dt><dd><p>
             새 패스워드가 입력되지 않았거나, 사용자가 패스워드
             변경을 중단했거나, 새 패스워드를 설정할 수 없었다.
           </p></dd><dt><span class="term">PAM_IGNORE</span></dt><dd><p>
@@ -65,7 +65,7 @@
             패스워드가 너무 많이 거절됐다.
           </p></dd><dt><span class="term">PAM_USER_UNKNOWN</span></dt><dd><p>
             시스템에서 알지 못하는 사용자다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-files"></a>6.25.5. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/opasswd</code></span></dt><dd><p>패스워드 이력이 있는 파일</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-examples"></a>6.25.6. 예시</h3></div></div></div><p>
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-files"></a>6.24.5. 파일</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="filename">/etc/security/opasswd</code></span></dt><dd><p>패스워드 이력이 있는 파일</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-examples"></a>6.24.6. 예시</h3></div></div></div><p>
       password 섹션 예시:
       </p><pre class="programlisting">
 #%PAM-1.0
@@ -73,13 +73,13 @@ password     required       pam_pwhistory.so
 password     required       pam_unix.so        use_authtok
       </pre><p>
     </p><p>
-     <span class="command"><strong>pam_cracklib</strong></span>과 조합:
+     <span class="command"><strong>pam_passwdqc</strong></span>과 조합:
       </p><pre class="programlisting">
 #%PAM-1.0
-password     required       pam_cracklib.so    retry=3
+password     required       pam_passwdqc.so    config=/etc/passwdqc.conf
 password     required       pam_pwhistory.so   use_authtok
 password     required       pam_unix.so        use_authtok
       </pre><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-author"></a>6.25.7. 작성자</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_pwhistory-author"></a>6.24.7. 작성자</h3></div></div></div><p>
         Thorsten Kukuk &lt;kukuk@thkukuk.de&gt이 pam_pwhistory를 작성했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_permit.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_rhosts.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.24. pam_permit - 무조건 허용 모듈 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.26. pam_rhosts - .rhosts 파일 이용 접근 허가</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_permit.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_rhosts.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.23. pam_permit - 무조건 허용 모듈 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.25. pam_rhosts - .rhosts 파일 이용 접근 허가</td></tr></table></div></body></html>

@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.14. pam_lastlog - 최근 로그인 시간 표시</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_keyinit.html" title="6.13. pam_keyinit - keyinit 파일 표시"><link rel="next" href="sag-pam_limits.html" title="6.15. pam_limits - 자원 제한"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.14. pam_lastlog - 최근 로그인 시간 표시</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_keyinit.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_limits.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_lastlog"></a>6.14. pam_lastlog - 최근 로그인 시간 표시</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_lastlog.so</code>  [
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.13. pam_lastlog - 최근 로그인 시간 표시</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-module-reference.html" title="6장. 모듈 참조 안내서"><link rel="prev" href="sag-pam_keyinit.html" title="6.12. pam_keyinit - keyinit 파일 표시"><link rel="next" href="sag-pam_limits.html" title="6.14. pam_limits - 자원 제한"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.13. pam_lastlog - 최근 로그인 시간 표시</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-pam_keyinit.html">이전</a> </td><th width="60%" align="center">6장. 모듈 참조 안내서</th><td width="20%" align="right"> <a accesskey="n" href="sag-pam_limits.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-pam_lastlog"></a>6.13. pam_lastlog - 최근 로그인 시간 표시</h2></div></div></div><div class="cmdsynopsis"><p><code class="command">pam_lastlog.so</code>  [
 	debug
       ] [
         silent
@@ -18,7 +18,9 @@
         showfailed
       ] [
         inactive=&lt;days&gt;
-      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-description"></a>6.14.1. 설명</h3></div></div></div><p>
+      ] [
+        unlimited
+      ]</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-description"></a>6.13.1. 설명</h3></div></div></div><p>
       pam_lastlog는 사용자의 최근 로그인에 대한 정보를 표시하는
       PAM 모듈이다. 추가로 <code class="filename">/var/log/lastlog</code>
       파일을 유지한다.
@@ -26,10 +28,17 @@
       일부 응용에서는 이 기능을 자체적으로 수행할 수 있다. 그 경우에는
       이 모듈이 필요치 않다.
     </p><p>
+      <code class="filename">/etc/login.defs</code>의
+      <code class="option">LASTLOG_UID_MAX</code> 옵션을 확인해서
+      사용자 ID가 그 값보다 크면 최근 로그인 기록을 갱신 및 표시하지 않는다.
+      그 옵션이 없거나 값이 유효하지 않으면 사용자 ID 제한을 두지 않는다.
+    </p><p>
       auth나 account 단계에서 모듈이 호출되면 충분히 최근에 이용하지
       않은 계정의 로그인이 불허된다. root가 막히는 일이 없도록 하기 위해
-      root 계정에는 검사를 수행하지 않는다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-options"></a>6.14.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+      root 계정에는 검사를 수행하지 않는다. UID가
+      <code class="option">LASTLOG_UID_MAX</code> 값보다 큰 사용자에도
+      수행하지 않는다.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-options"></a>6.13.2. 옵션</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
           <code class="option">debug</code>
         </span></dt><dd><p>
             디버그 정보 찍기.
@@ -38,6 +47,7 @@
         </span></dt><dd><p>
             사용자에게 이전 로그인에 대해 알려 주지 않기.
             <code class="filename">/var/log/lastlog</code> 파일 갱신만 한다.
+            틀린 로그인 시도 표시에는 영향을 주지 않는다.
           </p></dd><dt><span class="term">
           <code class="option">never</code>
         </span></dt><dd><p>
@@ -78,12 +88,18 @@
             이 옵션은 auth 내지 account 단계용이다. 마지막 로그인 후
             지정한 수의 날이 지났으면 모듈에서 사용자를 차단하게 된다.
             기본값은 90이다.
-          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-types"></a>6.14.3. 제공하는 모듈 종류</h3></div></div></div><p>
+          </p></dd><dt><span class="term">
+          <code class="option">unlimited</code>
+        </span></dt><dd><p>
+            <span class="emphasis"><em>fsize</em></span> 제한이 있는 경우에
+            이 옵션으로 무시할 수 있다. UID 값이 커서 lastlog 파일이
+            커지게 되는 시스템에서 기록에 실패하는 걸 방지한다.
+          </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-types"></a>6.13.3. 제공하는 모듈 종류</h3></div></div></div><p>
       <code class="option">auth</code> 및 <code class="option">account</code> 모듈 타입에서
       충분히 최근에 로그인하지 않은 사용자를 차단하는 게 가능하다.
       최근 로그인에 대한 정보 표시 및/또는 lastlog와 wtmp 파일 갱신을 위해
       <code class="option">session</code> 모듈 타입을 제공한다.
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-return_values"></a>6.14.4. 반환 값</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-return_values"></a>6.13.4. 반환 값</h3></div></div></div><p>
       </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">PAM_SUCCESS</span></dt><dd><p>
               성공적으로 동작했음.
             </p></dd><dt><span class="term">PAM_SERVICE_ERR</span></dt><dd><p>
@@ -97,7 +113,7 @@
 	      auth 내지 account 단계에서 lastlog 파일을 읽는 중
 	      오류가 발생해서 사용자의 활동이 없었는지를 판단할 수 없다.
             </p></dd></dl></div><p>
-    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-examples"></a>6.14.5. 예시</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-examples"></a>6.13.5. 예시</h3></div></div></div><p>
       <code class="filename">/etc/pam.d/login</code>에 다음 행을 추가해서
       사용자의 최근 로그인 시간을 표시할 수 있다.
     </p><pre class="programlisting">
@@ -107,8 +123,8 @@
      쓸 수 있다.
     </p><pre class="programlisting">
     auth  required  pam_lastlog.so inactive=50
-      </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-author"></a>6.14.6. 작성자</h3></div></div></div><p>
+      </pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="sag-pam_lastlog-author"></a>6.13.6. 작성자</h3></div></div></div><p>
         Andrew G. Morgan &lt;morgan@kernel.org&gt;이 pam_lastlog를 작성했다.
       </p><p>
         Tomáš Mráz &lt;tm@t8m.info&gt;가 비활동 계정 잠그기를 추가했다.
-      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_keyinit.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_limits.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.13. pam_keyinit - keyinit 파일 표시 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.15. pam_limits - 자원 제한</td></tr></table></div></body></html>
+      </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sag-pam_keyinit.html">이전</a> </td><td width="20%" align="center"><a accesskey="u" href="sag-module-reference.html">위</a></td><td width="40%" align="right"> <a accesskey="n" href="sag-pam_limits.html">다음</a></td></tr><tr><td width="40%" align="left" valign="top">6.12. pam_keyinit - keyinit 파일 표시 </td><td width="20%" align="center"><a accesskey="h" href="Linux-PAM_SAG.html">대문</a></td><td width="40%" align="right" valign="top"> 6.14. pam_limits - 자원 제한</td></tr></table></div></body></html>

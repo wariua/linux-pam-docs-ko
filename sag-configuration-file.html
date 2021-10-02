@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>4.1. 설정 파일 문법</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-configuration.html" title="4장. Linux-PAM 설정 파일"><link rel="prev" href="sag-configuration.html" title="4장. Linux-PAM 설정 파일"><link rel="next" href="sag-configuration-directory.html" title="4.2. 디렉터리 방식 설정"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.1. 설정 파일 문법</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-configuration.html">이전</a> </td><th width="60%" align="center">4장. Linux-PAM 설정 파일</th><td width="20%" align="right"> <a accesskey="n" href="sag-configuration-directory.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-configuration-file"></a>4.1. 설정 파일 문법</h2></div></div></div><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>4.1. 설정 파일 문법</title><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="Linux-PAM_SAG.html" title="Linux-PAM 시스템 관리자 안내서"><link rel="up" href="sag-configuration.html" title="4장. Linux-PAM 설정 파일"><link rel="prev" href="sag-configuration.html" title="4장. Linux-PAM 설정 파일"><link rel="next" href="sag-configuration-directory.html" title="4.2. 디렉터리 방식 설정"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">4.1. 설정 파일 문법</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sag-configuration.html">이전</a> </td><th width="60%" align="center">4장. Linux-PAM 설정 파일</th><td width="20%" align="right"> <a accesskey="n" href="sag-configuration-directory.html">다음</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="sag-configuration-file"></a>4.1. 설정 파일 문법</h2></div></div></div><p>
     <code class="filename">/etc/pam.conf</code> 설정 파일의 문법은
     이렇다. 파일은 규칙들의 목록으로 이뤄져 있다. 각 규칙은 보통
     한 행으로 돼 있지만 이스케이프 개행(`\&lt;LF&gt;')으로 연장할
@@ -146,9 +146,10 @@
              이 동작은 반환 코드를 모듈 실패를 나타내는 것으로 봐야
              한다는 뜻이다. 이 모듈이 스택에서 실패한 첫 번째 모듈이면
              그 상태 값을 전체 스택의 값으로 쓰게 된다.
+             모든 반환 코드의 기본 동작이다.
           </p></dd><dt><span class="term">die</span></dt><dd><p>
-             bad와 같되, 추가로 모듈 스택 처리를 종료하고 즉시 PAM에서
-             응용으로 반환한다.
+             <span class="emphasis"><em>bad</em></span>와 같되,
+             모듈 스택 처리를 종료하고 즉시 PAM에서 응용으로 반환한다.
           </p></dd><dt><span class="term">ok</span></dt><dd><p>
              관리자가 보기에 이 반환 코드가 그대로 전체 모듈 스택의 반환
              코드가 돼야 한다는 뜻이다. 달리 말해 스택의 이전 상태가
@@ -158,16 +159,32 @@
              나타내는 어떤 값이었던 경우에는 이 'ok' 값으로 그 값을
              오버라이드하지 않는다.
           </p></dd><dt><span class="term">done</span></dt><dd><p>
-             ok와 같되, 추가로 모듈 스택 처리를 종료하고 즉시 PAM에서
-             응용으로 반환한다.
+             <span class="emphasis"><em>ok</em></span>와 같되,
+             앞서 무시되지 않은 모듈 실패가 없었다면
+             모듈 스택 처리를 종료하고 즉시 PAM에서 응용으로 반환한다.
           </p></dd><dt><span class="term">N (부호 없는 정수)</span></dt><dd><p>
-         ok와 같되, 추가로 스택의 다음 N개 모듈을 건너뛴다. 참고로
-         N을 0으로 하는 건 허용되지 않는다. (설령 허용된다고 해도
-         ok와 동일할 것이다.)
+             스택의 다음 N개 모듈을 건너뛴다.
+             N을 0으로 하는 건 허용되지 않으며,
+             그 경우 <span class="emphasis"><em>ignore</em></span>로 취급하게 된다.
+             PAM 함수 호출에 따라 부대 효과가 달라진다.
+             <span class="emphasis"><em>pam_authenticate</em></span>,
+             <span class="emphasis"><em>pam_acct_mgmt</em></span>,
+             <span class="emphasis"><em>pam_chauthtok</em></span>,
+             <span class="emphasis"><em>pam_open_session</em></span>에선
+             <span class="emphasis"><em>ignore</em></span>다.
+             <span class="emphasis"><em>pam_setcred</em></span>와
+             <span class="emphasis"><em>pam_close_session</em></span>에선
+             모듈의 반환 값에 따라 <span class="emphasis"><em>ignore</em></span>
+             <span class="emphasis"><em>ok</em></span>,
+             <span class="emphasis"><em>bad</em></span> 중 하나다.
           </p></dd><dt><span class="term">reset</span></dt><dd><p>
              메모리에서 모듈 스택의 상태를 모두 비우고 스택의 다음
              모듈부터 새로 시작한다.
           </p></dd></dl></div><p>
+      반환 코드의 동작을 <span class="emphasis"><em>valueN</em></span> 토큰으로
+      따로 지정하지 않고 <span class="emphasis"><em>default</em></span> 값도
+      지정하지 않은 경우에 그 반환 코드의 동작은 <span class="emphasis"><em>bad</em></span>가 된다.
+    </p></p>
       네 가지 키워드(required, requisite, sufficient, optional)를
       [...] 문법으로 동등하게 표현할 수 있다. 다음과 같다.
     </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">required</span></dt><dd><p>
